@@ -1,0 +1,9 @@
+theme = "github-style"
+baseurl = "https://RockinWool.github.io/RFV/"
+title = "Tar_nullaの部屋"
+author = "RockinWool"
+canonifyurls = true #対パスか
+paginate = 3
+publishDir = "docs"
+hasCJKLanguage = true
+languageCode = "ja-jp

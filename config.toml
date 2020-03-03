@@ -1,3 +1,25 @@
 baseURL = "http://example.org/"
 languageCode = "en-us"
 title = "My New Hugo Site"
+theme = "github-style"
+baseurl = "https://RockinWool.github.io/RFV/"
+title = "Tar_nullaの部屋"
+author = "RockinWool"
+canonifyurls = true #対パスか
+paginate = 3
+publishDir = "docs"
+hasCJKLanguage = true
+languageCode = "ja-jp
+
+[params]
+  author = "example"
+  description = "example"
+  github = "example"
+  facebook = "example"
+  twitter = "example"
+  misskey = "user profile url"
+  mastodon = "user profile url"
+  email = "example@domain.com"
+  utterances = "example/example.github.io"
+  avatar = "https://example.com/images/avatar.png"
+  url = "https://example.com"
