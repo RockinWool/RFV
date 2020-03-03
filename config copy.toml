@@ -6,4 +6,17 @@ canonifyurls = true #対パスか
 paginate = 3
 publishDir = "docs"
 hasCJKLanguage = true
-languageCode = "ja-jp
+languageCode = "ja-jp"
+
+[params]
+  author = "example"
+  description = "example"
+  github = "example"
+  facebook = "example"
+  twitter = "example"
+  misskey = "user profile url"
+  mastodon = "user profile url"
+  email = "example@domain.com"
+  utterances = "example/example.github.io"
+  avatar = "https://example.com/images/avatar.png"
+  url = "https://example.com"
