@@ -3,13 +3,13 @@ baseurl = "https://RockinWool.github.io/RFV/"
 title = "Tar_nullaの部屋"
 author = "RockinWool"
 canonifyurls = true #対パスか
-paginate = 3
+paginate = 10
 publishDir = "docs"
 hasCJKLanguage = true
 languageCode = "ja-jp"
 
 [params]
-  author = "example"
+  author = "RockinWool"
   description = "example"
   github = "example"
   facebook = "example"
