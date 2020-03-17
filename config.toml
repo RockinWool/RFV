@@ -1,4 +1,4 @@
-theme = "github-style"
+theme = "black-and-light"
 baseurl = "https://RockinWool.github.io/RFV/"
 title = "Tar_nullaの部屋"
 author = "RockinWool"
@@ -8,15 +8,19 @@ publishDir = "docs"
 hasCJKLanguage = true
 languageCode = "ja-jp"
 
+pygmentsstyle       = "bw"
+pygmentscodefences  = true
+
 [params]
-  author = "RockinWool"
-  description = "example"
-  github = "example"
-  facebook = "example"
-  twitter = "example"
-  misskey = "user profile url"
-  mastodon = "user profile url"
-  email = "example@domain.com"
-  utterances = "example/example.github.io"
-  avatar = "https://example.com/images/avatar.png"
-  url = "https://example.com"
+  sitename = "Tar_nullaの部屋"
+  disableWebFonts = false
+
+[[menu.main]]
+    name = "About"
+    url  = "https://github.com/davidhampgonsalves/hugo-black-and-light-theme"
+[[menu.main]]
+    name = "Projects"
+    url  = "https://github.com/davidhampgonsalves/hugo-black-and-light-theme"
+[[menu.main]]
+    name = "Resume"
+    url  = "https://github.com/davidhampgonsalves/hugo-black-and-light-theme"
