@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+
+    
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400&display=swap' rel='stylesheet' type='text/css'>
+    
+
+    <title>
+      
+      
+         200320 
+      
+    </title>
+    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/200320/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+    text-decoration-skip: ink;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:700px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  .left-justify {
+    float: left;
+  }
+
+  .right-justify {
+    float:right;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+
+  blockquote p {
+    display:inline-block;
+    font-style:italic;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    content:'\201C';
+    font-size:35px;
+    color:#403c3b;
+  }
+
+  blockquote:after {
+    content:'\201D';
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+  #sub-header, .date {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .posts_listing a,#nav a {
+    text-decoration: none;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 5px;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+  }
+
+  #nav ul li:before, .posts_listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 80px;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content .date {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts_listing {
+    margin:0 0 50px;
+  }
+
+  .posts_listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts_listing li a:hover,#nav a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts_listing li div {
+      font-size:12px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts_listing li div{
+      font-size:12px;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    *, #nav h1 a {
+      color: #FDFDFD;
+    }
+
+    body {
+      background: #121212;
+    }
+
+    pre, code {
+      background-color: #262626;
+    }
+
+    #sub-header, .date {
+      color: #BABABA;
+    }
+
+    hr {
+      background: #EBEBEB;
+    }
+  }
+</style>
+
+
+    </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="https://RockinWool.github.io/RFV/">Tar_nullaの部屋</a></h1>
+      <ul>
+        
+          <li><a href="https://github.com/davidhampgonsalves/hugo-black-and-light-theme">About</a></li>
+        
+          <li><a href="https://github.com/davidhampgonsalves/hugo-black-and-light-theme">Projects</a></li>
+        
+          <li><a href="https://github.com/davidhampgonsalves/hugo-black-and-light-theme">Resume</a></li>
+        
+      </ul>
+    </section>
+
+
+<section id=content>
+  <h1> 200320 </h1>
+
+  
+    <div id=sub-header>
+      March 2020 · 3 minute read
+    </div>
+  
+
+  <div class="entry-content">
+    <p>お久しぶりです。<br>
+最近仕事ばかりで全然研究していないRockinWoolです。<br>
+４月からは社会人博士として学費を支払う必要があるので、もっと真面目に論文を読んだり書いたり研究をしたりしないといけないとは思っています（笑）<br>
+<br>
+今日はこの記事を書きながらDockerイメージを作って、自分の作ったプログラムを実行する環境を配布できるようにしようかなって思います。<br>
+手順はこんな感じかな〜(多分)</p>
+<ol>
+<li>プログラムAを作る</li>
+<li>Dockerfileを作ってDockerimageをビルドするときにAをぶち込む</li>
+<li>Docker build -t {イメージ名} {場所}</li>
+<li>Docker run -itd {コンテナ名} {イメージ名} bash</li>
+</ol>
+<p>それではまず、作業環境を作ります\</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~$ mkdir 2020_March
+</code></pre></div><p><br>
+この中にpythonで作ったプログラムをぶち込みます\</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~$ ls ~/2020_March
+main.py
+</code></pre></div><p><br>
+次にdockerfileでanaconda環境を設定していきます<br>
+自分はgeditを愛用している(Vim＜nano＜gedit)のでgeditを使います。WindowsだったらVisual Studio Codeで書いちゃいます<br>
+(ここで自分が仕事のせいで完全にWindows派からLinux派に堕ちてしまっていることに気づく)</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~$ gedit Dockerfile
+</code></pre></div><p><br>
+Dockerfileの記述はQiitaの<a href="https://qiita.com/komiya_____/items/96c14485eb035701e218">この記事</a>を参考にして作りました（マークダウンで初のURLリンク)<br>
+っつーことでいざ実行！\</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">(base)~$ docker build -t 20200320 .
+Command <span style="font-style:italic">&#39;docker&#39;</span> not found, but can be installed with:
+sudo snap install docker     <span style="font-style:italic"># version 18.09.9, or</span>
+sudo apt  install docker.io
+See <span style="font-style:italic">&#39;snap info docker&#39;</span> <span style="font-weight:bold">for</span> additional versions.
+</code></pre></div><p>正直ワロタｗこの環境にはDocker入れてませんでしたね・・・<br>
+提示された解決策を実行して(apt-getではなくsnap使ったのですがログがほとんど残らないのに衝撃を受けつつ)\</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~$ sudo snap install docker
+docker 18.09.9 from Canonical✓ installed
+</code></pre></div><p>とりあえず、dockerが入ったのはわかったのでリベンジ<br>
+\</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~$ docker build -t 20200320 .
+ERRO[0000] failed to dial gRPC: cannot connect to the Docker daemon. Is <span style="font-style:italic">&#39;docker daemon&#39;</span> running on this host?: dial unix /var/run/docker.sock: connect: permission denied 
+Got permission denied <span style="font-weight:bold">while</span> trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.39/build?buildargs=%7B%7D&amp;cachefrom=%5B%5D&amp;cgroupparent=&amp;cpuperiod=0&amp;cpuquota=0&amp;cpusetcpus=&amp;cpusetmems=&amp;cpushares=0&amp;dockerfile=Dockerfile&amp;labels=%7B%7D&amp;memory=0&amp;memswap=0&amp;networkmode=default&amp;rm=1&amp;session=py0c14unib9pi5f8397h7t1y0&amp;shmsize=0&amp;t=20200320&amp;target=&amp;ulimits=null&amp;version=1: dial unix /var/run/docker.sock: connect: permission denied
+</code></pre></div><p>へー。sudo入れないとこんなエラーが出るんですね！(無知)とりあえずsudoを入れてもう一回実行します。<br>
+するとSuccessfully tagged 20200320:latestと表示されたので多分イメージは完成しましたね。<br>
+それではdocker run します\</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~$ sudo docker run -itd --name 2020_March 20200320
+~$ sudo docker exec -it 2020_March bash
+Error response from daemon: Container d9b54f6101d600690f06cd67f0d6b5f4a4294384e65476023f2e105b8817f212 is not running 
+</code></pre></div><p>えええ？runさせた直後なのに止まっているとはどういうことじゃ？<br>
+考えられるのはDockerfileの記述内容だけですねえ..と思っていたのだけど、１０分後にこれはRUNのさせ方の問題じゃな・・となって修正\</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~$ sudo docker run -it -p 8888:8888 --rm --name 2020_March --mount type=bind,src=<span style="font-style:italic">`</span>pwd<span style="font-style:italic">`</span>,dst=/program_A 20200320
+</code></pre></div><p>とりあえずサーバーが立ち上がったそうなのでもう一個ctrl+alt+tで端末を召喚して\</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~$ firefox localhost:8888
+</code></pre></div><p>とでもしてアクセスすると&hellip;.<br>
+<img src="https://RockinWool.github.io/RFV/img/j1.png" alt="jupyter-lab-homepage">
+<img src="https://RockinWool.github.io/RFV/img/j2.png" alt="jupyter-lab-docalc">
+・・・いやあ、科学の力ってすげーですわ・・・<br>
+<br>
+とりあえず目標としていたDockerで遊ぶ！ということを達成したので今日は満足かな・・・。<br>
+マークダウンの表記方法にも色々慣れてきたと思うし、これを投稿してどうなるか見てみたいですね！<br>
+それでは、長くなりましたがここまで見ていただきありがとうございました。<br>
+次は月曜日かな？論文のレビューでもしようと思います！<br>
+\</p>
+
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200317/">&laquo; 新社会人もそろそろ終わる</a>
+    
+    
+  </div>
+</section>
+
+  
+</body>
+</html>
+
+
+
