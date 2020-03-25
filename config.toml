@@ -16,11 +16,11 @@ pygmentscodefences  = true
   disableWebFonts = false
 
 [[menu.main]]
-    name = "About"
-    url  = "https://github.com/davidhampgonsalves/hugo-black-and-light-theme"
+    name = "Twitter"
+    url  = "https://twitter.com/vaex116"
 [[menu.main]]
-    name = "Projects"
-    url  = "https://github.com/davidhampgonsalves/hugo-black-and-light-theme"
+    name = "GitHub"
+    url  = "https://github.com/RockinWool/talkings"
 [[menu.main]]
-    name = "Resume"
+    name = "black-and-light-theme(Hugo)"
     url  = "https://github.com/davidhampgonsalves/hugo-black-and-light-theme"
