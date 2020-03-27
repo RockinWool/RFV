@@ -15,10 +15,10 @@
     <title>
       
       
-         1st 
+         Twitterと連携してみた＆一時間でTwitterのPythonScriptを実装してみる 
       
     </title>
-    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/1st/">
+    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/200325/">
 
     <style>
   * {
@@ -421,24 +421,59 @@
 
 
 <section id=content>
-  <h1> 1st </h1>
+  <h1> Twitterと連携してみた＆一時間でTwitterのPythonScriptを実装してみる </h1>
 
   
     <div id=sub-header>
-      March 2020 · 1 minute read
+      March 2020 · 3 minute read
     </div>
   
 
   <div class="entry-content">
-    <h3 id="hello-hugo">Hello Hugo</h3>
-<p>this is my 9th chrange</p>
+    <p>皆さんこんにちは。RockinWoolです。<br>
+早速ですがこのブログのTwitter連携をしていなかったなあと業務中に思いついたので、早速ですがここで実況しながらやっていこうと思います。<br>
+ちなみに現在のこのブログの開発環境はVisual Studio Code + Hugo + Githubpagesという感じです。<br>
+OSはUbuntuとWindowsどちらからでも作成しています。そのとき使える方でやるって感じです。<br>
+<br>
+それでは早速ですがやって行こうと思います。<br>
+まず自分のTwitterのアカウントは以下のやつになります(うまく貼れているかな?)<br>
+Twitter : <a href="https://twitter.com/vaex116">RockinWool</a><br>
+そんで、これをconfi.tomlに追記することによってここからボタン一つでアクセスできるようにしようと思います。<br>
+※ちなみにここで自分の過去のツイートを確認して犯罪者臭いこと言っていないかチェックした。鍵垢ですみません。<br>
+<br>
+それからついでにGitHubのアカウントも公開しておこうかなと思います。<br>
+GitHub : <a href="https://github.com/RockinWool/talkings">RockinWool</a><br>
+※これもプライベートリポジトリとかを確認して事故のないようにした。このときサブのGitHubのアカウントの方に大体の機能を移した<br>
+<br>
+ということで無事に設定も終了したので、ここからはtwitterからデータを取って来るほうの話を始めようと思います。<br>
+今回気になっていたのは<a href="https://qiita.com/bc_yuuuuuki/items/964efd17dae53d855c8b">Qiitaのこの記事</a>です。とりあえずあまり読んでないのですが進めていこうと思います。<br>
+<br>
+さて、15分ほど読んだところで早速引っかかったのはimport configの部分。<br>
+configというライブラリがどっかにあるのかしら？と純粋な気持ちで検索をかけても見つからず、色々読んだ結果<br>
+別ファイルから設定を読んでいるだけということが判明した。<br>
+それと同時にTwitterの情報を入手するにはTwitter APIとの登録・連携が必要ということを知りました。<br>
+ということでいざ<a href="https://developer.twitter.com/en/apps">TwitterAPIのサイト</a>へ！と思って行ったらすでにアカウントが作成済みだった・・。どうやら学生のときにもチャレンジしたことがあったみたいです。<br>
+しかし、これにくじけずに必要な鍵を4つ手に入れることができました。この鍵を知られると簡単に乗っ取られてしまうそうなので皆さん厳重に保管しましょう<br>
+<br>
+つぎにとりあえず<a href="https://developer.twitter.com/en/apps">さっきのQiitaのページ</a>のプログラムをほぼペーストして実行すると早速エラーが出ました。<br>
+内容はpythonやっている人には日常茶飯事のライブラリが無いよってやつです。とりあえず以下を実行<br>
+&lsquo;&lsquo;&lsquo;bash
+conda install -c conda-forge requests-oauthlib
+'&rsquo;&rsquo;
+さらにmongodb関連のライブラリは解説が少なかったのもあって断念し、よく慣れ親しんだpandasを使用してデータを保存していくことに変更。<br>
+おそらくそこまで深く掘らなければデータ数もそこまで莫大にはならないと思うのでこれで良いのかな・・と思います。<br>
+ここで一度実行してみると、なんとか動きました！<br>
+今晩はここで一度家に帰って、明日結果の確認を行ってネットワーク化と解説をしていこうと思います。<br>
+ここまで見てくださってありがとうございました！</p>
 
   </div>
 
   <div id=links>
     
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200323/">&laquo; 大企業（笑）に入って失敗したと感じる日々</a>
     
-      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/20200307/">はじめまして！ &raquo;</a>
+    
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200327/">Twitterランドの情報を入手して遊ぶ1() &raquo;</a>
     
   </div>
 </section>

@@ -1,2 +1,2 @@
-# RFV
-8th
+# このプログラムはTar_nullaの部屋というサイトで使っているものです
+HugoおよびGithubpagesの技術に感謝します

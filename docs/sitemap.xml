@@ -1,6 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://RockinWool.github.io/RFV/posts/</loc>
+    <lastmod>2020-03-27T18:21:13+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://RockinWool.github.io/RFV/</loc>
+    <lastmod>2020-03-27T18:21:13+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://RockinWool.github.io/RFV/posts/200327/</loc>
+    <lastmod>2020-03-27T18:21:13+09:00</lastmod>
+  </url>
   
   <url>
     <loc>https://RockinWool.github.io/RFV/posts/200325/</loc>
@@ -34,24 +49,10 @@
   
   <url>
     <loc>https://RockinWool.github.io/RFV/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://RockinWool.github.io/RFV/posts/</loc>
-    <lastmod>2020-03-25T19:13:09+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://RockinWool.github.io/RFV/tags/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://RockinWool.github.io/RFV/</loc>
-    <lastmod>2020-03-25T19:13:09+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
 </urlset>

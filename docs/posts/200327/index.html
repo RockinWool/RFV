@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+
+    
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400&display=swap' rel='stylesheet' type='text/css'>
+    
+
+    <title>
+      
+      
+         Twitterランドの情報を入手して遊ぶ1() 
+      
+    </title>
+    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/200327/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+    text-decoration-skip: ink;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:700px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  .left-justify {
+    float: left;
+  }
+
+  .right-justify {
+    float:right;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+
+  blockquote p {
+    display:inline-block;
+    font-style:italic;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    content:'\201C';
+    font-size:35px;
+    color:#403c3b;
+  }
+
+  blockquote:after {
+    content:'\201D';
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+  #sub-header, .date {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .posts_listing a,#nav a {
+    text-decoration: none;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 5px;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+  }
+
+  #nav ul li:before, .posts_listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 80px;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content .date {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts_listing {
+    margin:0 0 50px;
+  }
+
+  .posts_listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts_listing li a:hover,#nav a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts_listing li div {
+      font-size:12px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts_listing li div{
+      font-size:12px;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    *, #nav h1 a {
+      color: #FDFDFD;
+    }
+
+    body {
+      background: #121212;
+    }
+
+    pre, code {
+      background-color: #262626;
+    }
+
+    #sub-header, .date {
+      color: #BABABA;
+    }
+
+    hr {
+      background: #EBEBEB;
+    }
+  }
+</style>
+
+
+    </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="https://RockinWool.github.io/RFV/">Tar_nullaの部屋</a></h1>
+      <ul>
+        
+          <li><a href="https://github.com/davidhampgonsalves/hugo-black-and-light-theme">black-and-light-theme(Hugo)</a></li>
+        
+          <li><a href="https://github.com/RockinWool/talkings">GitHub</a></li>
+        
+          <li><a href="https://twitter.com/vaex116">Twitter</a></li>
+        
+      </ul>
+    </section>
+
+
+<section id=content>
+  <h1> Twitterランドの情報を入手して遊ぶ1() </h1>
+
+  
+    <div id=sub-header>
+      March 2020 · 3 minute read
+    </div>
+  
+
+  <div class="entry-content">
+    <p>こんにちは。RockinWoolです。<br>
+<a href="https://RockinWool.github.io/RFV/200325">前回の記事</a>で挑戦したように、今日はTwitterの情報を入手して遊ぶプログラムを作っていこうと思います。<br>
+ただし、今回のプログラムは個人情報の多いものとなっているのですべてを公開することは難しいです。ご了承ください。<br>
+さて、前回はおそらくTwitterAPIのアカウント登録をして４つの鍵を手に入れたところで終わっているのだと思います。<br>
+ということで、これからそれをプログラムに読ませて活用していこうと思います。<br>
+<br>
+まず、前回pandasを使用してデータを保存すると言ったがあれは嘘だ。<br>
+pandasを使用するとdive_search関数（<a href="https://qiita.com/bc_yuuuuuki/items/964efd17dae53d855c8b">この記事</a>の作者が名付けたものかな？）の再起処理の部分で引っかかってしまいうまく行かない。<br>
+そこで多少重くなるがpythonのcsvライブラリを使って処理中にcsvファイルに書き込んでもらう形に変更した。<br>
+具体的にメイン部分は次のようにまとめられる\</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#8b008b;font-weight:bold">with</span> <span style="color:#658b00">open</span>(<span style="color:#cd5555">&#39;data.csv&#39;</span>, <span style="color:#cd5555">&#39;w&#39;</span>) <span style="color:#8b008b;font-weight:bold">as</span> f:
+    writer = csv.writer(f)
+    dive_search(targets, <span style="color:#b452cd">0</span>,writer)
+</code></pre></div><p>もともとがかなり整ったプログラムなので実質的には前に二行足しただけである。<br>
+こんな書き方は良くないとかあったらぜひ指導してください。<br>
+とりあえず解説すると、dive_serch関数は再起関数で引数に指定した人のフォロワーのリストと深さdを持っています。<br>
+最初の実行で起点となる友人のリストが用意されて、その処理の途中で友人のリストの上から順に再び友人のリストが用意されて・・・というものの繰り返しで深さ分のフォロワー情報を入手することができます。<br>
+弱点はtwitterAPIが15リクエスト/15分という制約をかけているということです。<br>
+したがって今日は作成したプログラムを回しながら帰宅することにしようと思います。<br>
+明日は<a href="https://qiita.com/bc_yuuuuuki/items/964efd17dae53d855c8b">さっきの記事</a>の後半部分。自分の専門分野であるネットワークについて実践していこうと思います。<br>
+今日の記事で作成したプログラムは↓にあげておきます。コメントいただけると嬉しいです（ほとんど丸パクリだけど）<br>
+それではここまで読んでくださってありがとうございました。
+\</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">json</span>
+<span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#008b45;text-decoration:underline">requests_oauthlib</span> <span style="color:#8b008b;font-weight:bold">import</span> OAuth1Session
+<span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#008b45;text-decoration:underline">time</span> <span style="color:#8b008b;font-weight:bold">import</span> sleep
+<span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">datetime</span>
+<span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">Twitconf</span> <span style="color:#8b008b;font-weight:bold">as</span> <span style="color:#008b45;text-decoration:underline">tc</span>
+<span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">pandas</span> <span style="color:#8b008b;font-weight:bold">as</span> <span style="color:#008b45;text-decoration:underline">pd</span>
+<span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">csv</span>
+
+<span style="color:#228b22"># APIキー設定(別ファイルのconfig.pyで定義しています)</span>
+Keys = tc.twconf()
+<span style="color:#228b22"># 認証処理</span>
+twitter = OAuth1Session(Keys.APIK,Keys.APISK,Keys.ACT,Keys.ACTS)
+<span style="color:#228b22">#情報収集</span>
+get_friends_url = <span style="color:#cd5555">&#34;https://api.twitter.com/1.1/friends/list.json&#34;</span> <span style="color:#228b22"># フォローしているアカウントを取得</span>
+get_user_info_url = <span style="color:#cd5555">&#34;https://api.twitter.com/1.1/users/show.json&#34;</span> <span style="color:#228b22"># ユーザー情報を取得する</span>
+count = <span style="color:#b452cd">200</span>
+targets = [<span style="color:#cd5555">&#39;任意のフォロワーを入れてね&#39;</span>]
+registed_list = []
+depth = <span style="color:#b452cd">2</span><span style="color:#228b22"># 潜る深さ</span>
+max_friends_count = <span style="color:#b452cd">1000</span> <span style="color:#228b22"># フォローアカウントがめちゃくちゃ多い人が居るので一定数を超えてると除外する</span>
+
+<span style="color:#228b22"># フォローアカウントが一定数を超えていないか判定する</span>
+<span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">judge_friends_count</span>(screen_name):
+    params = {<span style="color:#cd5555">&#39;screen_name&#39;</span>: screen_name}
+    <span style="color:#8b008b;font-weight:bold">while</span> True:
+        res = twitter.get(get_user_info_url, params=params)
+        result_json = json.loads(res.text)
+        <span style="color:#8b008b;font-weight:bold">if</span> res.status_code == <span style="color:#b452cd">200</span>:
+            <span style="color:#228b22"># フォローしている人数は「friends_count」、フォローされている人数は「followers_count」</span>
+            <span style="color:#8b008b;font-weight:bold">if</span> result_json[<span style="color:#cd5555">&#39;friends_count&#39;</span>] &gt; max_friends_count:
+                <span style="color:#8b008b;font-weight:bold">return</span> False
+            <span style="color:#8b008b;font-weight:bold">else</span>:
+                <span style="color:#8b008b;font-weight:bold">return</span> True
+        <span style="color:#8b008b;font-weight:bold">elif</span> res.status_code == <span style="color:#b452cd">429</span>:
+            <span style="color:#228b22"># 15分間で15回しかリクエストを送信出来ないので上限に達していたら待つ</span>
+            now = datetime.datetime.now()
+            <span style="color:#8b008b;font-weight:bold">print</span>(now.strftime(<span style="color:#cd5555">&#34;%Y/%m/</span><span style="color:#cd5555">%d</span><span style="color:#cd5555"> %H:%M:%S&#34;</span>) + <span style="color:#cd5555">&#39; 接続上限のため待機&#39;</span>)
+            sleep(<span style="color:#b452cd">15</span> * <span style="color:#b452cd">65</span>) <span style="color:#228b22"># 15分待機</span>
+        <span style="color:#8b008b;font-weight:bold">else</span>:
+            <span style="color:#8b008b;font-weight:bold">return</span> False
+
+<span style="color:#228b22"># 指定したscreen_nameのフォロワーを取得する</span>
+<span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">get_followers_info</span>(screen_name):
+    followers_info = []
+    params = {<span style="color:#cd5555">&#39;count&#39;</span>: count,<span style="color:#cd5555">&#39;screen_name&#39;</span>: screen_name}
+    <span style="color:#8b008b;font-weight:bold">while</span> True:
+        res = twitter.get(get_friends_url, params=params)
+        result_json = json.loads(res.text)
+
+        <span style="color:#8b008b;font-weight:bold">if</span> res.status_code == <span style="color:#b452cd">200</span> <span style="color:#8b008b">and</span> <span style="color:#658b00">len</span>(result_json[<span style="color:#cd5555">&#39;users&#39;</span>]) != <span style="color:#b452cd">0</span>:
+                <span style="color:#8b008b;font-weight:bold">for</span> user <span style="color:#8b008b">in</span> result_json[<span style="color:#cd5555">&#39;users&#39;</span>]:
+                    <span style="color:#228b22"># APIから取得した情報のうち、必要な情報だけをdict形式で設定　（このPGでidは使ってない・・）</span>
+                    followers_info.append({<span style="color:#cd5555">&#39;screen_name&#39;</span>: user[<span style="color:#cd5555">&#39;screen_name&#39;</span>], <span style="color:#cd5555">&#39;id&#39;</span>: user[<span style="color:#cd5555">&#39;id&#39;</span>]})
+                <span style="color:#228b22"># パラメーターに次の取得位置を設定する</span>
+                params[<span style="color:#cd5555">&#39;cursor&#39;</span>] = result_json[<span style="color:#cd5555">&#39;next_cursor&#39;</span>]
+        <span style="color:#228b22"># APIの接続上限を超えた場合の処理           </span>
+        <span style="color:#8b008b;font-weight:bold">elif</span> res.status_code == <span style="color:#b452cd">429</span>:
+            now = datetime.datetime.now()
+            <span style="color:#8b008b;font-weight:bold">print</span>(now.strftime(<span style="color:#cd5555">&#34;%Y/%m/</span><span style="color:#cd5555">%d</span><span style="color:#cd5555"> %H:%M:%S&#34;</span>) + <span style="color:#cd5555">&#39; 接続上限のため待機&#39;</span>)
+            sleep(<span style="color:#b452cd">15</span> * <span style="color:#b452cd">60</span>) <span style="color:#228b22"># 1分待機</span>
+        <span style="color:#8b008b;font-weight:bold">else</span>:
+            <span style="color:#8b008b;font-weight:bold">break</span>
+    <span style="color:#8b008b;font-weight:bold">return</span> followers_info
+
+<span style="color:#228b22"># dictのlistからscreen_nameのみのlistを取得する</span>
+<span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">followers_list</span>(followers_info):
+    followers_list = []
+    <span style="color:#8b008b;font-weight:bold">for</span> follower <span style="color:#8b008b">in</span> followers_info:
+        followers_list.append(follower[<span style="color:#cd5555">&#39;screen_name&#39;</span>])
+    <span style="color:#8b008b;font-weight:bold">return</span> followers_list
+
+<span style="color:#228b22"># 再帰処理</span>
+<span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">dive_search</span>(target_list, d,writer):
+    <span style="color:#8b008b;font-weight:bold">for</span> name <span style="color:#8b008b">in</span> target_list:
+        <span style="color:#8b008b;font-weight:bold">if</span> name <span style="color:#8b008b">in</span> registed_list <span style="color:#8b008b">or</span> <span style="color:#8b008b">not</span> judge_friends_count(name):
+            <span style="color:#8b008b;font-weight:bold">continue</span>
+        <span style="color:#8b008b;font-weight:bold">print</span>(name)
+        writer.writerow([d,name])
+        followers_info = get_followers_info(name)
+        registed_list.append(name)
+        <span style="color:#8b008b;font-weight:bold">if</span> depth &gt; d:
+            dive_search(followers_list(followers_info), d + <span style="color:#b452cd">1</span>,writer)
+        <span style="color:#8b008b;font-weight:bold">else</span>:
+            <span style="color:#8b008b;font-weight:bold">return</span>
+
+<span style="color:#8b008b;font-weight:bold">with</span> <span style="color:#658b00">open</span>(<span style="color:#cd5555">&#39;data.csv&#39;</span>, <span style="color:#cd5555">&#39;w&#39;</span>) <span style="color:#8b008b;font-weight:bold">as</span> f:
+    writer = csv.writer(f)
+    dive_search(targets, <span style="color:#b452cd">0</span>,writer)
+
+</code></pre></div>
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200325/">&laquo; Twitterと連携してみた＆一時間でTwitterのPythonScriptを実装してみる</a>
+    
+    
+  </div>
+</section>
+
+  
+</body>
+</html>
+
+
+

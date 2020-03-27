@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Tar_nullaの部屋</title>
@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Tar_nullaの部屋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Wed, 25 Mar 2020 19:13:09 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 27 Mar 2020 18:21:13 +0900</lastBuildDate>
     
 	<atom:link href="https://RockinWool.github.io/RFV/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Twitterランドの情報を入手して遊ぶ1()</title>
+      <link>https://RockinWool.github.io/RFV/posts/200327/</link>
+      <pubDate>Fri, 27 Mar 2020 18:21:13 +0900</pubDate>
+      
+      <guid>https://RockinWool.github.io/RFV/posts/200327/</guid>
+      <description>こんにちは。RockinWoolです。 前回の記事で挑戦したように、今日はTwitterの情報を入手して遊ぶプログラムを作っていこうと思います</description>
+    </item>
     
     <item>
       <title>Twitterと連携してみた＆一時間でTwitterのPythonScriptを実装してみる</title>
