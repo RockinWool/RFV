@@ -15,10 +15,10 @@
     <title>
       
       
-         社会人生活って辛いね 
+         脱社会人のための日々の研究と勉強 
       
     </title>
-    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/200414/">
+    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/200415/">
 
     <style>
   * {
@@ -421,7 +421,7 @@
 
 
 <section id=content>
-  <h1> 社会人生活って辛いね </h1>
+  <h1> 脱社会人のための日々の研究と勉強 </h1>
 
   
     <div id=sub-header>
@@ -430,40 +430,61 @@
   
 
   <div class="entry-content">
-    <p>こんにちは。RockinWoolです。<br>
-今回は全然プログラミングの話とかじゃありません。愚痴です。<br>
-なので、あんまり興味のない人は早めにブラウザバックしてください。<br>
+    <h1 id="sudo-docker-images--aq--sudo-xargs-docker-rmi--f">sudo docker images -aq | sudo xargs docker rmi -f</h1>
+<p>こんにちは。dockerイメージの全消しを行ったRockinWoolです。<br>
+今日は最近のコロナワールドを鑑みて、定時ダッシュに挑戦したら無事に成功したので
+ようやくゆっくり色々やり始めようと思っている次第であります。<br>
 <br>
-それでは、早速はじめていこうと思います。<br>
-RockinWooolは先日ついに社会人２年目を迎え、新入社員の称号を失いました。<br>
-会社内の風当たりも急に強くなって、知らないこと（事務処理９割）もたくさんやらされるようになっています。<br>
+ということで、恒例？となった実況しながらのブログ投稿になります。<br>
+今日のテーマは「DockerでHugoの環境を作ってGithubpagesに投稿しよう！」って感じです。<br>
+それではぼちぼち進めて行きます。<br>
 <br>
-そんな中、３人いた一つ上の先輩方もそろそろ１人になってしまいそうです。原因ははっきりしていて、私の上長が非常に頭が悪い方だからという理由につきます。<br>
-勤めているのが自動車関係というのもあってITの戦闘力的なやつは非常に低いのですが、もはやそれにもうんざりしすぎて心をなくしつつあります。<br>
-プログラミングやLinuxのビルドは１日で完成形が出るようなものでは無いですし、ましてやそれを一人でやるのは無理だとわかってほしい。<br>
-でも、「カーナビを一人で作れ」とか「リモートデスクトップを（社内のIT本部にバレなければ公開サービスを使っても良いから）実現してほしい」とか、
-「特許を考えろ」とか「稟議書を回せ（私はほぼ新人なのにプロジェクトの実態とか関連会社とかわかるわけがない）」とか、
-目標面接で早く結婚しろと言われたりとか、住んでる場所はどこなのか聞かれたりとか、もっと残業しろと言われたりとか、T社の開発したプログラムの実態を文書化しろとか・・・・<br>
-<br>
-こんな出来事がわずか２ヶ月足らずの間に毎日のように繰り返されているのだが、これが社会のみんなが味わっていることなのかな？<br>
-社会人は毎日ただ頭下げてるだけって、言葉では知っていたけど、こんなに嫌なことなんだなあって最近毎日のように思っています。<br>
-<br>
-けれど、ひとつだけ明確なことがあります。それは博士を取って日本を飛び出して教授として海外で生きることができれば、少なくともこの理不尽な人生を送る必要はないということ！<br>
-なので、毎日プログラミングして、毎日勉強して、毎日ブログにも触れられるようにしたいです。<br>
-<br>
-本当に久しぶりに書いたのでプログラミングの話は一ミリも出すことができませんでしたが、この記事を書いている裏ではDockerコンテナでHugoサーバーを建てるということに
-挑戦中なので、次の記事にはそれがかけたらいいなあと思っています！<br>
-<br>
-ここまで読んでくださってありがとうございました。</p>
-
+まず最初に、今回のやりたいことを公開するためのrepositoryを<a href="https://github.com/RockinWool/Docker_hugomaker">自分のGithub</a>に作成しました。ライセンスはよくわからないのでとりあえずGPLv2.0にしてあります。<br>
+こうして空のリポジトリを作成した後に、そのリポジトリをローカルにクローンしました。<br>
+\</p>
+<pre><code class="language-Bash:gitclone" data-lang="Bash:gitclone">git clone https://github.com/RockinWool/Docker_hugomaker
+</code></pre><p>こんな感じのコマンドです。ここで、コマンド文をマークダウンで挿入する際にVSCodeに怒られてしまいました。どうやら前後に改行を入れないと怒ってくるそうです。<br>
+そして、昨日の投稿の裏でコッソリやっていたDockerfileを移動して起動・・のつもりが凄いゴミイメージとゴミコンテナがあったので掃除することに。<br>
+これで冒頭の全消しコマンドが発動することになったというわけです。</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">sudo docker images -aq | sudo xargs docker rmi -f
+sudo docker rm <span style="color:#8b008b;font-weight:bold">$(</span>sudo docker ps -q -a<span style="color:#8b008b;font-weight:bold">)</span> -f
+</code></pre></div><p>とりあえずこれでイメージもコンテナも全部消去することができました。<br>
+次にこのDockerfileを読み込んで起動して停止するのを自動化するプログラムも書いてみました。しかし、これが仇となりました。<br>
+とりあえず完成品は以下に記載しますが、いかんせんif文の書き方にいじめられすぎて時間がなくなってしまったのでTipsはまた次回書きます<br>
+ここまで読んでくださってありがとうございました！<br>
+<a href="https://qiita.com/shisama/items/48e2eaf1dc356568b0d7">参考URL</a></p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash"><span style="color:#658b00">export</span> <span style="color:#00688b">PWD</span>=<span style="color:#8b008b;font-weight:bold">$(</span><span style="color:#658b00">pwd</span><span style="color:#8b008b;font-weight:bold">)</span>
+<span style="color:#658b00">export</span> <span style="color:#00688b">EXISTDOCKER</span>=<span style="color:#8b008b;font-weight:bold">$(</span>sudo docker ps -a -f <span style="color:#cd5555">&#34;name=HugoC&#34;</span> --format {{.Names}}<span style="color:#8b008b;font-weight:bold">)</span>
+<span style="color:#8b008b;font-weight:bold">for</span> X in <span style="color:#cd5555">&#34;RockinWool&#34;</span>
+<span style="color:#8b008b;font-weight:bold">do</span>
+    sudo docker build -t hugoc .
+    <span style="color:#8b008b;font-weight:bold">if</span> [ <span style="color:#cd5555">&#34;</span><span style="color:#00688b">$EXISTDOCKER</span><span style="color:#cd5555">&#34;</span> = HugoC ]; <span style="color:#8b008b;font-weight:bold">then</span>
+        <span style="color:#658b00">read</span> -p <span style="color:#cd5555">&#34; すでにコンテナは存在しますが作り直しますか? (y/N):&#34;</span> BUILD
+        <span style="color:#8b008b;font-weight:bold">case</span> <span style="color:#cd5555">&#34;</span><span style="color:#00688b">$BUILD</span><span style="color:#cd5555">&#34;</span> in 
+            [yY]*) sudo docker rm HugoC &amp;&amp; sudo docker run -itd --name HugoC -v <span style="color:#00688b">$PWD</span>/volume/:/volume hugoc &amp;&amp; sudo docker <span style="color:#658b00">exec</span> -it HugoC bash;;
+            *) <span style="color:#658b00">echo</span> <span style="color:#cd5555">&#34;skipped.&#34;</span> ;;
+        <span style="color:#8b008b;font-weight:bold">esac</span>
+    <span style="color:#8b008b;font-weight:bold">else</span>
+        sudo docker run -itd --name HugoC -v <span style="color:#00688b">$PWD</span>/volume/:/volume hugoc
+    <span style="color:#8b008b;font-weight:bold">fi</span>
+    sudo docker start HugoC
+    sudo docker <span style="color:#658b00">exec</span> -it HugoC bash
+    sudo docker stop HugoC
+    <span style="color:#658b00">read</span> -p <span style="color:#cd5555">&#34;</span><span style="color:#cd5555">${</span><span style="color:#00688b">X</span><span style="color:#cd5555">}</span><span style="color:#cd5555"> : コンテナを破棄しますか? (y/N):&#34;</span> VAR
+    <span style="color:#8b008b;font-weight:bold">case</span> <span style="color:#cd5555">&#34;</span><span style="color:#00688b">$VAR</span><span style="color:#cd5555">&#34;</span> in 
+        [yY]*) sudo docker rm HugoC ;;
+        *) <span style="color:#658b00">echo</span> <span style="color:#cd5555">&#34;skipped.&#34;</span> ; <span style="color:#8b008b;font-weight:bold">continue</span> ;;
+    <span style="color:#8b008b;font-weight:bold">esac</span>
+<span style="color:#8b008b;font-weight:bold">done</span>
+</code></pre></div>
   </div>
 
   <div id=links>
     
-      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200327/">&laquo; Twitterランドの情報を入手して遊ぶ1()</a>
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200414/">&laquo; 社会人生活って辛いね</a>
     
     
-      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200415/">脱社会人のための日々の研究と勉強 &raquo;</a>
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200417/">弊社は自動車会社なので交代二勤で乗り切るみたいです &raquo;</a>
     
   </div>
 </section>
