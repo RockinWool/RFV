@@ -15,10 +15,10 @@
     <title>
       
       
-         弊社は自動車会社なので交代二勤で乗り切るみたいです 
+         ようやくコンテナから画面をとることに成功した話 
       
     </title>
-    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/200417/">
+    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/200428/">
 
     <style>
   * {
@@ -421,42 +421,62 @@
 
 
 <section id=content>
-  <h1> 弊社は自動車会社なので交代二勤で乗り切るみたいです </h1>
+  <h1> ようやくコンテナから画面をとることに成功した話 </h1>
 
   
     <div id=sub-header>
-      April 2020 · 2 minute read
+      April 2020 · 3 minute read
     </div>
   
 
   <div class="entry-content">
-    <p>タイトルの通りです。正直びっくりしました。<br>
-本日の午後より緊急的にアナウンスされて、コロナ対策の一環として朝勤と昼勤の交代二勤制になるそうです。なので、私は来週から朝７時に出社・・・。よいことなのか悪いことなのかわかりかねますねこれは・・・。<br>
-さて、昨日も予告したとおり、Dockerコンテナを使用してHugoの記事を書くことを目的に今日も頑張って行こうと思います。<br>
-今回はまず、SlideshareでDockerfileについて良い書き方がないかなあと探すところから始めました。
-すると数分後、<a href="https://www.slideshare.net/zembutsu/explaining-best-practices-for-writing-dockerfiles">こちら</a>のスライドがとても良くて、印刷したくなっちゃいました。
-そこで、この際だったのでSlideshareの新規アカウント登録をして、スライドをDownLoadしておきました。&quot;(OO)/&rdquo;<br>
+    <p>RockinWoolです。こんにちは。<br>
+コロナ怖いですね。自分も結構自粛してますが、なんとなく胸が狭まっているような感覚があるんですよね。まあ気のせいだといいなあ<br>
 <br>
-次に、どうにかしてDockerコンテナ内でGeditできないかなあ・・・なんて意★味★不★明なことを思っていたら、なんと<a href="https://own-search-and-study.xyz/2020/04/02/docker-python-develop-environment/">こちら</a>のページでDockerコンテナで画面表示ができるという美味しすぎる話を見つけてしまったので早速使用・・・と思ったら、なんか自分のubuntuの環境ではdocker-composeでバグるんですよね。<br>
-そこで、早速アップデートしてみました</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">sudo apt-get install docker-compose
-</code></pre></div><p>とりあえず、これで更新はできたので、いざもう一度！<br>
-・・・使用できないコマンドとかがあって、そのままでは使えなさそうですね・・・。
-しかも、ここでTeraTermとか色々調べてみたら、やりたいことはWindowsからLinuxをリモートしたいってことじゃないですか！
-微妙に違うのでここで絶望・・・と思いきや！<br>
-よくよく読んでみたらAnacondaも入れているじゃないですか。しかもjupyterも。ってことはこの方法ならばGUI可能ってことだ（自分の最初の記事をすっかり忘れていた）<br>
-ということなので、今から頑張って見ようと思います。<br>
-それでは読んでくださってありがとうございました!<br>
-\</p>
+さて、今回はタイトルの通りDockerコンテナからGuiアプリなどを起動した際にホストコンピュータの方に表示させる方法をついに確立したので、よろこびそのままここに書き込むことにしました。<br>
+ちなみに今回も本当の目的は別にあって、その途中で無理に凝った結果生まれたものになります。<br>
+しかも本当の目的ではDocker使う必要はどこにもなくて、本当に時間を無駄にしてしまったなあという感じ。<br>
+挙句の果てに、いつも通りの「寝てデバッグ」が発動して、５時間頑張るよりも8時間寝る方が解決につながってしまって本当に虚無な時間を過ごしてしまったなあ・・・と。<br>
+<br>
+それでは前置きはこの辺りにして、説明に入って行こうと思います。<br>
+今回は某VIMゴリラさん（自分が勝手に呼んでいる）のツイッターを参考にしました（ソースは後で付記します）<br>
+それを自分なりにアレンジして以下の３つのファイルを作りました。</p>
+<ol>
+<li>Dockerfile</li>
+<li>docker-compose.yml</li>
+<li>xhost_setup.sh</li>
+</ol>
+<p>Dockerfileはコンテナの設計図のようなものと認識しております。今回はGUIというよりかは単なる端末であるxtermを内部で起動できるように作りました↓</p>
+<pre><code>FROM ubuntu:18.04
+RUN apt update &amp;&amp; apt install -y \ 
+    xterm \ 
+    &amp;&amp; rm -rf /var/lib/apt/lists/* 
+RUN useradd -m -s /bin/bash RockinWool
+USER RockinWool
+</code></pre><p>USERを足しているのは、xhostかなんかがroot権限者だと怒ってきたからだったと思います。やっておいて損はないはずです。<br>
+docker-compose.ymlの方は2つ注目すべき部分があります。1つ目は環境変数$DISPLAYをホストと同じものに設定している部分。2つ目は/tmp/.X11-unixディレクトリを共有している部分です。この二つを設定するとホストの画面出力を共有できるようになります。（重要なのはその中のソケットファイルなんだけど、話が長くなるので割愛）</p>
+<pre><code>version: &quot;3&quot; 
+services: 
+  guitest: 
+    build: . 
+    environment: 
+      - &quot;DISPLAY=${DISPLAY}&quot; 
+    volumes: 
+      - /tmp/.X11-unix:/tmp/.X11-unix 
+    command: xterm 
+</code></pre><p>最後になりましたがxhost_setup.shは単にdocker-composeを自動化するものに近いです。自分がdocker-composeになれていないというのが原因です。ちなみにdocker-composeで単一のコンテナを起動したのは今回が初めてだったりします。<br>
+それとこのスクリプトではついでのようにxhost+でホスト側の画面をコンテナと共有できるようにしていますが、セキュリティ的にはまずいそうなので、適当なときにxhost-するべきなのかもしれませんね。</p>
+<pre><code>docker-compose build
+xhost +
+docker-compose run --rm guitest
+</code></pre><p>これらを用いて実際に起動するとこんな感じになります・・・というのは次回にします。ここまで見てくださってありがとうございました。</p>
 
   </div>
 
   <div id=links>
     
-      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200415/">&laquo; 脱社会人のための日々の研究と勉強</a>
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200417/">&laquo; 弊社は自動車会社なので交代二勤で乗り切るみたいです</a>
     
-    
-      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200428/">ようやくコンテナから画面をとることに成功した話 &raquo;</a>
     
   </div>
 </section>
