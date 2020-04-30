@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Tar_nullaの部屋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Tue, 28 Apr 2020 16:36:53 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 30 Apr 2020 18:10:48 +0900</lastBuildDate>
     
 	<atom:link href="https://RockinWool.github.io/RFV/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ヴォロノイさんのネットワークについて</title>
+      <link>https://RockinWool.github.io/RFV/posts/200430/</link>
+      <pubDate>Thu, 30 Apr 2020 18:10:48 +0900</pubDate>
+      
+      <guid>https://RockinWool.github.io/RFV/posts/200430/</guid>
+      <description>こんにちは。RockinWoolです。東京のコロナは収まってきましたが、自分の身近では感染が広がっている気がするので気を引き締めてGEEKを</description>
+    </item>
     
     <item>
       <title>ようやくコンテナから画面をとることに成功した話</title>
