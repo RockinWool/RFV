@@ -6,10 +6,19 @@
     <description>Recent content on Tar_nullaの部屋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Thu, 30 Apr 2020 18:10:48 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 02 May 2020 17:03:54 +0900</lastBuildDate>
     
 	<atom:link href="https://RockinWool.github.io/RFV/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>直近二つの成果物を組み合わせてみた</title>
+      <link>https://RockinWool.github.io/RFV/posts/200502/</link>
+      <pubDate>Sat, 02 May 2020 17:03:54 +0900</pubDate>
+      
+      <guid>https://RockinWool.github.io/RFV/posts/200502/</guid>
+      <description>※前回の画像から。コンテナからターミナルをホストの画面に表示する様子</description>
+    </item>
     
     <item>
       <title>ヴォロノイさんのネットワークについて</title>
