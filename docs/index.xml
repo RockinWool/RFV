@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tar_nullaの部屋</title>
@@ -6,18 +6,18 @@
     <description>Recent content on Tar_nullaの部屋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sat, 02 May 2020 17:03:54 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 05 May 2020 15:29:48 +0900</lastBuildDate>
     
 	<atom:link href="https://RockinWool.github.io/RFV/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>直近二つの成果物を組み合わせてみた</title>
-      <link>https://RockinWool.github.io/RFV/posts/200502/</link>
-      <pubDate>Sat, 02 May 2020 17:03:54 +0900</pubDate>
+      <title>充実したGW（研究生活）を送っています</title>
+      <link>https://RockinWool.github.io/RFV/posts/200505/</link>
+      <pubDate>Tue, 05 May 2020 15:29:48 +0900</pubDate>
       
-      <guid>https://RockinWool.github.io/RFV/posts/200502/</guid>
-      <description>※前回の画像から。コンテナからターミナルをホストの画面に表示する様子</description>
+      <guid>https://RockinWool.github.io/RFV/posts/200505/</guid>
+      <description>こんにちは。研究に勤しむRockinWoolです。 今週はプログラミングに次ぐプログラミングの生活を送っているので非常に充実しています。この調</description>
     </item>
     
     <item>
