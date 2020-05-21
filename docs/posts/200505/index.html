@@ -15,10 +15,10 @@
     <title>
       
       
-         ヴォロノイさんのネットワークについて 
+         充実したGW（研究生活）を送っています 
       
     </title>
-    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/200430/">
+    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/200505/">
 
     <style>
   * {
@@ -421,74 +421,61 @@
 
 
 <section id=content>
-  <h1> ヴォロノイさんのネットワークについて </h1>
+  <h1> 充実したGW（研究生活）を送っています </h1>
 
   
     <div id=sub-header>
-      April 2020 · 3 minute read
+      May 2020 · 3 minute read
     </div>
   
 
   <div class="entry-content">
-    <p>※前回の画像から。コンテナからターミナルをホストの画面に表示する様子
-<img src="https://RockinWool.github.io/RFV/img/%E3%83%89%E3%83%83%E3%82%AB%E3%83%BC%E3%81%8B%E3%82%89%E7%94%BB%E9%9D%A2%E8%A1%A8%E7%A4%BA.png" alt="前回のコンテナ内からターミナルを起動する図"></p>
-<p>こんにちは。RockinWoolです。東京のコロナは収まってきましたが、自分の身近では感染が広がっている気がするので気を引き締めてGEEKをしていたいですね！<br>
-<br>
-さて、今回は結構マイナーな話になってしまうと思いますので、全然興味ないと思ったらすぐに退避してください。<br>
-今回作成するプログラムは、簡単にいうと２つのネットワークを作成するものです。<br>
-一つ目はVoronoi図と呼ばれるものです。これはxy平面上にランダムにn個の点をばらまいて、２点間の距離が等しくなるところに境界線を引いていく・・というものになります。<br>
-これを簡単に実装するにはpythonのscipyライブラリ内にあるscipy.spatialを活用すればそれほど難しくありません。<br>
-二つ目はこのVoronoi図からもう一度Voronoi図を作成すした図です。まったく意味がわからないと思うのですが、これにより領域同士がどのように隣接しているのかを表現できるのではないか・・・？と期待してのものです。<br>
-それでは早速やっていきます。まず、単純なVoronoi図を表示する部分はこのようにしました。</p>
-<pre><code>from scipy.spatial import Voronoi, voronoi_plot_2d
-import numpy as np
-import matplotlib.pyplot as plt
-
-maxvalue = 100
-number_of_points = 100
-A=np.array([[np.random.rand()*maxvalue,np.random.rand()*maxvalue] for i in range(number_of_points)])
-vor = Voronoi(A)
-voronoi_plot_2d(vor,show_points = False)
-plt.show()
-</code></pre><p>多分こんな感じで大丈夫だと思います。これを実際に走らせるとこんな感じの図形が出てきます。<br>
-<img src="https://RockinWool.github.io/RFV/img/Voronoi.png" alt="Voronoi図"></p>
-<p>ちなみに最後のshow_pointsをなくせば、voronoi図の境界の交点に点がプロットされます。次に作成する図はこの点がどの領域と隣接しているのかを利用して作成します。<br>
-ちなみに今回使用していませんがVoronoiライブラリにはほかにもいくつか便利なものがあるので、ここにメモって置きます</p>
-<pre><code>print(vor.points)#元の点の座標
-print(vor.vertices)#Voronoiの点の座標
-print(vor.ridge_vertices)#Voronoiのリンク。-1が外部とのリンクを示す
-print(vor.ridge_dict)#どの点とどの点が隣接しているかを辞書型で表示
-</code></pre><p>次にVoronoi図の領域間の隣接関係をネットワークに直します。以下のようにコードを書くとこのような図が出力されます。</p>
-<pre><code>pos = vor.vertices
-illigal_points = []
-N = [i for i in range(len(pos))]
-for i in range(len(pos)):
-    if(0 &gt; pos[i][0] or maxvalue  &lt; pos[i][0]):
-        illigal_points.append(i)
-    elif(0 &gt; pos[i][1] or maxvalue  &lt; pos[i][1]):
-        illigal_points.append(i)
-G = nx.Graph()
-E = vor.ridge_vertices
-G.add_nodes_from(N)
-G.add_edges_from(E)
-G.remove_node(-1)
-G.remove_nodes_from(illigal_points)
-
-#--グラフを返す--#
-fout.figure_out(G,pos,'Voronoiz')
-</code></pre><p>ここで使用したfigure_out関数は本当に適当にmatplotlibで書けば良いと思います。</p>
-<p><img src="https://RockinWool.github.io/RFV/img/Voronoi2.png" alt="Voronoi図2"></p>
-<p>こんな感じで図が出力されました。
-ということで今回の実験は終了です。ここまで見てくださってありがとうございました。</p>
+    <p>こんにちは。研究に勤しむRockinWoolです。<br>
+今週はプログラミングに次ぐプログラミングの生活を送っているので非常に充実しています。この調子で頑張ってクソみたいな社会から独立した科学者になるぞ〜！<br>
+ということで今回は今週の出来事をひたすら書いていこうと思います。今回は技術の話は薄めなのでいつも通り興味の無い方は早めにブラウザヴァっくをよろしく！</p>
+<ol>
+<li>Ubuntu20.04にsnap install dockerするとdocker-composeでバグる疑惑</li>
+</ol>
+<blockquote>
+<p>これに関しては自分の問題なのかもしれませんが、朧な記憶をたどるdocker-composeを唱えたときになぜかsnap install dockerで一緒に入ってくる予定だったdocker-composeが存在しなくてapt-getかなんかで入れ直したことが原因だと思うんですよね。<br>
+sudo apt install docker.io<br>
+sudo apt install docker-compose<br>
+で解決しました。</p>
+</blockquote>
+<ol start="2">
+<li>One Noteを使い始めました</li>
+</ol>
+<blockquote>
+<p>こちらは単純に新しいものを使ってみようというやつです。感想は「以外と使いやすい！」<br>
+画像とコメントをきれいに配置することに関してはWordやExcelをはるかに凌ぐ使いやすさでした。<br>
+ところで、全然関係ない愚痴になっちゃうんですけど、自分の教授とこういうものを遊びながら試して覚えるのと、会社で先輩とか上司からこういうものを指示されながら習うのだと全然習得スピードが違う感じがするのはなんでなんでしょうね？<br>
+やっぱり自分は会社というものに向いていないのかな？<br>
+色んな人が色んなふうに存在しながら話をしなければならない空間がとても辛くて気持ち悪くて逃げ出したくなるんですけど、普通の人ってなんで普通に過ごせるんだろう？</p>
+</blockquote>
+<ol start="3">
+<li>久しぶりにpythonを触っています</li>
+</ol>
+<blockquote>
+<p>こちらは上とは逆に、昔作った自分のプログラム等を修正したり拡張したりしています。昔の自分が作ったプログラムが難解だったり間違っていたりするのを見るたびに成長したんだなあと思います。たしかLinusの言葉だったと思うんですけど、「1つのプログラムは1つの機能だけを持たせなさい」ってやつがあったと思うんですよね（すごくうろ覚え）<br>
+一年前の自分は1つのプログラムにすべての機能を入れてしまおう！って感じで作っていたみたいで今の自分からすると「分解！分解！分解だぁ〜！」ってなります。<br>
+あとは自分でプログラミングするのってとても大切ですね。自然とその部分はコピペ部分よりも可読性が高くなるんですよね。あと仕様ライブラリのreferenceを読むのもとても大切。昔は使えたnetworkxのG.self_loop()が今は使えなくてnx.self_loop(G)としなくちゃいけなかったんですが、某キータ君のデータは古かったり間違っていたりして使えなかったんですよね。なので自分で頑張って英語を読みました。</p>
+</blockquote>
+<ol start="4">
+<li>英語って大切なのでユーロビートと洋楽を聞いています</li>
+</ol>
+<blockquote>
+<p>上つながりなんですけど、自分の夢は海外で研究者になることなので英語を喋れなければだめです。しかし、全然喋れない。しかも聞き取れない。これはまずいので修行しようと思っていろいろ聞くところからはじめました。</p>
+</blockquote>
+<p><br>
+ということで、スーパー意味の無い記事かもしれませんが最近の自分をメモしました。<br>
+いつか自分が見直して、こんなんだったんだなあと言えるようにがんばります。</p>
 
   </div>
 
   <div id=links>
     
-      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200428/">&laquo; ようやくコンテナから画面をとることに成功した話</a>
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200430/">&laquo; ヴォロノイさんのネットワークについて</a>
     
-    
-      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200505/">充実したGW（研究生活）を送っています &raquo;</a>
     
   </div>
 </section>

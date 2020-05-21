@@ -1,10 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+<<<<<<< HEAD
     <loc>https://RockinWool.github.io/RFV/posts/200521/</loc>
     <lastmod>2020-05-21T18:12:26+09:00</lastmod>
+=======
+    <loc>https://RockinWool.github.io/RFV/posts/</loc>
+    <lastmod>2020-05-05T15:29:48+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://RockinWool.github.io/RFV/</loc>
+    <lastmod>2020-05-05T15:29:48+09:00</lastmod>
+>>>>>>> c8d42dca735cae37132c020601bab0f11c3257d8
   </url>
   
   <url>
@@ -74,6 +84,7 @@
   
   <url>
     <loc>https://RockinWool.github.io/RFV/categories/</loc>
+<<<<<<< HEAD
     <priority>0</priority>
   </url>
   
@@ -81,10 +92,13 @@
     <loc>https://RockinWool.github.io/RFV/posts/</loc>
     <lastmod>2020-05-21T18:12:26+09:00</lastmod>
     <priority>0</priority>
+=======
+>>>>>>> c8d42dca735cae37132c020601bab0f11c3257d8
   </url>
   
   <url>
     <loc>https://RockinWool.github.io/RFV/tags/</loc>
+<<<<<<< HEAD
     <priority>0</priority>
   </url>
   
@@ -92,6 +106,8 @@
     <loc>https://RockinWool.github.io/RFV/</loc>
     <lastmod>2020-05-21T18:12:26+09:00</lastmod>
     <priority>0</priority>
+=======
+>>>>>>> c8d42dca735cae37132c020601bab0f11c3257d8
   </url>
   
 </urlset>
