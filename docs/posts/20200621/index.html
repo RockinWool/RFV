@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+
+    
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400&display=swap' rel='stylesheet' type='text/css'>
+    
+
+    <title>
+      
+      
+         久しぶりにPythonに触らなければしぬと思った 
+      
+    </title>
+    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/20200621/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+    text-decoration-skip: ink;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:700px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  .left-justify {
+    float: left;
+  }
+
+  .right-justify {
+    float:right;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+
+  blockquote p {
+    display:inline-block;
+    font-style:italic;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    content:'\201C';
+    font-size:35px;
+    color:#403c3b;
+  }
+
+  blockquote:after {
+    content:'\201D';
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+  #sub-header, .date {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .posts_listing a,#nav a {
+    text-decoration: none;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 5px;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+  }
+
+  #nav ul li:before, .posts_listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 80px;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content .date {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts_listing {
+    margin:0 0 50px;
+  }
+
+  .posts_listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts_listing li a:hover,#nav a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts_listing li div {
+      font-size:12px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts_listing li div{
+      font-size:12px;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    *, #nav h1 a {
+      color: #FDFDFD;
+    }
+
+    body {
+      background: #121212;
+    }
+
+    pre, code {
+      background-color: #262626;
+    }
+
+    #sub-header, .date {
+      color: #BABABA;
+    }
+
+    hr {
+      background: #EBEBEB;
+    }
+  }
+</style>
+
+
+    </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="https://RockinWool.github.io/RFV/">Tar_nullaの部屋</a></h1>
+      <ul>
+        
+          <li><a href="https://github.com/davidhampgonsalves/hugo-black-and-light-theme">black-and-light-theme(Hugo)</a></li>
+        
+          <li><a href="https://github.com/RockinWool/talkings">GitHub</a></li>
+        
+          <li><a href="https://twitter.com/vaex116">Twitter</a></li>
+        
+      </ul>
+    </section>
+
+
+<section id=content>
+  <h1> 久しぶりにPythonに触らなければしぬと思った </h1>
+
+  
+    <div id=sub-header>
+      June 2020 · 9 minute read
+    </div>
+  
+
+  <div class="entry-content">
+    <p>こんにちは。最近仕事にばっかり注力していたRockinWoolです。仕事辞めたいといつも思っているのに、それが人生の時間で一番大きな割合を占めているのがしょっちゅう許せないですよね。そういうわけで、前回の投稿から現在までの間で色々勉強のスタイルを模索して、結果としては出社前に一時間程度勉強してから出勤するのがアタマが冴えてベストという答えになりました。これを習慣付けて、パワーパーソンになるべく修練を積んでいこうと思ってます。<br>
+<br>
+さて、今回は前回までの&rsquo;Pythonで学ぶネットワーク'ではなく、最近にわかに話題らしいGinzaについてです。「まえがきで散々勉強勉強言って置きながら全然アンタの専門ちゃうやんけ」って言われそうですが、やりたかったんだもん。仕方ない。<br>
+<br>
+Ginzaについては次のサイトに詳しく書いてあります。<br>
+<a href="https://www.virment.com/how-to-install-ginza-and-use/">自然言語処理ライブラリGiNZAをインストールして簡単に動かすまでの手順</a>
+そもそも自分がGinzaについて知ったのは完全に偶然です。先週、自分の部署に初めてとなる後輩新入社員がやってきたので、最近興味あることを聞いてみたらIBMのWatsonって答えたんですよね（本当はこの回答は３番目くらいに飛び出した内容で、ドローンとかそういうやつのほうが興味ありそうでしたけど）それでWatsonに興味を持ったんですけど、WatosonはIBMの登録がいるとかなんとかで、なんか面倒だなあって思ってしまったんですよね。それで、来たようなやつで自由に使えそうなやつ無いかなあと思っていたらGinzaにたどり着いたってわけなんです。GinzaはMITライセンスらしいので安全ですね！（ライセンスについては全然知らない）<br>
+<br>
+それでは今回も実況しながら進めて行こうと思います。<br>
+まず、Ginzaはpipしか対応していないっぽいので(conda install Ginzaってやったけどダメだった)新たにAnacondaの環境を作成することにします。詳しいことは<a href="https://qiita.com/ozaki_physics/items/985188feb92570e5b82d">このページ</a>でも見れば良いと思います。環境名はGinzaを実行する用としてGinpyにしました。</p>
+<p>&lsquo;&lsquo;&lsquo;bash
+conda create -n Ginpy python=3.8
+'&rsquo;&rsquo;
+一応、環境一覧をinfo -eで確認してから、Ginpyに移動します。</p>
+<p>&lsquo;&lsquo;&lsquo;bash
+conda info -e
+conda activate Ginpy
+'&rsquo;&rsquo;</p>
+<p>ではGinpyにGiNZAを入れていこうと思います。コマンドは以下の通りにしました。</p>
+<p>&lsquo;&lsquo;&lsquo;bash
+pip install -U ginza
+'&rsquo;&rsquo;</p>
+<p>とりあえず、これでGiNZA自体を入手することは成功したので、所有欲の半分は満たされました。次は支配欲を満たすために実際に使っていくことにします。
+まずは形態素解析から。形態素解析は説明するよりも見るほうが早いと思うので説明は省きますが、高校時代にこれがあればもうちょっと国語に興味が持てたかなあと思います（多分そんなことは無い）<br>
+適当な作業ディレクトリに移動して以下の流れでファイルを作って、コードを書いてみます。\</p>
+<p>&lsquo;&lsquo;&lsquo;bash
+mkdir Gintes
+cd Gintes
+'&rsquo;&rsquo;</p>
+<p>&lsquo;&lsquo;&lsquo;Python3:Gintes1.py
+import spacy</p>
+<p>nlp = spacy.load(&lsquo;ja_ginza&rsquo;)
+doc = nlp(&lsquo;なんかワーカホリックな人からフォロリク来ている。自分のリアル知り合い以外フォロリクされたことないから不安だ。')</p>
+<p>for sent in doc.sents:
+for token in sent:
+info = [
+token.i,         # トークン番号
+token.orth_,     # テキスト
+token._.reading, # 読みカナ
+token.lemma_,    # 基本形
+token.pos_,      # 品詞
+token.tag_,      # 品詞詳細
+token._.inf      # 活用情報
+]
+print(info)
+'&rsquo;&rsquo;
+すると、上手く動きはするのですが、警告が！</p>
+<p>'&rsquo;&rsquo;
+UserWarning: [W031] Model &lsquo;ja_ginza&rsquo; (3.1.0) requires spaCy v2.2 and is incompatible with the current spaCy version (2.3.0). This may lead to unexpected results or runtime errors. To resolve this, download a newer compatible model or retrain your custom model with the current spaCy version. For more details and available updates, run: python -m spacy validate
+'&rsquo;&rsquo;</p>
+<p>ぱっと見、バージョンが新しいから危ないよ。コマンドを打って調整してね！って書いてありそう（適当）なので、コマンドを打ってみる&hellip;が全然ダメだし、もう普通に動いているから問題ないやってことで進めていきます（諦め）<br>
+<br>
+先程のGintes1.pyを実行すると以下のような表示が出力されます。</p>
+<p>&lsquo;&lsquo;&lsquo;bash
+[0, &lsquo;なん&rsquo;, &lsquo;ナン&rsquo;, &lsquo;何&rsquo;, &lsquo;PRON&rsquo;, &lsquo;代名詞&rsquo;, &lsquo;<em>,</em>']
+[1, &lsquo;か&rsquo;, &lsquo;カ&rsquo;, &lsquo;か&rsquo;, &lsquo;ADP&rsquo;, &lsquo;助詞-副助詞&rsquo;, &lsquo;<em>,</em>']
+[2, &lsquo;ワーカホリック&rsquo;, &lsquo;ワーカホリック&rsquo;, &lsquo;ワーカホリック&rsquo;, &lsquo;NOUN&rsquo;, &lsquo;名詞-普通名詞-一般&rsquo;, &lsquo;<em>,</em>']
+[3, &lsquo;な&rsquo;, &lsquo;ナ&rsquo;, &lsquo;だ&rsquo;, &lsquo;AUX&rsquo;, &lsquo;助動詞&rsquo;, &lsquo;助動詞-ダ,連体形-一般&rsquo;]
+[4, &lsquo;人&rsquo;, &lsquo;ヒト&rsquo;, &lsquo;人&rsquo;, &lsquo;NOUN&rsquo;, &lsquo;名詞-普通名詞-一般&rsquo;, &lsquo;<em>,</em>']
+[5, &lsquo;から&rsquo;, &lsquo;カラ&rsquo;, &lsquo;から&rsquo;, &lsquo;ADP&rsquo;, &lsquo;助詞-格助詞&rsquo;, &lsquo;<em>,</em>']
+[6, &lsquo;フォロリク&rsquo;, &lsquo;', &lsquo;フォロリク&rsquo;, &lsquo;NOUN&rsquo;, &lsquo;名詞-普通名詞-一般&rsquo;, &lsquo;<em>,</em>']
+[7, &lsquo;来&rsquo;, &lsquo;キ&rsquo;, &lsquo;来る&rsquo;, &lsquo;VERB&rsquo;, &lsquo;動詞-非自立可能&rsquo;, &lsquo;カ行変格,連用形-一般&rsquo;]
+[8, &lsquo;て&rsquo;, &lsquo;テ&rsquo;, &lsquo;て&rsquo;, &lsquo;SCONJ&rsquo;, &lsquo;助詞-接続助詞&rsquo;, &lsquo;<em>,</em>']
+[9, &lsquo;いる&rsquo;, &lsquo;イル&rsquo;, &lsquo;居る&rsquo;, &lsquo;AUX&rsquo;, &lsquo;動詞-非自立可能&rsquo;, &lsquo;上一段-ア行,終止形-一般&rsquo;]
+[10, &lsquo;。', &lsquo;。', &lsquo;。', &lsquo;PUNCT&rsquo;, &lsquo;補助記号-句点&rsquo;, &lsquo;<em>,</em>']
+[11, &lsquo;自分&rsquo;, &lsquo;ジブン&rsquo;, &lsquo;自分&rsquo;, &lsquo;NOUN&rsquo;, &lsquo;名詞-普通名詞-一般&rsquo;, &lsquo;<em>,</em>']
+[12, &lsquo;の&rsquo;, &lsquo;ノ&rsquo;, &lsquo;の&rsquo;, &lsquo;ADP&rsquo;, &lsquo;助詞-格助詞&rsquo;, &lsquo;<em>,</em>']
+[13, &lsquo;リアル&rsquo;, &lsquo;リアル&rsquo;, &lsquo;リアル&rsquo;, &lsquo;NOUN&rsquo;, &lsquo;名詞-普通名詞-形状詞可能&rsquo;, &lsquo;<em>,</em>']
+[14, &lsquo;知り合い&rsquo;, &lsquo;シリアイ&rsquo;, &lsquo;知り合い&rsquo;, &lsquo;NOUN&rsquo;, &lsquo;名詞-普通名詞-一般&rsquo;, &lsquo;<em>,</em>']
+[15, &lsquo;以外&rsquo;, &lsquo;イガイ&rsquo;, &lsquo;以外&rsquo;, &lsquo;ADV&rsquo;, &lsquo;名詞-普通名詞-副詞可能&rsquo;, &lsquo;<em>,</em>']
+[16, &lsquo;フォロリク&rsquo;, &lsquo;', &lsquo;フォロリク&rsquo;, &lsquo;VERB&rsquo;, &lsquo;名詞-普通名詞-一般&rsquo;, &lsquo;<em>,</em>']
+[17, &lsquo;さ&rsquo;, &lsquo;サ&rsquo;, &lsquo;為る&rsquo;, &lsquo;AUX&rsquo;, &lsquo;動詞-非自立可能&rsquo;, &lsquo;サ行変格,未然形-サ&rsquo;]
+[18, &lsquo;れ&rsquo;, &lsquo;レ&rsquo;, &lsquo;れる&rsquo;, &lsquo;AUX&rsquo;, &lsquo;助動詞&rsquo;, &lsquo;助動詞-レル,連用形-一般&rsquo;]
+[19, &lsquo;た&rsquo;, &lsquo;タ&rsquo;, &lsquo;た&rsquo;, &lsquo;AUX&rsquo;, &lsquo;助動詞&rsquo;, &lsquo;助動詞-タ,連体形-一般&rsquo;]
+[20, &lsquo;こと&rsquo;, &lsquo;コト&rsquo;, &lsquo;こと&rsquo;, &lsquo;NOUN&rsquo;, &lsquo;名詞-普通名詞-一般&rsquo;, &lsquo;<em>,</em>']
+[21, &lsquo;ない&rsquo;, &lsquo;ナイ&rsquo;, &lsquo;無い&rsquo;, &lsquo;ADJ&rsquo;, &lsquo;形容詞-非自立可能&rsquo;, &lsquo;形容詞,終止形-一般&rsquo;]
+[22, &lsquo;から&rsquo;, &lsquo;カラ&rsquo;, &lsquo;から&rsquo;, &lsquo;CCONJ&rsquo;, &lsquo;助詞-接続助詞&rsquo;, &lsquo;<em>,</em>']
+[23, &lsquo;不安&rsquo;, &lsquo;フアン&rsquo;, &lsquo;不安&rsquo;, &lsquo;ADJ&rsquo;, &lsquo;名詞-普通名詞-形状詞可能&rsquo;, &lsquo;<em>,</em>']
+[24, &lsquo;だ&rsquo;, &lsquo;ダ&rsquo;, &lsquo;だ&rsquo;, &lsquo;AUX&rsquo;, &lsquo;助動詞&rsquo;, &lsquo;助動詞-ダ,終止形-一般&rsquo;]
+[25, &lsquo;。', &lsquo;。', &lsquo;。', &lsquo;PUNCT&rsquo;, &lsquo;補助記号-句点&rsquo;, &lsquo;<em>,</em>']</p>
+<p>'&rsquo;&rsquo;</p>
+<p>ここで一言、すげえと出てしまいました。ワーカホリックとかも辞書登録されているのでしょうか？かなり正確に結果が出ていることがわかります。これらの関係は画面出力でより簡単に理解できるみたいです。</p>
+<p><img src="https://RockinWool.github.io/RFV/img/%E5%BD%A2%E6%85%8B%E7%B4%A0%E8%A7%A3%E6%9E%901.jpg" alt="GiNZA画面出力"></p>
+<p>&lsquo;&lsquo;&lsquo;Python3:Gintes2.py
+import spacy
+from spacy import displacy
+nlp = spacy.load(&lsquo;ja_ginza&rsquo;)
+doc = nlp(&lsquo;なんかワーカホリックな人からフォロリク来ている。自分のリアル知り合い以外フォロリクされたことないから不安だ。')
+displacy.serve(doc, style=&quot;dep&rdquo;)
+'&rsquo;&rsquo;</p>
+<p>あと個人的に気になったのは２つの文章を見比べて類似度とやらを出してくれる機能。具体的に何をやっているのかは専門家ではないので知らなくていいかなあ。</p>
+<p>&lsquo;&lsquo;&lsquo;Python3:Gentes3.py
+import spacy
+nlp = spacy.load(&lsquo;ja_ginza_nopn&rsquo;)</p>
+<p>doc1 = nlp(&ldquo;このパソコンは現在シミュレーションを実行中です&rdquo;)
+doc2 = nlp(&ldquo;最近、雨が多すぎやしませんか？&quot;)</p>
+<p>similarity = doc1.similarity(doc2)
+print(similarity)
+'&rsquo;&rsquo;</p>
+<p>上を実行すると結果は0.46384519507135974って表示されます。半分くらい似ている・・・らしいけど、なにが半分似ているって根拠なんだろう？<br>
+文章の中の各言葉間の類似度を計算することもできるらしいです。</p>
+<p>&lsquo;&lsquo;&lsquo;Python3:Gintes4.py
+import spacy
+import numpy as np
+import pandas as pd
+nlp = spacy.load(&lsquo;ja_ginza&rsquo;)</p>
+<p>tokens = nlp(&lsquo;お米食べろ!')
+token_size =len(tokens)</p>
+<p>tokens_array = np.zeros((token_size,token_size))
+for i in range(token_size):
+for j in range(token_size):
+tokens_array[i][j] = tokens[i].similarity(tokens[j])</p>
+<p>df_tokens = pd.DataFrame(tokens_array)
+df_tokens.columns= tokens
+df_tokens.index = tokens
+print(df_tokens)
+'&rsquo;&rsquo;</p>
+<p>ここで問題発生。最初に作ったAnacondaの環境にはpandasが入ってなかったようなので、急遽conda install pandasで追加しました。<br>
+最終的には
+<img src="https://RockinWool.github.io/RFV/img/pandas%E3%83%86%E3%82%B9%E3%83%88.png" alt="こんな感じの出力">
+が出力されて単語ごとの類似度もわかります。すごいですねえ。</p>
+
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200521/">&laquo; コロナ禍の中で</a>
+    
+    
+  </div>
+</section>
+
+  
+</body>
+</html>
+
+
+
