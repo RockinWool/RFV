@@ -425,7 +425,7 @@
 
   
     <div id=sub-header>
-      June 2020 · 9 minute read
+      June 2020 · 8 minute read
     </div>
   
 
@@ -440,114 +440,102 @@ Ginzaについては次のサイトに詳しく書いてあります。<br>
 <br>
 それでは今回も実況しながら進めて行こうと思います。<br>
 まず、Ginzaはpipしか対応していないっぽいので(conda install Ginzaってやったけどダメだった)新たにAnacondaの環境を作成することにします。詳しいことは<a href="https://qiita.com/ozaki_physics/items/985188feb92570e5b82d">このページ</a>でも見れば良いと思います。環境名はGinzaを実行する用としてGinpyにしました。</p>
-<p>&lsquo;&lsquo;&lsquo;bash
-conda create -n Ginpy python=3.8
-'&rsquo;&rsquo;
-一応、環境一覧をinfo -eで確認してから、Ginpyに移動します。</p>
-<p>&lsquo;&lsquo;&lsquo;bash
-conda info -e
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conda create -n Ginpy <span style="color:#00688b">python</span>=3.8
+</code></pre></div><p>一応、環境一覧をinfo -eで確認してから、Ginpyに移動します。</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conda info -e
 conda activate Ginpy
-'&rsquo;&rsquo;</p>
-<p>ではGinpyにGiNZAを入れていこうと思います。コマンドは以下の通りにしました。</p>
-<p>&lsquo;&lsquo;&lsquo;bash
-pip install -U ginza
-'&rsquo;&rsquo;</p>
-<p>とりあえず、これでGiNZA自体を入手することは成功したので、所有欲の半分は満たされました。次は支配欲を満たすために実際に使っていくことにします。
+</code></pre></div><p>ではGinpyにGiNZAを入れていこうと思います。コマンドは以下の通りにしました。</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install -U ginza
+</code></pre></div><p>とりあえず、これでGiNZA自体を入手することは成功したので、所有欲の半分は満たされました。次は支配欲を満たすために実際に使っていくことにします。
 まずは形態素解析から。形態素解析は説明するよりも見るほうが早いと思うので説明は省きますが、高校時代にこれがあればもうちょっと国語に興味が持てたかなあと思います（多分そんなことは無い）<br>
 適当な作業ディレクトリに移動して以下の流れでファイルを作って、コードを書いてみます。\</p>
-<p>&lsquo;&lsquo;&lsquo;bash
-mkdir Gintes
-cd Gintes
-'&rsquo;&rsquo;</p>
-<p>&lsquo;&lsquo;&lsquo;Python3:Gintes1.py
-import spacy</p>
-<p>nlp = spacy.load(&lsquo;ja_ginza&rsquo;)
-doc = nlp(&lsquo;なんかワーカホリックな人からフォロリク来ている。自分のリアル知り合い以外フォロリクされたことないから不安だ。')</p>
-<p>for sent in doc.sents:
-for token in sent:
-info = [
-token.i,         # トークン番号
-token.orth_,     # テキスト
-token._.reading, # 読みカナ
-token.lemma_,    # 基本形
-token.pos_,      # 品詞
-token.tag_,      # 品詞詳細
-token._.inf      # 活用情報
-]
-print(info)
-'&rsquo;&rsquo;
-すると、上手く動きはするのですが、警告が！</p>
-<p>'&rsquo;&rsquo;
-UserWarning: [W031] Model &lsquo;ja_ginza&rsquo; (3.1.0) requires spaCy v2.2 and is incompatible with the current spaCy version (2.3.0). This may lead to unexpected results or runtime errors. To resolve this, download a newer compatible model or retrain your custom model with the current spaCy version. For more details and available updates, run: python -m spacy validate
-'&rsquo;&rsquo;</p>
-<p>ぱっと見、バージョンが新しいから危ないよ。コマンドを打って調整してね！って書いてありそう（適当）なので、コマンドを打ってみる&hellip;が全然ダメだし、もう普通に動いているから問題ないやってことで進めていきます（諦め）<br>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir Gintes
+<span style="color:#658b00">cd</span> Gintes
+</code></pre></div><div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3:Gintes1.py" data-lang="Python3:Gintes1.py"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">spacy</span>
+
+nlp = spacy.load(<span style="color:#cd5555">&#39;ja_ginza&#39;</span>)
+doc = nlp(<span style="color:#cd5555">&#39;なんかワーカホリックな人からフォロリク来ている。自分のリアル知り合い以外フォロリクされたことないから不安だ。&#39;</span>)
+
+<span style="color:#8b008b;font-weight:bold">for</span> sent <span style="color:#8b008b">in</span> doc.sents:
+    <span style="color:#8b008b;font-weight:bold">for</span> token <span style="color:#8b008b">in</span> sent:
+        info = [
+            token.i,         <span style="color:#228b22"># トークン番号</span>
+            token.orth_,     <span style="color:#228b22"># テキスト</span>
+            token._.reading, <span style="color:#228b22"># 読みカナ</span>
+            token.lemma_,    <span style="color:#228b22"># 基本形</span>
+            token.pos_,      <span style="color:#228b22"># 品詞</span>
+            token.tag_,      <span style="color:#228b22"># 品詞詳細</span>
+            token._.inf      <span style="color:#228b22"># 活用情報</span>
+        ]
+        <span style="color:#8b008b;font-weight:bold">print</span>(info)
+</code></pre></div><p>すると、上手く動きはするのですが、警告が！</p>
+<pre><code>UserWarning: [W031] Model 'ja_ginza' (3.1.0) requires spaCy v2.2 and is incompatible with the current spaCy version (2.3.0). This may lead to unexpected results or runtime errors. To resolve this, download a newer compatible model or retrain your custom model with the current spaCy version. For more details and available updates, run: python -m spacy validate
+</code></pre><p>ぱっと見、バージョンが新しいから危ないよ。コマンドを打って調整してね！って書いてありそう（適当）なので、コマンドを打ってみる&hellip;が全然ダメだし、もう普通に動いているから問題ないやってことで進めていきます（諦め）<br>
 <br>
 先程のGintes1.pyを実行すると以下のような表示が出力されます。</p>
-<p>&lsquo;&lsquo;&lsquo;bash
-[0, &lsquo;なん&rsquo;, &lsquo;ナン&rsquo;, &lsquo;何&rsquo;, &lsquo;PRON&rsquo;, &lsquo;代名詞&rsquo;, &lsquo;<em>,</em>']
-[1, &lsquo;か&rsquo;, &lsquo;カ&rsquo;, &lsquo;か&rsquo;, &lsquo;ADP&rsquo;, &lsquo;助詞-副助詞&rsquo;, &lsquo;<em>,</em>']
-[2, &lsquo;ワーカホリック&rsquo;, &lsquo;ワーカホリック&rsquo;, &lsquo;ワーカホリック&rsquo;, &lsquo;NOUN&rsquo;, &lsquo;名詞-普通名詞-一般&rsquo;, &lsquo;<em>,</em>']
-[3, &lsquo;な&rsquo;, &lsquo;ナ&rsquo;, &lsquo;だ&rsquo;, &lsquo;AUX&rsquo;, &lsquo;助動詞&rsquo;, &lsquo;助動詞-ダ,連体形-一般&rsquo;]
-[4, &lsquo;人&rsquo;, &lsquo;ヒト&rsquo;, &lsquo;人&rsquo;, &lsquo;NOUN&rsquo;, &lsquo;名詞-普通名詞-一般&rsquo;, &lsquo;<em>,</em>']
-[5, &lsquo;から&rsquo;, &lsquo;カラ&rsquo;, &lsquo;から&rsquo;, &lsquo;ADP&rsquo;, &lsquo;助詞-格助詞&rsquo;, &lsquo;<em>,</em>']
-[6, &lsquo;フォロリク&rsquo;, &lsquo;', &lsquo;フォロリク&rsquo;, &lsquo;NOUN&rsquo;, &lsquo;名詞-普通名詞-一般&rsquo;, &lsquo;<em>,</em>']
-[7, &lsquo;来&rsquo;, &lsquo;キ&rsquo;, &lsquo;来る&rsquo;, &lsquo;VERB&rsquo;, &lsquo;動詞-非自立可能&rsquo;, &lsquo;カ行変格,連用形-一般&rsquo;]
-[8, &lsquo;て&rsquo;, &lsquo;テ&rsquo;, &lsquo;て&rsquo;, &lsquo;SCONJ&rsquo;, &lsquo;助詞-接続助詞&rsquo;, &lsquo;<em>,</em>']
-[9, &lsquo;いる&rsquo;, &lsquo;イル&rsquo;, &lsquo;居る&rsquo;, &lsquo;AUX&rsquo;, &lsquo;動詞-非自立可能&rsquo;, &lsquo;上一段-ア行,終止形-一般&rsquo;]
-[10, &lsquo;。', &lsquo;。', &lsquo;。', &lsquo;PUNCT&rsquo;, &lsquo;補助記号-句点&rsquo;, &lsquo;<em>,</em>']
-[11, &lsquo;自分&rsquo;, &lsquo;ジブン&rsquo;, &lsquo;自分&rsquo;, &lsquo;NOUN&rsquo;, &lsquo;名詞-普通名詞-一般&rsquo;, &lsquo;<em>,</em>']
-[12, &lsquo;の&rsquo;, &lsquo;ノ&rsquo;, &lsquo;の&rsquo;, &lsquo;ADP&rsquo;, &lsquo;助詞-格助詞&rsquo;, &lsquo;<em>,</em>']
-[13, &lsquo;リアル&rsquo;, &lsquo;リアル&rsquo;, &lsquo;リアル&rsquo;, &lsquo;NOUN&rsquo;, &lsquo;名詞-普通名詞-形状詞可能&rsquo;, &lsquo;<em>,</em>']
-[14, &lsquo;知り合い&rsquo;, &lsquo;シリアイ&rsquo;, &lsquo;知り合い&rsquo;, &lsquo;NOUN&rsquo;, &lsquo;名詞-普通名詞-一般&rsquo;, &lsquo;<em>,</em>']
-[15, &lsquo;以外&rsquo;, &lsquo;イガイ&rsquo;, &lsquo;以外&rsquo;, &lsquo;ADV&rsquo;, &lsquo;名詞-普通名詞-副詞可能&rsquo;, &lsquo;<em>,</em>']
-[16, &lsquo;フォロリク&rsquo;, &lsquo;', &lsquo;フォロリク&rsquo;, &lsquo;VERB&rsquo;, &lsquo;名詞-普通名詞-一般&rsquo;, &lsquo;<em>,</em>']
-[17, &lsquo;さ&rsquo;, &lsquo;サ&rsquo;, &lsquo;為る&rsquo;, &lsquo;AUX&rsquo;, &lsquo;動詞-非自立可能&rsquo;, &lsquo;サ行変格,未然形-サ&rsquo;]
-[18, &lsquo;れ&rsquo;, &lsquo;レ&rsquo;, &lsquo;れる&rsquo;, &lsquo;AUX&rsquo;, &lsquo;助動詞&rsquo;, &lsquo;助動詞-レル,連用形-一般&rsquo;]
-[19, &lsquo;た&rsquo;, &lsquo;タ&rsquo;, &lsquo;た&rsquo;, &lsquo;AUX&rsquo;, &lsquo;助動詞&rsquo;, &lsquo;助動詞-タ,連体形-一般&rsquo;]
-[20, &lsquo;こと&rsquo;, &lsquo;コト&rsquo;, &lsquo;こと&rsquo;, &lsquo;NOUN&rsquo;, &lsquo;名詞-普通名詞-一般&rsquo;, &lsquo;<em>,</em>']
-[21, &lsquo;ない&rsquo;, &lsquo;ナイ&rsquo;, &lsquo;無い&rsquo;, &lsquo;ADJ&rsquo;, &lsquo;形容詞-非自立可能&rsquo;, &lsquo;形容詞,終止形-一般&rsquo;]
-[22, &lsquo;から&rsquo;, &lsquo;カラ&rsquo;, &lsquo;から&rsquo;, &lsquo;CCONJ&rsquo;, &lsquo;助詞-接続助詞&rsquo;, &lsquo;<em>,</em>']
-[23, &lsquo;不安&rsquo;, &lsquo;フアン&rsquo;, &lsquo;不安&rsquo;, &lsquo;ADJ&rsquo;, &lsquo;名詞-普通名詞-形状詞可能&rsquo;, &lsquo;<em>,</em>']
-[24, &lsquo;だ&rsquo;, &lsquo;ダ&rsquo;, &lsquo;だ&rsquo;, &lsquo;AUX&rsquo;, &lsquo;助動詞&rsquo;, &lsquo;助動詞-ダ,終止形-一般&rsquo;]
-[25, &lsquo;。', &lsquo;。', &lsquo;。', &lsquo;PUNCT&rsquo;, &lsquo;補助記号-句点&rsquo;, &lsquo;<em>,</em>']</p>
-<p>'&rsquo;&rsquo;</p>
-<p>ここで一言、すげえと出てしまいました。ワーカホリックとかも辞書登録されているのでしょうか？かなり正確に結果が出ていることがわかります。これらの関係は画面出力でより簡単に理解できるみたいです。</p>
-<p><img src="https://RockinWool.github.io/RFV/img/%E5%BD%A2%E6%85%8B%E7%B4%A0%E8%A7%A3%E6%9E%901.jpg" alt="GiNZA画面出力"></p>
-<p>&lsquo;&lsquo;&lsquo;Python3:Gintes2.py
-import spacy
-from spacy import displacy
-nlp = spacy.load(&lsquo;ja_ginza&rsquo;)
-doc = nlp(&lsquo;なんかワーカホリックな人からフォロリク来ている。自分のリアル知り合い以外フォロリクされたことないから不安だ。')
-displacy.serve(doc, style=&quot;dep&rdquo;)
-'&rsquo;&rsquo;</p>
-<p>あと個人的に気になったのは２つの文章を見比べて類似度とやらを出してくれる機能。具体的に何をやっているのかは専門家ではないので知らなくていいかなあ。</p>
-<p>&lsquo;&lsquo;&lsquo;Python3:Gentes3.py
-import spacy
-nlp = spacy.load(&lsquo;ja_ginza_nopn&rsquo;)</p>
-<p>doc1 = nlp(&ldquo;このパソコンは現在シミュレーションを実行中です&rdquo;)
-doc2 = nlp(&ldquo;最近、雨が多すぎやしませんか？&quot;)</p>
-<p>similarity = doc1.similarity(doc2)
-print(similarity)
-'&rsquo;&rsquo;</p>
-<p>上を実行すると結果は0.46384519507135974って表示されます。半分くらい似ている・・・らしいけど、なにが半分似ているって根拠なんだろう？<br>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">[0, <span style="color:#cd5555">&#39;なん&#39;</span>, <span style="color:#cd5555">&#39;ナン&#39;</span>, <span style="color:#cd5555">&#39;何&#39;</span>, <span style="color:#cd5555">&#39;PRON&#39;</span>, <span style="color:#cd5555">&#39;代名詞&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[1, <span style="color:#cd5555">&#39;か&#39;</span>, <span style="color:#cd5555">&#39;カ&#39;</span>, <span style="color:#cd5555">&#39;か&#39;</span>, <span style="color:#cd5555">&#39;ADP&#39;</span>, <span style="color:#cd5555">&#39;助詞-副助詞&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[2, <span style="color:#cd5555">&#39;ワーカホリック&#39;</span>, <span style="color:#cd5555">&#39;ワーカホリック&#39;</span>, <span style="color:#cd5555">&#39;ワーカホリック&#39;</span>, <span style="color:#cd5555">&#39;NOUN&#39;</span>, <span style="color:#cd5555">&#39;名詞-普通名詞-一般&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[3, <span style="color:#cd5555">&#39;な&#39;</span>, <span style="color:#cd5555">&#39;ナ&#39;</span>, <span style="color:#cd5555">&#39;だ&#39;</span>, <span style="color:#cd5555">&#39;AUX&#39;</span>, <span style="color:#cd5555">&#39;助動詞&#39;</span>, <span style="color:#cd5555">&#39;助動詞-ダ,連体形-一般&#39;</span>]
+[4, <span style="color:#cd5555">&#39;人&#39;</span>, <span style="color:#cd5555">&#39;ヒト&#39;</span>, <span style="color:#cd5555">&#39;人&#39;</span>, <span style="color:#cd5555">&#39;NOUN&#39;</span>, <span style="color:#cd5555">&#39;名詞-普通名詞-一般&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[5, <span style="color:#cd5555">&#39;から&#39;</span>, <span style="color:#cd5555">&#39;カラ&#39;</span>, <span style="color:#cd5555">&#39;から&#39;</span>, <span style="color:#cd5555">&#39;ADP&#39;</span>, <span style="color:#cd5555">&#39;助詞-格助詞&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[6, <span style="color:#cd5555">&#39;フォロリク&#39;</span>, <span style="color:#cd5555">&#39;&#39;</span>, <span style="color:#cd5555">&#39;フォロリク&#39;</span>, <span style="color:#cd5555">&#39;NOUN&#39;</span>, <span style="color:#cd5555">&#39;名詞-普通名詞-一般&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[7, <span style="color:#cd5555">&#39;来&#39;</span>, <span style="color:#cd5555">&#39;キ&#39;</span>, <span style="color:#cd5555">&#39;来る&#39;</span>, <span style="color:#cd5555">&#39;VERB&#39;</span>, <span style="color:#cd5555">&#39;動詞-非自立可能&#39;</span>, <span style="color:#cd5555">&#39;カ行変格,連用形-一般&#39;</span>]
+[8, <span style="color:#cd5555">&#39;て&#39;</span>, <span style="color:#cd5555">&#39;テ&#39;</span>, <span style="color:#cd5555">&#39;て&#39;</span>, <span style="color:#cd5555">&#39;SCONJ&#39;</span>, <span style="color:#cd5555">&#39;助詞-接続助詞&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[9, <span style="color:#cd5555">&#39;いる&#39;</span>, <span style="color:#cd5555">&#39;イル&#39;</span>, <span style="color:#cd5555">&#39;居る&#39;</span>, <span style="color:#cd5555">&#39;AUX&#39;</span>, <span style="color:#cd5555">&#39;動詞-非自立可能&#39;</span>, <span style="color:#cd5555">&#39;上一段-ア行,終止形-一般&#39;</span>]
+[10, <span style="color:#cd5555">&#39;。&#39;</span>, <span style="color:#cd5555">&#39;。&#39;</span>, <span style="color:#cd5555">&#39;。&#39;</span>, <span style="color:#cd5555">&#39;PUNCT&#39;</span>, <span style="color:#cd5555">&#39;補助記号-句点&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[11, <span style="color:#cd5555">&#39;自分&#39;</span>, <span style="color:#cd5555">&#39;ジブン&#39;</span>, <span style="color:#cd5555">&#39;自分&#39;</span>, <span style="color:#cd5555">&#39;NOUN&#39;</span>, <span style="color:#cd5555">&#39;名詞-普通名詞-一般&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[12, <span style="color:#cd5555">&#39;の&#39;</span>, <span style="color:#cd5555">&#39;ノ&#39;</span>, <span style="color:#cd5555">&#39;の&#39;</span>, <span style="color:#cd5555">&#39;ADP&#39;</span>, <span style="color:#cd5555">&#39;助詞-格助詞&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[13, <span style="color:#cd5555">&#39;リアル&#39;</span>, <span style="color:#cd5555">&#39;リアル&#39;</span>, <span style="color:#cd5555">&#39;リアル&#39;</span>, <span style="color:#cd5555">&#39;NOUN&#39;</span>, <span style="color:#cd5555">&#39;名詞-普通名詞-形状詞可能&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[14, <span style="color:#cd5555">&#39;知り合い&#39;</span>, <span style="color:#cd5555">&#39;シリアイ&#39;</span>, <span style="color:#cd5555">&#39;知り合い&#39;</span>, <span style="color:#cd5555">&#39;NOUN&#39;</span>, <span style="color:#cd5555">&#39;名詞-普通名詞-一般&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[15, <span style="color:#cd5555">&#39;以外&#39;</span>, <span style="color:#cd5555">&#39;イガイ&#39;</span>, <span style="color:#cd5555">&#39;以外&#39;</span>, <span style="color:#cd5555">&#39;ADV&#39;</span>, <span style="color:#cd5555">&#39;名詞-普通名詞-副詞可能&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[16, <span style="color:#cd5555">&#39;フォロリク&#39;</span>, <span style="color:#cd5555">&#39;&#39;</span>, <span style="color:#cd5555">&#39;フォロリク&#39;</span>, <span style="color:#cd5555">&#39;VERB&#39;</span>, <span style="color:#cd5555">&#39;名詞-普通名詞-一般&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[17, <span style="color:#cd5555">&#39;さ&#39;</span>, <span style="color:#cd5555">&#39;サ&#39;</span>, <span style="color:#cd5555">&#39;為る&#39;</span>, <span style="color:#cd5555">&#39;AUX&#39;</span>, <span style="color:#cd5555">&#39;動詞-非自立可能&#39;</span>, <span style="color:#cd5555">&#39;サ行変格,未然形-サ&#39;</span>]
+[18, <span style="color:#cd5555">&#39;れ&#39;</span>, <span style="color:#cd5555">&#39;レ&#39;</span>, <span style="color:#cd5555">&#39;れる&#39;</span>, <span style="color:#cd5555">&#39;AUX&#39;</span>, <span style="color:#cd5555">&#39;助動詞&#39;</span>, <span style="color:#cd5555">&#39;助動詞-レル,連用形-一般&#39;</span>]
+[19, <span style="color:#cd5555">&#39;た&#39;</span>, <span style="color:#cd5555">&#39;タ&#39;</span>, <span style="color:#cd5555">&#39;た&#39;</span>, <span style="color:#cd5555">&#39;AUX&#39;</span>, <span style="color:#cd5555">&#39;助動詞&#39;</span>, <span style="color:#cd5555">&#39;助動詞-タ,連体形-一般&#39;</span>]
+[20, <span style="color:#cd5555">&#39;こと&#39;</span>, <span style="color:#cd5555">&#39;コト&#39;</span>, <span style="color:#cd5555">&#39;こと&#39;</span>, <span style="color:#cd5555">&#39;NOUN&#39;</span>, <span style="color:#cd5555">&#39;名詞-普通名詞-一般&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[21, <span style="color:#cd5555">&#39;ない&#39;</span>, <span style="color:#cd5555">&#39;ナイ&#39;</span>, <span style="color:#cd5555">&#39;無い&#39;</span>, <span style="color:#cd5555">&#39;ADJ&#39;</span>, <span style="color:#cd5555">&#39;形容詞-非自立可能&#39;</span>, <span style="color:#cd5555">&#39;形容詞,終止形-一般&#39;</span>]
+[22, <span style="color:#cd5555">&#39;から&#39;</span>, <span style="color:#cd5555">&#39;カラ&#39;</span>, <span style="color:#cd5555">&#39;から&#39;</span>, <span style="color:#cd5555">&#39;CCONJ&#39;</span>, <span style="color:#cd5555">&#39;助詞-接続助詞&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[23, <span style="color:#cd5555">&#39;不安&#39;</span>, <span style="color:#cd5555">&#39;フアン&#39;</span>, <span style="color:#cd5555">&#39;不安&#39;</span>, <span style="color:#cd5555">&#39;ADJ&#39;</span>, <span style="color:#cd5555">&#39;名詞-普通名詞-形状詞可能&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+[24, <span style="color:#cd5555">&#39;だ&#39;</span>, <span style="color:#cd5555">&#39;ダ&#39;</span>, <span style="color:#cd5555">&#39;だ&#39;</span>, <span style="color:#cd5555">&#39;AUX&#39;</span>, <span style="color:#cd5555">&#39;助動詞&#39;</span>, <span style="color:#cd5555">&#39;助動詞-ダ,終止形-一般&#39;</span>]
+[25, <span style="color:#cd5555">&#39;。&#39;</span>, <span style="color:#cd5555">&#39;。&#39;</span>, <span style="color:#cd5555">&#39;。&#39;</span>, <span style="color:#cd5555">&#39;PUNCT&#39;</span>, <span style="color:#cd5555">&#39;補助記号-句点&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+
+</code></pre></div><p>ここで一言、すげえと出てしまいました。ワーカホリックとかも辞書登録されているのでしょうか？かなり正確に結果が出ていることがわかります。これらの関係は画面出力でより簡単に理解できるみたいです。</p>
+<p><img src="https://RockinWool.github.io/RFV/img/%E5%BD%A2%E6%85%8B%E7%B4%A0%E8%A7%A3%E6%9E%901.png" alt="GiNZA画面出力"></p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3:Gintes2.py" data-lang="Python3:Gintes2.py"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">spacy</span>
+<span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#008b45;text-decoration:underline">spacy</span> <span style="color:#8b008b;font-weight:bold">import</span> displacy
+nlp = spacy.load(<span style="color:#cd5555">&#39;ja_ginza&#39;</span>)
+doc = nlp(<span style="color:#cd5555">&#39;なんかワーカホリックな人からフォロリク来ている。自分のリアル知り合い以外フォロリクされたことないから不安だ。&#39;</span>)
+displacy.serve(doc, style=<span style="color:#cd5555">&#34;dep&#34;</span>)
+</code></pre></div><p>あと個人的に気になったのは２つの文章を見比べて類似度とやらを出してくれる機能。具体的に何をやっているのかは専門家ではないので知らなくていいかなあ。</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3:Gentes3.py" data-lang="Python3:Gentes3.py"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">spacy</span>
+nlp = spacy.load(<span style="color:#cd5555">&#39;ja_ginza_nopn&#39;</span>)
+
+doc1 = nlp(<span style="color:#cd5555">&#34;このパソコンは現在シミュレーションを実行中です&#34;</span>)
+doc2 = nlp(<span style="color:#cd5555">&#34;最近、雨が多すぎやしませんか？&#34;</span>)
+
+similarity = doc1.similarity(doc2)
+<span style="color:#8b008b;font-weight:bold">print</span>(similarity)
+</code></pre></div><p>上を実行すると結果は0.46384519507135974って表示されます。半分くらい似ている・・・らしいけど、なにが半分似ているって根拠なんだろう？<br>
 文章の中の各言葉間の類似度を計算することもできるらしいです。</p>
-<p>&lsquo;&lsquo;&lsquo;Python3:Gintes4.py
-import spacy
-import numpy as np
-import pandas as pd
-nlp = spacy.load(&lsquo;ja_ginza&rsquo;)</p>
-<p>tokens = nlp(&lsquo;お米食べろ!')
-token_size =len(tokens)</p>
-<p>tokens_array = np.zeros((token_size,token_size))
-for i in range(token_size):
-for j in range(token_size):
-tokens_array[i][j] = tokens[i].similarity(tokens[j])</p>
-<p>df_tokens = pd.DataFrame(tokens_array)
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3:Gintes4.py" data-lang="Python3:Gintes4.py"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">spacy</span>
+<span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">numpy</span> <span style="color:#8b008b;font-weight:bold">as</span> <span style="color:#008b45;text-decoration:underline">np</span>
+<span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">pandas</span> <span style="color:#8b008b;font-weight:bold">as</span> <span style="color:#008b45;text-decoration:underline">pd</span>
+nlp = spacy.load(<span style="color:#cd5555">&#39;ja_ginza&#39;</span>)
+
+tokens = nlp(<span style="color:#cd5555">&#39;お米食べろ!&#39;</span>)
+token_size =<span style="color:#658b00">len</span>(tokens)
+
+tokens_array = np.zeros((token_size,token_size))
+<span style="color:#8b008b;font-weight:bold">for</span> i <span style="color:#8b008b">in</span> <span style="color:#658b00">range</span>(token_size):
+    <span style="color:#8b008b;font-weight:bold">for</span> j <span style="color:#8b008b">in</span> <span style="color:#658b00">range</span>(token_size):
+        tokens_array[i][j] = tokens[i].similarity(tokens[j])
+
+df_tokens = pd.DataFrame(tokens_array)
 df_tokens.columns= tokens
 df_tokens.index = tokens
-print(df_tokens)
-'&rsquo;&rsquo;</p>
-<p>ここで問題発生。最初に作ったAnacondaの環境にはpandasが入ってなかったようなので、急遽conda install pandasで追加しました。<br>
+<span style="color:#8b008b;font-weight:bold">print</span>(df_tokens)
+</code></pre></div><p>ここで問題発生。最初に作ったAnacondaの環境にはpandasが入ってなかったようなので、急遽conda install pandasで追加しました。<br>
 最終的には
 <img src="https://RockinWool.github.io/RFV/img/pandas%E3%83%86%E3%82%B9%E3%83%88.png" alt="こんな感じの出力">
 が出力されて単語ごとの類似度もわかります。すごいですねえ。</p>
