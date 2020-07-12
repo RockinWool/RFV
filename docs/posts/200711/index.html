@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+
+    
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400&display=swap' rel='stylesheet' type='text/css'>
+    
+
+    <title>
+      
+      
+         今日から4日間は普通に過ごす 
+      
+    </title>
+    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/200711/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+    text-decoration-skip: ink;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:700px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  .left-justify {
+    float: left;
+  }
+
+  .right-justify {
+    float:right;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+
+  blockquote p {
+    display:inline-block;
+    font-style:italic;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    content:'\201C';
+    font-size:35px;
+    color:#403c3b;
+  }
+
+  blockquote:after {
+    content:'\201D';
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+  #sub-header, .date {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .posts_listing a,#nav a {
+    text-decoration: none;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 5px;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+  }
+
+  #nav ul li:before, .posts_listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 80px;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content .date {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts_listing {
+    margin:0 0 50px;
+  }
+
+  .posts_listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts_listing li a:hover,#nav a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts_listing li div {
+      font-size:12px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts_listing li div{
+      font-size:12px;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    *, #nav h1 a {
+      color: #FDFDFD;
+    }
+
+    body {
+      background: #121212;
+    }
+
+    pre, code {
+      background-color: #262626;
+    }
+
+    #sub-header, .date {
+      color: #BABABA;
+    }
+
+    hr {
+      background: #EBEBEB;
+    }
+  }
+</style>
+
+
+    </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="https://RockinWool.github.io/RFV/">Tar_nullaの部屋</a></h1>
+      <ul>
+        
+          <li><a href="https://github.com/davidhampgonsalves/hugo-black-and-light-theme">black-and-light-theme(Hugo)</a></li>
+        
+          <li><a href="https://github.com/RockinWool/talkings">GitHub</a></li>
+        
+          <li><a href="https://twitter.com/vaex116">Twitter</a></li>
+        
+      </ul>
+    </section>
+
+
+<section id=content>
+  <h1> 今日から4日間は普通に過ごす </h1>
+
+  
+    <div id=sub-header>
+      July 2020 · 7 minute read
+    </div>
+  
+
+  <div class="entry-content">
+    <p>こんにちはRockinWoolです。最近は仕事でもマークダウンを使用しているので、少々使い方に幅がでてきたかな・・・という感じです。マークダウンって凄い楽なので良いですね〜。<br>
+さて、今日はPythonやCに慣れる日と決めていたので早速実況しながら色々やって行こうと思います。</p>
+<ol>
+<li>
+<h2 id="python38にアップデート">Python3.8にアップデート</h2>
+<p>「python3.8からf文字がデフォルトで入ってくるのではないか？」という噂を聞いていたので、そろそろアップデートしておこうと思ってやりました。f文字はprint文の書き方が楽になるやつ。例えば</p>
+<pre><code class="language-python:f文字" data-lang="python:f文字">print(f'バラバシアルバートモデルを追加次数{m}で作成します')
+結果&gt;&gt;バラバシアルバートモデルを追加次数2で作成します
+</code></pre><p>といった感じで簡単に書き込むことができる仕組みのことです。噂では先頭のfを入れなくても対応してくれるようになったと聞いていたわけです。以下のコマンドを実行してanaconda(in Ubuntu)のPythonをアップデートしました。</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conda install <span style="color:#00688b">python</span>=3.8
+</code></pre></div></li>
+<li>
+<h2 id="atcoderに挑戦">Atcoderに挑戦</h2>
+<ol>
+<li>
+<h3 id="atcoderへの登録">Atcoderへの登録</h3>
+<p>前々から興味あったAtcoderに登録しました。で、最初の練習問題すら解けず（Pythonでもわからなかった）これは再修行が必要だなと思いAtCoder Programing Guide for beginnersをやることにしました。まあ、前々からC++に興味がありましたので、ここの恥はすぐに取り返して来月にはツヨツヨプログラマの仲間入りを果たしてやりたいですね（)</p>
+</li>
+<li>
+<h3 id="cの修行の開始">C++の修行の開始</h3>
+<p>まず、C++のプログラムの基本形は</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#1e889b">#include</span> <span style="color:#1e889b">&lt;bits/stdc++.h&gt;</span><span style="color:#1e889b">
+</span><span style="color:#1e889b"></span><span style="color:#8b008b;font-weight:bold">using</span> <span style="color:#8b008b;font-weight:bold">namespace</span> std;
+
+<span style="color:#00688b;font-weight:bold">int</span> <span style="color:#008b45">main</span>(){
+}
+</code></pre></div><p>らしいです（恥ずかしながらほぼコピペ）。もはやプログラマとして自信を持っていた自分が偉く恥ずかしいナウであるわけですが、この呪文の意味を知るところからはじめようと思います。たしかC言語では<code>#include&lt;stdio.h&gt;</code>て感じで標準入出力のヘッダファイルを読み込んでいたような・・・かすかな記憶ですが。調べたらこのヘッダファイルの本体は一般的には/usr/include/stdio.hにあるらしいですね。未だに/usrの立ち位置が分かっていない・・・。というより何も分かっていないんでしょうな私は。ということでbits/stdc++.hについても調べてみました。<a href="https://qiita.com/hakatashi/items/f9d9abf05a002b5c4dc5">参考ページ</a><br>
+ふむ。どうやら、普段使うようなc++の基本のライブラリであるlibstdc++(スタンダードC++ライブラリってことなのかな？)を改造してまとめてコンパイルしたプリコンパイル済みのヘッダファイルってことっぽいですね。つまりはこれを#includeしておけば大体使いたいライブラリは揃っているって感じなのでしょう。速さの利点があるため、競技プログラミングの世界では普通に使われているそうですが、linuxの環境以外(というよりGCC)では無いところではそもそもlibstdc++が使えないのでこの呪文もバグの原因になってしまうそう。ちょっと悩みましたが、今の自分の環境もubuntuなのであまり気にせずにどんどん<code>#include&lt;bits/stdc++.h&gt;</code>を使っていって慣れて行こうとおもいます。</p>
+</li>
+<li>
+<h3 id="cの出力">C++の出力</h3>
+<p>実はこれが一番ビックリした内容かもしれません。出力がprintfで無い・・・だと？</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#1e889b">#include</span> <span style="color:#1e889b">&lt;bits/stdc++.h&gt;</span><span style="color:#1e889b">
+</span><span style="color:#1e889b"></span><span style="color:#8b008b;font-weight:bold">using</span> <span style="color:#8b008b;font-weight:bold">namespace</span> std;
+
+<span style="color:#00688b;font-weight:bold">int</span> <span style="color:#008b45">main</span>() {
+    cout &lt;&lt; <span style="color:#cd5555">&#34;Hello_World&#34;</span>&gt;&gt;endl;
+}
+</code></pre></div><p>これはどういうことだ？C++はC言語の拡張だから互換性とかでprintfは使えるのでは無いのか？となったので調べました。<br>
+その結果、どうやら２つの理由があるようですね。</p>
+<ol>
+<li>C言語のprintfは脆弱性がある</li>
+<li>std::coutは型チェックがあるので異常な出力が出にくい</li>
+</ol>
+<p>まあ、英語の資料ばっかり出てくるのでなんとなくの意味合いしかわからないのが多かったのですが。coutのほうが早いのならば納得できる部分もありますが、脆弱性回避の意味合いのほうが強いとするならば競技プログラミングではprintfを使う価値もあるのかしら？まあ、ここは先人のツヨツヨプログラマに倣ってcoutを使うことに慣れていこうと思います。
+<br>
+<br>
+そういえばこれを調べている時に気づいたのですが、2行目の<code>using namespace std;</code>を入れることによってstd::coutを使うときにcoutだけで済むようになるらしいです。namespaceというのだからコンテナとかと関係があるのかしら？と踏んでいたのですが、どちらかといえばPythonの<code>import numpy as np</code>のほうに近いのかしら？一応調べておきます。</p>
+</li>
+<li>
+<h3 id="名前空間">名前空間</h3>
+<p>ああ、またコイツか。仕事でも出会うヤバイヤツってイメージしか無い。名前空間はコンテナ化に必要な技術で、「こいつを正しく設定することによってシステムの頑強性を高めます！」って謳い文句を何も分かってなさそうなコンサルが上長にオススメしている印象しかない。この際だから慣れてしまおうか。<br>
+まず、冒頭の<code>using namespace std;</code>。こいつはどこからどう読んでも「stdってヤツ(namespace)を使うぜ！」って宣言しているようにしか見えない。<a href="https://qiita.com/_EnumHack/items/430da105a541f9ecd774">解説サイト</a>などを読んでもstdという名前空間内に様々な関数などを登録しておけば、それを<code>using namespace std</code>することによってstd名前空間内にあるものはそのプログラム内ではグローバル変数チックに登録されるという流れのように見える。<br>
+つまり、本質的に<code>from numpy import hoge</code>とは異なるものの使い勝手としては大した差は無いという感じかな？個人的には<code>import numpy as np</code>のほうが、プログラム内の関数とnumpyの関数が同じ関数名になっても助かる可能性があるので後者のほうが好きなんですよね（トラウマ）。ですので、名前空間をまとめて<code>using namespace std;</code>するのは流石のツヨツヨ先人の呪文とは言え採用は難しいです・・・。自分は<code>std::cout</code>って宣言したいなあ・・・。ダメかなあ・・・。<br>
+というか結局、基本的にこの程度の隔離がコンテナ空間の隔離にまで至る気持ちがあまりわからなかった・・・。</p>
+</li>
+<li>
+<h3 id="コメントの記法">コメントの記法</h3>
+<p>これも「ああ、こんな感じだったね・・」ってなった内容です。Pyhtonのコメントは#であるのに対してCは//や/**/でしたわ。</p>
+</li>
+<li>
+<h3 id="細かい話">細かい話</h3>
+<p>さっき一生懸命(？)探した<code>#include&lt;bits/stdc++.h&gt;</code>や<code>using namespace std;</code>の解説が乗ってました。哀れ自分。
+coutは<code>#include&lt;iostream&gt;</code>と書くことによって個別に読み込むことができるそうですね。業務ではこちらが推奨されるとも書いてあるので、コンテストでもこちらを使って行こうかしら（気持ちのブレ）。<code>using namespce std;</code>も業務で推奨されないとか書いてあるので極力使わないで行こうかな。</p>
+</li>
+<li>
+<h3 id="iostreamの罠">iostreamの罠</h3>
+<p>ということで例題を解いてみたんですけど、ACになるまでめっちゃかかってしまって自分でも面白かったです。とりあえず今回かいてみた回答はこんな感じ</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#1e889b">#include</span> <span style="color:#1e889b">&lt;iostream&gt;</span><span style="color:#1e889b">
+</span><span style="color:#1e889b"></span>
+<span style="color:#00688b;font-weight:bold">int</span> <span style="color:#008b45">main</span>(){
+    std::cout &lt;&lt; <span style="color:#cd5555">&#34;こんにちは&#34;</span> &lt;&lt;std::endl;
+    std::cout &lt;&lt; <span style="color:#cd5555">&#34;AtCoder&#34;</span> &lt;&lt;std::endl;
+}
+</code></pre></div><p>ミスの一覧: \</p>
+<ol>
+<li>
+<p><code>&lt;iostream&gt;</code>を<code>&lt;iostream.h&gt;</code>と打ってしまってコンパイルエラー</p>
+</li>
+<li>
+<p><code>int main(){}</code>が正解なのにintを抜いたり、()を抜いたりする</p>
+</li>
+<li>
+<p>coutのstdを抜く（なんでやねん）</p>
+</li>
+<li>
+<p>endlにstdが必要だったのに気づかなかった</p>
+<p>特にこれが一番悔しかっった。冷静に考えればendlは文字列ではなくendlineを意味する関数であるのは当たり前。iostream内のstdネームスペースのendl関数であったということ。</p>
+</li>
+</ol>
+<p>とりあえず、ここで休憩をはさみつつ、次の勉強会の内容はこれにしようと思ったRockinWoolなのでありました。</p>
+</li>
+</ol>
+</li>
+</ol>
+
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/20200621/">&laquo; 久しぶりにPythonに触らなければしぬと思った</a>
+    
+    
+  </div>
+</section>
+
+  
+</body>
+</html>
+
+
+
