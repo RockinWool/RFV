@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
   <head>
-	<meta name="generator" content="Hugo 0.66.0-DEV" />
     <meta charset="utf-8">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -16,10 +15,10 @@
     <title>
       
       
-         Tar_nullaの部屋 
+         LaTeX初心者への道 
       
     </title>
-    <link rel="canonical" href="https://RockinWool.github.io/RFV/">
+    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/200729/">
 
     <style>
   * {
@@ -404,7 +403,6 @@
 </style>
 
 
-    <link rel="alternate" type="application/rss+xml" href="https://RockinWool.github.io/RFV/index.xml" title="Tar_nullaの部屋" />
     </head>
 
   <body>
@@ -423,146 +421,67 @@
 
 
 <section id=content>
-  <ul class=posts_listing>
+  <h1> LaTeX初心者への道 </h1>
+
+  
+    <div id=sub-header>
+      July 2020 · 2 minute read
+    </div>
+  
+
+  <div class="entry-content">
+    <p>こんにちは。RockinWoolです。今は朝早くから論文を書く作業をしようと思ってパソコンを開いたものの、OSがubuntuのパソコンしか手元になくて書けないとなっているところです。<br>
+さて、挨拶を書いたところで気づいたのですが、論文なのだからLaTeXで書けば良いですね。これならubuntuのほうが向いていそうですし。\</p>
+<ol>
+<li>
+<h2 id="latexの環境構築">LaTeXの環境構築</h2>
+</li>
+</ol>
+<p>LaTeXの環境構築はWindowsだと死ぬほど面倒だった記憶があるのですが、Ubuntuならば簡単なんでしょうね。そう思って<a href="https://qiita.com/BitPositive/items/6b13e2038d628c33be8e">こちら</a>のサイトを見ながら作業を進めていきました。</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt update
+sudo apt upgrade
+sudo apt install texlive-lang-cjk xdvik-ja evince
+sudo apt install texlive-fonts-recommended texlive-fonts-extra
+</code></pre></div><p>あとついでに載っているPDFへの変換方法も、メモでここに載っけておきます。</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">platex hoge.tex
+dvipdfmx hoge.dvi
+</code></pre></div><ol start="2">
+<li>
+<h2 id="latexの基本構文の練習">LaTeXの基本構文の練習</h2>
+</li>
+</ol>
+<p>LaTeXは<a href="https://texwiki.texjp.org/?LaTeX%E5%85%A5%E9%96%80%2F%E6%9C%80%E5%88%9D%E3%81%AE%E4%BE%8B">チュートリアルサイト</a>があったのでこれで練習していこうと思います。<br>
+最初の内容は以下の内容をコピペしてpractice1.texとでも命名して保存するところから始まります。</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
+<span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
+
+吾輩は猫である。名前はまだ無い。
+
+どこで生れたかとんと見当がつかぬ。
+何でも薄暗いじめじめした所で
+ニャーニャー泣いていた事だけは記憶している。
+吾輩はここで始めて人間というものを見た。
+
+<span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
+</code></pre></div><p>ここで先程のコンパイルとPDF化をこのpractice1.texに対して行ったのですが
+、わざわざplatexとdvipdfmxなんてしなくても以下の一行でまとめられるらしいです。</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ptex2pdf -l ex1
+</code></pre></div>
+  </div>
+
+  <div id=links>
     
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/210425/">210425 Cython 久しぶりに研究者としてのログイン</a></h2>
-        <div class=date>
-          April 2021
-        </div>
-      </li>
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200711/">&laquo; 今日から4日間は普通に過ごす</a>
     
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200731/">職場で泣かされて、なお修行する</a></h2>
-        <div class=date>
-          July 2020
-        </div>
-      </li>
     
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200729/">LaTeX初心者への道</a></h2>
-        <div class=date>
-          July 2020
-        </div>
-      </li>
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200731/">職場で泣かされて、なお修行する &raquo;</a>
     
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200711/">今日から4日間は普通に過ごす</a></h2>
-        <div class=date>
-          July 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/20200621/">久しぶりにPythonに触らなければしぬと思った</a></h2>
-        <div class=date>
-          June 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200521/">コロナ禍の中で</a></h2>
-        <div class=date>
-          May 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200505/">充実したGW（研究生活）を送っています</a></h2>
-        <div class=date>
-          May 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200430/">ヴォロノイさんのネットワークについて</a></h2>
-        <div class=date>
-          April 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200428/">ようやくコンテナから画面をとることに成功した話</a></h2>
-        <div class=date>
-          April 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200417/">弊社は自動車会社なので交代二勤で乗り切るみたいです</a></h2>
-        <div class=date>
-          April 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200415/">脱社会人のための日々の研究と勉強</a></h2>
-        <div class=date>
-          April 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200414/">社会人生活って辛いね</a></h2>
-        <div class=date>
-          April 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200327/">Twitterランドの情報を入手して遊ぶ1()</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200325/">Twitterと連携してみた＆一時間でTwitterのPythonScriptを実装してみる</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200323/">大企業（笑）に入って失敗したと感じる日々</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200320/">Dockerで遊ぶ</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200317/">新社会人もそろそろ終わる</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/20200307/">はじめまして！</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/1st/">1st</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-  </ul>
+  </div>
 </section>
 
   
 </body>
 </html>
+
 
 

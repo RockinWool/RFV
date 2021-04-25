@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
   <head>
-	<meta name="generator" content="Hugo 0.66.0-DEV" />
     <meta charset="utf-8">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -16,10 +15,10 @@
     <title>
       
       
-         Tar_nullaの部屋 
+         210425 Cython 久しぶりに研究者としてのログイン 
       
     </title>
-    <link rel="canonical" href="https://RockinWool.github.io/RFV/">
+    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/210425/">
 
     <style>
   * {
@@ -404,7 +403,6 @@
 </style>
 
 
-    <link rel="alternate" type="application/rss+xml" href="https://RockinWool.github.io/RFV/index.xml" title="Tar_nullaの部屋" />
     </head>
 
   <body>
@@ -423,146 +421,58 @@
 
 
 <section id=content>
-  <ul class=posts_listing>
+  <h1> 210425 Cython 久しぶりに研究者としてのログイン </h1>
+
+  
+    <div id=sub-header>
+      April 2021 · 2 minute read
+    </div>
+  
+
+  <div class="entry-content">
+    <p>こんにちは。RockinWoolです。<br>
+最終登校日からおよそ10ヵ月も空いてしまいました。その間、コロナ禍やテレワークなどいろいろ出来事がありましたね。RockinWoolとしては激動の1年でした。最近は仕事で気持ちが浮き沈みすることも少なくなってきたかな・・・と過去の記事を見て思います。とはいえ他の人よりもどうしても激烈苛烈になりがち。<br>
+<br>
+さて、今回は久しぶりのCython練習編という感じです。いつも「Pythonを高速化したいなあ」⇒「せや！Cython使ったろ！」ってなって、しばらく使ううちに忘れるパターンが多い言語です。この際ブログに残していつでも参照できるようにしておこ。<br>
+明日はAWS(EC2)+VSCodeの環境を作って遊ぶぞー(予告)
+\</p>
+<!-- raw HTML omitted -->
+<p>最初にやることは普通のpython関数を作成することである。今回は以下のような関数を記述した。</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">Hello_World</span>():
+    <span style="color:#8b008b;font-weight:bold">print</span>(<span style="color:#cd5555">&#39;Hello_World&#39;</span>)
+</code></pre></div><!-- raw HTML omitted -->
+<p>Cythonプログラム拡張子であるhelloworld.pyxに変更する</p>
+<!-- raw HTML omitted -->
+<p>Cythonプログラムをコンパイルするための設定プログラムを作成して実行する。以下のプログラムを作成＆実行すれば良い。ただしWin＆Anaconda環境でやっているため、Linuxではコンパイラが異なる点に注意。</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#008b45;text-decoration:underline">distutils.core</span> <span style="color:#8b008b;font-weight:bold">import</span> setup
+<span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#008b45;text-decoration:underline">Cython.Build</span> <span style="color:#8b008b;font-weight:bold">import</span> cythonize
+
+setup(
+    ext_modules = cythonize(<span style="color:#cd5555">&#34;helloworld.pyx&#34;</span>)
+)
+</code></pre></div><div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python setup.py build_ext --inplace --compiler=msvc
+</code></pre></div><!-- raw HTML omitted -->
+<p>ここまでの動作でコンパイルは完了しているため、あとは呼び出して使うだけである。</p>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">helloworld</span> <span style="color:#8b008b;font-weight:bold">as</span> <span style="color:#008b45;text-decoration:underline">h</span>
+
+<span style="color:#8b008b;font-weight:bold">if</span> __name__ == <span style="color:#cd5555">&#34;__main__&#34;</span>:
+    h.Hello_World()
+</code></pre></div><div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python main.py
+</code></pre></div><!-- raw HTML omitted -->
+
+  </div>
+
+  <div id=links>
     
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/210425/">210425 Cython 久しぶりに研究者としてのログイン</a></h2>
-        <div class=date>
-          April 2021
-        </div>
-      </li>
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/200731/">&laquo; 職場で泣かされて、なお修行する</a>
     
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200731/">職場で泣かされて、なお修行する</a></h2>
-        <div class=date>
-          July 2020
-        </div>
-      </li>
     
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200729/">LaTeX初心者への道</a></h2>
-        <div class=date>
-          July 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200711/">今日から4日間は普通に過ごす</a></h2>
-        <div class=date>
-          July 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/20200621/">久しぶりにPythonに触らなければしぬと思った</a></h2>
-        <div class=date>
-          June 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200521/">コロナ禍の中で</a></h2>
-        <div class=date>
-          May 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200505/">充実したGW（研究生活）を送っています</a></h2>
-        <div class=date>
-          May 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200430/">ヴォロノイさんのネットワークについて</a></h2>
-        <div class=date>
-          April 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200428/">ようやくコンテナから画面をとることに成功した話</a></h2>
-        <div class=date>
-          April 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200417/">弊社は自動車会社なので交代二勤で乗り切るみたいです</a></h2>
-        <div class=date>
-          April 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200415/">脱社会人のための日々の研究と勉強</a></h2>
-        <div class=date>
-          April 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200414/">社会人生活って辛いね</a></h2>
-        <div class=date>
-          April 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200327/">Twitterランドの情報を入手して遊ぶ1()</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200325/">Twitterと連携してみた＆一時間でTwitterのPythonScriptを実装してみる</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200323/">大企業（笑）に入って失敗したと感じる日々</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200320/">Dockerで遊ぶ</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200317/">新社会人もそろそろ終わる</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/20200307/">はじめまして！</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/1st/">1st</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-  </ul>
+  </div>
 </section>
 
   
 </body>
 </html>
+
 
 
