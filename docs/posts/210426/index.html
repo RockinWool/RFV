@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja-jp">
   <head>
-	<meta name="generator" content="Hugo 0.66.0-DEV" />
     <meta charset="utf-8">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -16,10 +15,10 @@
     <title>
       
       
-         Tar_nullaの部屋 
+         210426 AWSのEC2に初チャレンジ 
       
     </title>
-    <link rel="canonical" href="https://RockinWool.github.io/RFV/">
+    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/210426/">
 
     <style>
   * {
@@ -404,7 +403,6 @@
 </style>
 
 
-    <link rel="alternate" type="application/rss+xml" href="https://RockinWool.github.io/RFV/index.xml" title="Tar_nullaの部屋" />
     </head>
 
   <body>
@@ -423,153 +421,58 @@
 
 
 <section id=content>
-  <ul class=posts_listing>
+  <h1> 210426 AWSのEC2に初チャレンジ </h1>
+
+  
+    <div id=sub-header>
+      April 2021 · 3 minute read
+    </div>
+  
+
+  <div class="entry-content">
+    <p>こんにちは。初心者プログラマのRockinWoolです。<br>
+今日は有給を取って勉強をしていました。主にずっとやりたいと思っていたAWSでのPython実行について格闘し、結果として中々よい環境構築までいけました。頭の中に方法が残っている間にここにメモっておこうと思います。<br>
+あと、昨日<code>&lt;ol&gt;</code>とかのhtml構文を記事に入れたのですが、どうやらhugoでは使えないみたいですね。残念です。</p>
+<ol>
+<li>
+<p>AWSアカウントの作成
+たしか<a href="https://aws.amazon.com/jp/s/dm/landing-page/create-free-account/?all-free-tier.sort-by=item.additionalFields.SortRank&amp;all-free-tier.sort-order=asc%3FtrkCampaign&amp;trk=ps_a134p000003yhoPAAQ&amp;sc_campaign=acquisition_JP&amp;sc_channel=ps&amp;sc_publisher=google&amp;sc_category=core-main&amp;sc_country=JP&amp;sc_geo=JP&amp;sc_outcome=devadopt&amp;sc_detail=aws&amp;sc_content=Brand_Core_aws_e&amp;sc_segment=498599282606&amp;sc_medium=ACQ-P%7CPS-GO%7CBrand%7CDesktop%7CSU%7CCore-Main%7CCore%7CJP%7CEN%7CText%7Cdx&amp;ef_id=Cj0KCQjwyZmEBhCpARIsALIzmnJcb5z6ULsFcijCeatORjs3NwM80twysICUgMPOx_RKS55_zNLF5ccaAkQ8EALw_wcB:G:s&amp;s_kwcid=AL!4422!3!498599282606!e!!g!!aws&amp;gclid=Cj0KCQjwyZmEBhCpARIsALIzmnJcb5z6ULsFcijCeatORjs3NwM80twysICUgMPOx_RKS55_zNLF5ccaAkQ8EALw_wcB&amp;awsf.Free%20Tier%20Types=*all&amp;awsf.Free%20Tier%20Categories=*all">AWSのホームページ</a>に行って、アカウントを作りました。この時、ユーザのpemを作ったんだっけな？このファイルは死ぬほど大切なのでなくさないように。</p>
+</li>
+<li>
+<p>AWSのホームページに戻り、コンソールからMFAの設定を行う
+Multi-Factor Authenticationの略の用です。自分のAndroidにGoogle Authenticatorを入れてあるので、QRコード読み込んでケータイに表示される6桁の数字を入れて完成です。なお、1回目に表示される数字を1に、2回目に表示される数字を2に入れます。</p>
+</li>
+<li>
+<p>EC2のAMIを作成
+多分Amazon Machine Imageとかの略だと思う。GPU付きを選ぶと無料ではなくなるが、逆に言えば無料のイメージもある。今回はUbuntu18.04の無料イメージを使った。</p>
+</li>
+<li>
+<p>VScodeでRemoteSSH拡張機能のインストール
+VScodeのRemoteSSHの拡張機能はEC2内のファイルをローカルＰＣから確認できるヤバすぎ機能である。本当に素晴らしいです。
+<br>
+AWSのEC2のページに移動して、インスタンスをクリックした後、接続のタブでSSHを確認するとパブリックIPがわかるので以下のコマンドをRemoteSSHで打つ。</p>
+</li>
+</ol>
+<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -i <span style="color:#cd5555">&#34;.pemファイル&#34;</span> ユーザ名@IPアドレス
+</code></pre></div><p>なお、.pemファイルの部分は絶対アドレスで記述するのだが、日本語ユーザなどでフォルダ名が「苗字スペース名前」等になっている場合、スペースが第二引数扱いになるらしくバグる。よしなにした方がよい(1敗)</p>
+<p>ざっとこのような手順でEC2にVScodeからつなぐことができる。ちょっと動かして見た感じ、ローカルのプログラムをEC2に移動する方法はGithub経由が楽でいいなと。その逆も然り。<br>
+今後のＡＷＳ利用ですが、まずは時々動かしてみて何円かかるか測定してみようと思います。<br>
+次回はGPU付きAWSを使ってCupyを試してみたいです。・・・が、先にQtとCppの勉強をしようかな。<br>
+最後まで見てくださりありがとう！</p>
+
+  </div>
+
+  <div id=links>
     
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/210426/">210426 AWSのEC2に初チャレンジ</a></h2>
-        <div class=date>
-          April 2021
-        </div>
-      </li>
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/210425/">&laquo; 210425 Cython 久しぶりに研究者としてのログイン</a>
     
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/210425/">210425 Cython 久しぶりに研究者としてのログイン</a></h2>
-        <div class=date>
-          April 2021
-        </div>
-      </li>
     
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200731/">職場で泣かされて、なお修行する</a></h2>
-        <div class=date>
-          July 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200729/">LaTeX初心者への道</a></h2>
-        <div class=date>
-          July 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200711/">今日から4日間は普通に過ごす</a></h2>
-        <div class=date>
-          July 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/20200621/">久しぶりにPythonに触らなければしぬと思った</a></h2>
-        <div class=date>
-          June 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200521/">コロナ禍の中で</a></h2>
-        <div class=date>
-          May 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200505/">充実したGW（研究生活）を送っています</a></h2>
-        <div class=date>
-          May 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200430/">ヴォロノイさんのネットワークについて</a></h2>
-        <div class=date>
-          April 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200428/">ようやくコンテナから画面をとることに成功した話</a></h2>
-        <div class=date>
-          April 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200417/">弊社は自動車会社なので交代二勤で乗り切るみたいです</a></h2>
-        <div class=date>
-          April 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200415/">脱社会人のための日々の研究と勉強</a></h2>
-        <div class=date>
-          April 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200414/">社会人生活って辛いね</a></h2>
-        <div class=date>
-          April 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200327/">Twitterランドの情報を入手して遊ぶ1()</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200325/">Twitterと連携してみた＆一時間でTwitterのPythonScriptを実装してみる</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200323/">大企業（笑）に入って失敗したと感じる日々</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200320/">Dockerで遊ぶ</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/200317/">新社会人もそろそろ終わる</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/20200307/">はじめまして！</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://RockinWool.github.io/RFV/posts/1st/">1st</a></h2>
-        <div class=date>
-          March 2020
-        </div>
-      </li>
-    
-  </ul>
+  </div>
 </section>
 
   
 </body>
 </html>
+
 
 
