@@ -435,11 +435,11 @@
 さて、昨日も予告したとおり、Dockerコンテナを使用してHugoの記事を書くことを目的に今日も頑張って行こうと思います。<br>
 今回はまず、SlideshareでDockerfileについて良い書き方がないかなあと探すところから始めました。
 すると数分後、<a href="https://www.slideshare.net/zembutsu/explaining-best-practices-for-writing-dockerfiles">こちら</a>のスライドがとても良くて、印刷したくなっちゃいました。
-そこで、この際だったのでSlideshareの新規アカウント登録をして、スライドをDownLoadしておきました。&quot;(OO)/&rdquo;<br>
+そこで、この際だったのでSlideshareの新規アカウント登録をして、スライドをDownLoadしておきました。&quot;(OO)/&quot;<br>
 <br>
 次に、どうにかしてDockerコンテナ内でGeditできないかなあ・・・なんて意★味★不★明なことを思っていたら、なんと<a href="https://own-search-and-study.xyz/2020/04/02/docker-python-develop-environment/">こちら</a>のページでDockerコンテナで画面表示ができるという美味しすぎる話を見つけてしまったので早速使用・・・と思ったら、なんか自分のubuntuの環境ではdocker-composeでバグるんですよね。<br>
 そこで、早速アップデートしてみました</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">sudo apt-get install docker-compose
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">sudo apt-get install docker-compose
 </code></pre></div><p>とりあえず、これで更新はできたので、いざもう一度！<br>
 ・・・使用できないコマンドとかがあって、そのままでは使えなさそうですね・・・。
 しかも、ここでTeraTermとか色々調べてみたら、やりたいことはWindowsからLinuxをリモートしたいってことじゃないですか！

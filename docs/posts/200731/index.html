@@ -435,7 +435,7 @@
 <p>さて、本日は前回のLaTeXの続きからやっていこうと思います。今日は<a href="https://texwiki.texjp.org/?LaTeX%E5%85%A5%E9%96%80%2F%E7%B0%A1%E5%8D%98%E3%81%AA%E6%95%B0%E5%BC%8F%281%29">ここから</a>始めていこうと思います。\</p>
 <h2 id="1数式の挿入">1.数式の挿入</h2>
 <p>まずは参考サイトにある例をここにそのままコピペしました。</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
 <span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
 
 日本で漱石が「吾輩は猫である」を発表したころ，
@@ -454,13 +454,13 @@
 
 <span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
 </code></pre></div><p>これを<code>ptex2pdf -l hoge.tex</code>することによってPDF化すると、数式が挿入できていることがわかります。LaTeXでは数式用の文字を<code>$E$</code>のように表記したり、数式を</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>equation<span style="color:#658b00">}</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>equation<span style="color:#658b00">}</span>
     E = mc<span style="color:#658b00">^{</span>2<span style="color:#658b00">}</span>
 <span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>equation<span style="color:#658b00">}</span>
 </code></pre></div><p>のように記載するんですね。後、単位は<code>\, \mathrm{m/s}</code>で表現するみたいですね。</p>
 <h2 id="2-数式の代入2httpstexwikitexjporglatexe585a5e996802fe7b0a1e58d98e381aae695b0e5bc8f28229">2. <a href="https://texwiki.texjp.org/?LaTeX%E5%85%A5%E9%96%80%2F%E7%B0%A1%E5%8D%98%E3%81%AA%E6%95%B0%E5%BC%8F%282%29">数式の代入2</a></h2>
 <p>次の数式が簡単とか紹介されているんですけど・・。うーん・・天才ってやっぱり存在しますねえ。</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
 <span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
 
 <span style="color:#cd5555">\[</span><span style="color:#658b00">
@@ -476,7 +476,7 @@
 他にも三角関数<code>\sin x,\cos,\tan</code>や対数<code>\log</code>、平方根の<code>\sqrt{x}</code>や<code>\sqrt{3}{x}</code>、総和相乗の<code>\sum,\prod</code>などがあります。<code>\sum_{下限}^{上限}</code>ともできるみたいです。そういえば話がそれますが、英語では総乗のことをプロダクトと言うんですよね。これをみて思い出しました。\</p>
 <h2 id="3-各種パッケージの利用httpstexwikitexjporglatexe585a5e996802fe59084e7a8aee38391e38383e382b1e383bce382b8e381aee588a9e794a8">3. <a href="https://texwiki.texjp.org/?LaTeX%E5%85%A5%E9%96%80%2F%E5%90%84%E7%A8%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E5%88%A9%E7%94%A8">各種パッケージの利用</a></h2>
 <p>ここで、いままでで<code>amsmath</code>や<code>amssymb</code>という数学用パッケージを無意識に使用していたことが明かされました。Pythonなどとは違って宣言しなくても使用できるライブラリもあるということなのでしょうか？そして、明示的にパッケージを使用する例として、次の内容が解説されました。</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
 <span style="color:#8b008b;font-weight:bold">\usepackage</span><span style="color:#658b00">{</span>multicol<span style="color:#658b00">}</span>
 <span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
 ここは一段組み。
@@ -489,7 +489,7 @@
 </code></pre></div><p>今までの経験より、２行目の<code>usepackage{multicol}</code>でマルチカラム・・すなわち複数の列からなる文章を作成できるようにしているのかなと推測できます。これは<code>\begin{multicols}{3}</code>から始まって<code>end{multicols}</code>で終了するように書かれています。</p>
 <h2 id="4-レポートを書いてみる">4. レポートを書いてみる</h2>
 <p>これが一番のLaTeXを使う目的ですよね。レポートの例として以下のソースが示されています。</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
 <span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
 
 <span style="color:#8b008b;font-weight:bold">\title</span><span style="color:#658b00">{</span>情報科学レポート<span style="color:#658b00">}</span>

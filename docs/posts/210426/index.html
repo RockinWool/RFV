@@ -453,7 +453,7 @@ VScodeのRemoteSSHの拡張機能はEC2内のファイルをローカルＰＣ�
 AWSのEC2のページに移動して、インスタンスをクリックした後、接続のタブでSSHを確認するとパブリックIPがわかるので以下のコマンドをRemoteSSHで打つ。</p>
 </li>
 </ol>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -i <span style="color:#cd5555">&#34;.pemファイル&#34;</span> ユーザ名@IPアドレス
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh -i <span style="color:#cd5555">&#34;.pemファイル&#34;</span> ユーザ名@IPアドレス
 </code></pre></div><p>なお、.pemファイルの部分は絶対アドレスで記述するのだが、日本語ユーザなどでフォルダ名が「苗字スペース名前」等になっている場合、スペースが第二引数扱いになるらしくバグる。よしなにした方がよい(1敗)</p>
 <p>ざっとこのような手順でEC2にVScodeからつなぐことができる。ちょっと動かして見た感じ、ローカルのプログラムをEC2に移動する方法はGithub経由が楽でいいなと。その逆も然り。<br>
 今後のＡＷＳ利用ですが、まずは時々動かしてみて何円かかるか測定してみようと思います。<br>

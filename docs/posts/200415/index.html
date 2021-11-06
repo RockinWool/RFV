@@ -446,14 +446,14 @@
 </code></pre><p>こんな感じのコマンドです。ここで、コマンド文をマークダウンで挿入する際にVSCodeに怒られてしまいました。どうやら前後に改行を入れないと怒ってくるそうです。<br>
 そして、昨日の投稿の裏でコッソリやっていたDockerfileを移動して起動・・のつもりが凄いゴミイメージとゴミコンテナがあったので掃除することに。<br>
 これで冒頭の全消しコマンドが発動することになったというわけです。</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">sudo docker images -aq | sudo xargs docker rmi -f
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">sudo docker images -aq | sudo xargs docker rmi -f
 sudo docker rm <span style="color:#8b008b;font-weight:bold">$(</span>sudo docker ps -q -a<span style="color:#8b008b;font-weight:bold">)</span> -f
 </code></pre></div><p>とりあえずこれでイメージもコンテナも全部消去することができました。<br>
 次にこのDockerfileを読み込んで起動して停止するのを自動化するプログラムも書いてみました。しかし、これが仇となりました。<br>
 とりあえず完成品は以下に記載しますが、いかんせんif文の書き方にいじめられすぎて時間がなくなってしまったのでTipsはまた次回書きます<br>
 ここまで読んでくださってありがとうございました！<br>
 <a href="https://qiita.com/shisama/items/48e2eaf1dc356568b0d7">参考URL</a></p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash"><span style="color:#658b00">export</span> <span style="color:#00688b">PWD</span>=<span style="color:#8b008b;font-weight:bold">$(</span><span style="color:#658b00">pwd</span><span style="color:#8b008b;font-weight:bold">)</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash"><span style="color:#658b00">export</span> <span style="color:#00688b">PWD</span>=<span style="color:#8b008b;font-weight:bold">$(</span><span style="color:#658b00">pwd</span><span style="color:#8b008b;font-weight:bold">)</span>
 <span style="color:#658b00">export</span> <span style="color:#00688b">EXISTDOCKER</span>=<span style="color:#8b008b;font-weight:bold">$(</span>sudo docker ps -a -f <span style="color:#cd5555">&#34;name=HugoC&#34;</span> --format {{.Names}}<span style="color:#8b008b;font-weight:bold">)</span>
 <span style="color:#8b008b;font-weight:bold">for</span> X in <span style="color:#cd5555">&#34;RockinWool&#34;</span>
 <span style="color:#8b008b;font-weight:bold">do</span>

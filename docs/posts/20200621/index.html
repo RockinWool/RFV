@@ -432,7 +432,7 @@
   <div class="entry-content">
     <p>こんにちは。最近仕事にばっかり注力していたRockinWoolです。仕事辞めたいといつも思っているのに、それが人生の時間で一番大きな割合を占めているのがしょっちゅう許せないですよね。そういうわけで、前回の投稿から現在までの間で色々勉強のスタイルを模索して、結果としては出社前に一時間程度勉強してから出勤するのがアタマが冴えてベストという答えになりました。これを習慣付けて、パワーパーソンになるべく修練を積んでいこうと思ってます。<br>
 <br>
-さて、今回は前回までの&rsquo;Pythonで学ぶネットワーク'ではなく、最近にわかに話題らしいGinzaについてです。「まえがきで散々勉強勉強言って置きながら全然アンタの専門ちゃうやんけ」って言われそうですが、やりたかったんだもん。仕方ない。<br>
+さて、今回は前回までの&rsquo;Pythonで学ぶネットワーク&rsquo;ではなく、最近にわかに話題らしいGinzaについてです。「まえがきで散々勉強勉強言って置きながら全然アンタの専門ちゃうやんけ」って言われそうですが、やりたかったんだもん。仕方ない。<br>
 <br>
 Ginzaについては次のサイトに詳しく書いてあります。<br>
 <a href="https://www.virment.com/how-to-install-ginza-and-use/">自然言語処理ライブラリGiNZAをインストールして簡単に動かすまでの手順</a>
@@ -440,18 +440,18 @@ Ginzaについては次のサイトに詳しく書いてあります。<br>
 <br>
 それでは今回も実況しながら進めて行こうと思います。<br>
 まず、Ginzaはpipしか対応していないっぽいので(conda install Ginzaってやったけどダメだった)新たにAnacondaの環境を作成することにします。詳しいことは<a href="https://qiita.com/ozaki_physics/items/985188feb92570e5b82d">このページ</a>でも見れば良いと思います。環境名はGinzaを実行する用としてGinpyにしました。</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conda create -n Ginpy <span style="color:#00688b">python</span>=3.8
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conda create -n Ginpy <span style="color:#00688b">python</span>=3.8
 </code></pre></div><p>一応、環境一覧をinfo -eで確認してから、Ginpyに移動します。</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conda info -e
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conda info -e
 conda activate Ginpy
 </code></pre></div><p>ではGinpyにGiNZAを入れていこうと思います。コマンドは以下の通りにしました。</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install -U ginza
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install -U ginza
 </code></pre></div><p>とりあえず、これでGiNZA自体を入手することは成功したので、所有欲の半分は満たされました。次は支配欲を満たすために実際に使っていくことにします。
 まずは形態素解析から。形態素解析は説明するよりも見るほうが早いと思うので説明は省きますが、高校時代にこれがあればもうちょっと国語に興味が持てたかなあと思います（多分そんなことは無い）<br>
 適当な作業ディレクトリに移動して以下の流れでファイルを作って、コードを書いてみます。\</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir Gintes
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir Gintes
 <span style="color:#658b00">cd</span> Gintes
-</code></pre></div><div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3:Gintes1.py" data-lang="Python3:Gintes1.py"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">spacy</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3:Gintes1.py" data-lang="Python3:Gintes1.py"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">spacy</span>
 
 nlp = spacy.load(<span style="color:#cd5555">&#39;ja_ginza&#39;</span>)
 doc = nlp(<span style="color:#cd5555">&#39;なんかワーカホリックな人からフォロリク来ている。自分のリアル知り合い以外フォロリクされたことないから不安だ。&#39;</span>)
@@ -459,21 +459,21 @@ doc = nlp(<span style="color:#cd5555">&#39;なんかワーカホリックな人�
 <span style="color:#8b008b;font-weight:bold">for</span> sent <span style="color:#8b008b">in</span> doc.sents:
     <span style="color:#8b008b;font-weight:bold">for</span> token <span style="color:#8b008b">in</span> sent:
         info = [
-            token.i,         <span style="color:#228b22"># トークン番号</span>
-            token.orth_,     <span style="color:#228b22"># テキスト</span>
-            token._.reading, <span style="color:#228b22"># 読みカナ</span>
-            token.lemma_,    <span style="color:#228b22"># 基本形</span>
-            token.pos_,      <span style="color:#228b22"># 品詞</span>
-            token.tag_,      <span style="color:#228b22"># 品詞詳細</span>
-            token._.inf      <span style="color:#228b22"># 活用情報</span>
+            token.i,         <span style="color:#228b22"># トークン番号</span>
+            token.orth_,     <span style="color:#228b22"># テキスト</span>
+            token._.reading, <span style="color:#228b22"># 読みカナ</span>
+            token.lemma_,    <span style="color:#228b22"># 基本形</span>
+            token.pos_,      <span style="color:#228b22"># 品詞</span>
+            token.tag_,      <span style="color:#228b22"># 品詞詳細</span>
+            token._.inf      <span style="color:#228b22"># 活用情報</span>
         ]
-        <span style="color:#8b008b;font-weight:bold">print</span>(info)
+        <span style="color:#658b00">print</span>(info)
 </code></pre></div><p>すると、上手く動きはするのですが、警告が！</p>
 <pre><code>UserWarning: [W031] Model 'ja_ginza' (3.1.0) requires spaCy v2.2 and is incompatible with the current spaCy version (2.3.0). This may lead to unexpected results or runtime errors. To resolve this, download a newer compatible model or retrain your custom model with the current spaCy version. For more details and available updates, run: python -m spacy validate
 </code></pre><p>ぱっと見、バージョンが新しいから危ないよ。コマンドを打って調整してね！って書いてありそう（適当）なので、コマンドを打ってみる&hellip;が全然ダメだし、もう普通に動いているから問題ないやってことで進めていきます（諦め）<br>
 <br>
 先程のGintes1.pyを実行すると以下のような表示が出力されます。</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">[0, <span style="color:#cd5555">&#39;なん&#39;</span>, <span style="color:#cd5555">&#39;ナン&#39;</span>, <span style="color:#cd5555">&#39;何&#39;</span>, <span style="color:#cd5555">&#39;PRON&#39;</span>, <span style="color:#cd5555">&#39;代名詞&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">[0, <span style="color:#cd5555">&#39;なん&#39;</span>, <span style="color:#cd5555">&#39;ナン&#39;</span>, <span style="color:#cd5555">&#39;何&#39;</span>, <span style="color:#cd5555">&#39;PRON&#39;</span>, <span style="color:#cd5555">&#39;代名詞&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
 [1, <span style="color:#cd5555">&#39;か&#39;</span>, <span style="color:#cd5555">&#39;カ&#39;</span>, <span style="color:#cd5555">&#39;か&#39;</span>, <span style="color:#cd5555">&#39;ADP&#39;</span>, <span style="color:#cd5555">&#39;助詞-副助詞&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
 [2, <span style="color:#cd5555">&#39;ワーカホリック&#39;</span>, <span style="color:#cd5555">&#39;ワーカホリック&#39;</span>, <span style="color:#cd5555">&#39;ワーカホリック&#39;</span>, <span style="color:#cd5555">&#39;NOUN&#39;</span>, <span style="color:#cd5555">&#39;名詞-普通名詞-一般&#39;</span>, <span style="color:#cd5555">&#39;*,*&#39;</span>]
 [3, <span style="color:#cd5555">&#39;な&#39;</span>, <span style="color:#cd5555">&#39;ナ&#39;</span>, <span style="color:#cd5555">&#39;だ&#39;</span>, <span style="color:#cd5555">&#39;AUX&#39;</span>, <span style="color:#cd5555">&#39;助動詞&#39;</span>, <span style="color:#cd5555">&#39;助動詞-ダ,連体形-一般&#39;</span>]
@@ -502,23 +502,23 @@ doc = nlp(<span style="color:#cd5555">&#39;なんかワーカホリックな人�
 
 </code></pre></div><p>ここで一言、すげえと出てしまいました。ワーカホリックとかも辞書登録されているのでしょうか？かなり正確に結果が出ていることがわかります。これらの関係は画面出力でより簡単に理解できるみたいです。</p>
 <p><img src="https://RockinWool.github.io/RFV/img/%E5%BD%A2%E6%85%8B%E7%B4%A0%E8%A7%A3%E6%9E%901.png" alt="GiNZA画面出力"></p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3:Gintes2.py" data-lang="Python3:Gintes2.py"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">spacy</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3:Gintes2.py" data-lang="Python3:Gintes2.py"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">spacy</span>
 <span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#008b45;text-decoration:underline">spacy</span> <span style="color:#8b008b;font-weight:bold">import</span> displacy
 nlp = spacy.load(<span style="color:#cd5555">&#39;ja_ginza&#39;</span>)
 doc = nlp(<span style="color:#cd5555">&#39;なんかワーカホリックな人からフォロリク来ている。自分のリアル知り合い以外フォロリクされたことないから不安だ。&#39;</span>)
 displacy.serve(doc, style=<span style="color:#cd5555">&#34;dep&#34;</span>)
 </code></pre></div><p>あと個人的に気になったのは２つの文章を見比べて類似度とやらを出してくれる機能。具体的に何をやっているのかは専門家ではないので知らなくていいかなあ。</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3:Gentes3.py" data-lang="Python3:Gentes3.py"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">spacy</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3:Gentes3.py" data-lang="Python3:Gentes3.py"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">spacy</span>
 nlp = spacy.load(<span style="color:#cd5555">&#39;ja_ginza_nopn&#39;</span>)
 
 doc1 = nlp(<span style="color:#cd5555">&#34;このパソコンは現在シミュレーションを実行中です&#34;</span>)
 doc2 = nlp(<span style="color:#cd5555">&#34;最近、雨が多すぎやしませんか？&#34;</span>)
 
 similarity = doc1.similarity(doc2)
-<span style="color:#8b008b;font-weight:bold">print</span>(similarity)
+<span style="color:#658b00">print</span>(similarity)
 </code></pre></div><p>上を実行すると結果は0.46384519507135974って表示されます。半分くらい似ている・・・らしいけど、なにが半分似ているって根拠なんだろう？<br>
 文章の中の各言葉間の類似度を計算することもできるらしいです。</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3:Gintes4.py" data-lang="Python3:Gintes4.py"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">spacy</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3:Gintes4.py" data-lang="Python3:Gintes4.py"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">spacy</span>
 <span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">numpy</span> <span style="color:#8b008b;font-weight:bold">as</span> <span style="color:#008b45;text-decoration:underline">np</span>
 <span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">pandas</span> <span style="color:#8b008b;font-weight:bold">as</span> <span style="color:#008b45;text-decoration:underline">pd</span>
 nlp = spacy.load(<span style="color:#cd5555">&#39;ja_ginza&#39;</span>)
@@ -534,7 +534,7 @@ tokens_array = np.zeros((token_size,token_size))
 df_tokens = pd.DataFrame(tokens_array)
 df_tokens.columns= tokens
 df_tokens.index = tokens
-<span style="color:#8b008b;font-weight:bold">print</span>(df_tokens)
+<span style="color:#658b00">print</span>(df_tokens)
 </code></pre></div><p>ここで問題発生。最初に作ったAnacondaの環境にはpandasが入ってなかったようなので、急遽conda install pandasで追加しました。<br>
 最終的には
 <img src="https://RockinWool.github.io/RFV/img/pandas%E3%83%86%E3%82%B9%E3%83%88.png" alt="こんな感じの出力">

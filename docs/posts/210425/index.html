@@ -438,26 +438,26 @@
 \</p>
 <!-- raw HTML omitted -->
 <p>最初にやることは普通のpython関数を作成することである。今回は以下のような関数を記述した。</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">Hello_World</span>():
-    <span style="color:#8b008b;font-weight:bold">print</span>(<span style="color:#cd5555">&#39;Hello_World&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">Hello_World</span>():
+    <span style="color:#658b00">print</span>(<span style="color:#cd5555">&#39;Hello_World&#39;</span>)
 </code></pre></div><!-- raw HTML omitted -->
 <p>Cythonプログラム拡張子であるhelloworld.pyxに変更する</p>
 <!-- raw HTML omitted -->
 <p>Cythonプログラムをコンパイルするための設定プログラムを作成して実行する。以下のプログラムを作成＆実行すれば良い。ただしWin＆Anaconda環境でやっているため、Linuxではコンパイラが異なる点に注意。</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#008b45;text-decoration:underline">distutils.core</span> <span style="color:#8b008b;font-weight:bold">import</span> setup
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#008b45;text-decoration:underline">distutils.core</span> <span style="color:#8b008b;font-weight:bold">import</span> setup
 <span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#008b45;text-decoration:underline">Cython.Build</span> <span style="color:#8b008b;font-weight:bold">import</span> cythonize
 
 setup(
     ext_modules = cythonize(<span style="color:#cd5555">&#34;helloworld.pyx&#34;</span>)
 )
-</code></pre></div><div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python setup.py build_ext --inplace --compiler=msvc
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python setup.py build_ext --inplace --compiler=msvc
 </code></pre></div><!-- raw HTML omitted -->
 <p>ここまでの動作でコンパイルは完了しているため、あとは呼び出して使うだけである。</p>
-<div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">helloworld</span> <span style="color:#8b008b;font-weight:bold">as</span> <span style="color:#008b45;text-decoration:underline">h</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">helloworld</span> <span style="color:#8b008b;font-weight:bold">as</span> <span style="color:#008b45;text-decoration:underline">h</span>
 
 <span style="color:#8b008b;font-weight:bold">if</span> __name__ == <span style="color:#cd5555">&#34;__main__&#34;</span>:
     h.Hello_World()
-</code></pre></div><div class="highlight"><pre style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python main.py
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python main.py
 </code></pre></div><!-- raw HTML omitted -->
 
   </div>
