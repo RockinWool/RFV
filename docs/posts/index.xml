@@ -6,10 +6,15 @@
     <description>Recent content in Posts on Tar_nullaの部屋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sat, 08 May 2021 08:48:15 +0900</lastBuildDate>
-    
-	<atom:link href="https://RockinWool.github.io/RFV/posts/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sat, 06 Nov 2021 23:07:00 +0900</lastBuildDate><atom:link href="https://RockinWool.github.io/RFV/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>久しぶりにhugo環境を整えた話</title>
+      <link>https://RockinWool.github.io/RFV/posts/211106/</link>
+      <pubDate>Sat, 06 Nov 2021 23:07:00 +0900</pubDate>
+      
+      <guid>https://RockinWool.github.io/RFV/posts/211106/</guid>
+      <description>お久しぶりです。RockinWoolです。 (本当に久しぶり過ぎて実名で挨拶しそうになりました。) 今回は新たにゼロからのOS自作入門を購入した</description>
+    </item>
     
     <item>
       <title>2021/05/08 C&#43;&#43;とGRPC</title>
