@@ -15,10 +15,10 @@
     <title>
       
       
-         久しぶりにhugo環境を整えた話 
+         2021/11/07 ゼロ作OSその１＆Atcoder2回目 
       
     </title>
-    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/211106/">
+    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/211107/">
 
     <style>
   * {
@@ -421,7 +421,7 @@
 
 
 <section id=content>
-  <h1> 久しぶりにhugo環境を整えた話 </h1>
+  <h1> 2021/11/07 ゼロ作OSその１＆Atcoder2回目 </h1>
 
   
     <div id=sub-header>
@@ -430,27 +430,59 @@
   
 
   <div class="entry-content">
-    <p>お久しぶりです。RockinWoolです。<br>
-(本当に久しぶり過ぎて実名で挨拶しそうになりました。)<br>
-今回は新たに<a href="https://www.amazon.co.jp/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E3%81%AEOS%E8%87%AA%E4%BD%9C%E5%85%A5%E9%96%80-%E5%86%85%E7%94%B0-%E5%85%AC%E5%A4%AA/dp/4839975868/ref=sr_1_1?adgrpid=125435312371&amp;gclid=CjwKCAjwz5iMBhAEEiwAMEAwGOUdC8vvr4OdJoq8bARU7K2zHZ8Yzv1uDh0Colm097tqMn471GdHCxoCKRUQAvD_BwE&amp;hvadid=508088180550&amp;hvdev=c&amp;hvlocphy=1009435&amp;hvnetw=g&amp;hvqmt=e&amp;hvrand=16215841283287201386&amp;hvtargid=kwd-1403943850792&amp;hydadcr=9495_10352862&amp;jp-ad-ap=0&amp;keywords=%E3%82%BC%E3%83%AD+%E3%81%8B%E3%82%89+%E3%81%AE+os+%E8%87%AA%E4%BD%9C+%E5%85%A5%E9%96%80&amp;qid=1636207970&amp;sr=8-1">ゼロからのOS自作入門</a>を購入したので、それをレビューしたいと思います・・・と行きたかったのですが、そもそもhugoでブログを描くのが久しぶりすぎたので、まずはhugoのセットアップ作業を実況していこうと思います。明日以降はOS自作入門の方もちゃんと進めていきます。</p>
-<h2 id="1-hugoの再インストール">1. hugoの再インストール</h2>
-<p>何故かhugoがWindowsに入っていないというエラー文が表示されたため、再度セットアップ作業を行います。hugoのインストールに関しては<a href="https://qiita.com/utibori1/items/46fde79958ec9202d6c4">このサイト</a>を参考にして進めました。なお、PATH設定後はVSCodeを再起動しないとターミナルに反映されない点に注意です(一敗)。</p>
-<h2 id="2-新しい記事の投稿">2. 新しい記事の投稿</h2>
-<p>新しい記事は以下のようなコマンドを入力して作成しました。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo new posts/211106.md
-</code></pre></div><h2 id="3-os自作の準備p28ハローワールド">3. OS自作の準備(p28ハローワールド)</h2>
-<p>この本ではLinuxを用いてOS自作を行うため、自分のWindows環境をそのまま使うとミスる可能性が高いかなと思いました。そこで、ＡＷＳのEC2で適当なUbuntu20.04の仮想マシンを作成して使ってしまおうと思ったのですが！<br>
-なんと自分Windowsを久しぶりに起動して更新した関係で、モバイルWifiの3日で10GB制限を大幅に超えてしまっていて(19.8GB)通信制限がかかっており、まともに使えない！ということで本日はここまでにいたします。</p>
-<p>また明日もがんばるぞー！！</p>
+    <p>こんばんは。RockinWoolです。
+今日から適当にミカノス本を進めていこうと思います。
+ちなみに、昨日の記事を投稿しようとしたら、見知らぬエラーが大量に出てきたため<a href="https://infraya.work/posts/hugo_mypage_git_clone_error/">この記事</a>に習って解決しました。なお、これ以外にも他のテーマをgit submoduleに加えていたようで、<a href="https://qiita.com/k_yamashita/items/040c04f8798d2384806e">こちらの記事</a>を参考にsubmoduleを初期化して対応いたしました。</p>
+<h2 id="mikanosその1p28">mikanosその1(p28~)</h2>
+<p>ネタバレしないように感動した内容を語っていくと</p>
+<ul>
+<li>実行可能ファイル = CPUが実行可能な機械語を含んだファイル</li>
+<li>CPUで扱う数値は「機械語命令」か「それ以外」かである</li>
+<li>機械語命令 + データ + メタデータ(ファイルのフォーマットや大きさ、どんなCPU向けの機械語が入っているかなどの付加情報)</li>
+</ul>
+<p>その後AWSにバイナリファイルチェック用環境を整えて行きました。
+なお、ubutu20.04のイメージを使用しています。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/uchan-nos/mikanos-build.git osbook
+</code></pre></div><h2 id="atcoder開始a問題httpsatcoderjpcontestsabc226tasksabc226_a">Atcoder開始<a href="https://atcoder.jp/contests/abc226/tasks/abc226_a">A問題</a></h2>
+<p>作業中にAtcoderが始まってしまったので、こちらも挑戦。
+ところが、この作業中にローカルのWindowsPCにg++等が存在しないことが判明！
+仕方がないので脳内コンパイラでA問題を解いてみました(AC)</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#1e889b">#include</span> <span style="color:#1e889b">&lt;iostream&gt;</span><span style="color:#1e889b">
+</span><span style="color:#1e889b"></span>
+<span style="color:#00688b;font-weight:bold">int</span> <span style="color:#008b45">main</span>(){
+    <span style="color:#00688b;font-weight:bold">double</span> X;
+
+    std::cin &gt;&gt; X;
+    X = <span style="color:#00688b;font-weight:bold">int</span>(X+<span style="color:#b452cd">0.5</span>);
+    std::cout &lt;&lt; X &lt;&lt;std::endl;
+}
+</code></pre></div><p>四捨五入の関数とか知らなかったので愚直に実装。intにキャストすると切り捨てられることを想定して前もって0.5足しておけば良いのでは？となりAC。</p>
+<h2 id="atcoderb問題httpsatcoderjpcontestsabc226tasksabc226_b">Atcoder<a href="https://atcoder.jp/contests/abc226/tasks/abc226_b">B問題</a></h2>
+<p>B問題は手元にpythonの実行環境ならばあったのでpyuthonで実装。
+pythonならば同じ文字列でもset型でキャストしてしまえば統合されるので、簡単に実装できた。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#228b22">#!/usr/bin/env python3</span>
+<span style="color:#228b22"># 標準入力の方法については下記サイトを参考</span>
+<span style="color:#228b22"># https://qiita.com/zenrshon/items/c4f3849552348b3dbe67</span>
+
+<span style="color:#228b22"># 最初に数列の個数を取得</span>
+N = <span style="color:#658b00">int</span>(<span style="color:#658b00">input</span>())
+
+<span style="color:#228b22"># 数列を(文字列として)N個分だけ取得</span>
+base_array = [<span style="color:#658b00">input</span>().replace(<span style="color:#cd5555">&#34; &#34;</span>,<span style="color:#cd5555">&#34;-&#34;</span>) <span style="color:#8b008b;font-weight:bold">for</span> l <span style="color:#8b008b">in</span> <span style="color:#658b00">range</span>(N)]
+
+<span style="color:#228b22"># set型にキャストして数列内の数字の種類を返すようにする</span>
+base_array = <span style="color:#658b00">set</span>(base_array)
+<span style="color:#658b00">print</span>(<span style="color:#658b00">len</span>(base_array))
+</code></pre></div><p>ということで、今回はAtcoderのB問題まで溶けたところで終わりにします。
+なお、次回はAWSにchrome remote desktop入れてQemuを動作させるところまで頑張ろうと思います。
+ご閲覧ありがとうございます。</p>
 
   </div>
 
   <div id=links>
     
-      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/210508/">&laquo; 2021/05/08 C&#43;&#43;とGRPC</a>
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/211106/">&laquo; 久しぶりにhugo環境を整えた話</a>
     
-    
-      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/211107/">2021/11/07 ゼロ作OSその１＆Atcoder2回目 &raquo;</a>
     
   </div>
 </section>
