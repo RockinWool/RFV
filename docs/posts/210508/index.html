@@ -437,46 +437,46 @@
 </ul>
 <p>まずは今回の目的であるgRPCの導入と、gRPCを使用する際に必要になるprotobufが使えるようにならないといけない。なので、そのあたりの環境構築からはじめる.<a href="https://qiita.com/k-koh/items/38dc86be2b55a9228b50">参考2</a><br>
 最初にcmakeのインストールを行う</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#658b00">export</span> <span style="color:#00688b">MY_INSTALL_DIR</span>=<span style="color:#00688b">$HOME</span>/.local
-wget -q -O cmake-linux.sh https://github.com/Kitware/CMake/releases/download/v3.19.6/cmake-3.19.6-Linux-x86_64.sh
-sh cmake-linux.sh -- --skip-license --prefix=<span style="color:#00688b">$MY_INSTALL_DIR</span>
-rm cmake-linux.sh
-cmake --version
-</code></pre></div><p>次にgRPCのインストールを行う。まずはパス通しから</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#658b00">export</span> <span style="color:#00688b">MY_INSTALL_DIR</span>=<span style="color:#00688b">$HOME</span>/.local
-mkdir -p <span style="color:#00688b">$MY_INSTALL_DIR</span>
-<span style="color:#658b00">export</span> <span style="color:#00688b">PATH</span>=<span style="color:#cd5555">&#34;</span><span style="color:#00688b">$PATH</span><span style="color:#cd5555">:</span><span style="color:#00688b">$MY_INSTALL_DIR</span><span style="color:#cd5555">/bin&#34;</span>
-</code></pre></div><p>.~bashrcにも追記する</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#658b00">export</span> <span style="color:#00688b">PATH</span>=<span style="color:#00688b">$PATH</span>:<span style="color:#00688b">$HOME</span>/.local/bin
-</code></pre></div><p>そして関連ツールのインストール</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install build-essential autoconf libtool pkg-config libssl-dev
-</code></pre></div><p>そしてgRPCをクローンしてきてひたすらmakeする.<br>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#658b00">export</span> <span style="color:#00688b">MY_INSTALL_DIR</span>=<span style="color:#00688b">$HOME</span>/.local
+</span></span><span style="display:flex;"><span>wget -q -O cmake-linux.sh https://github.com/Kitware/CMake/releases/download/v3.19.6/cmake-3.19.6-Linux-x86_64.sh
+</span></span><span style="display:flex;"><span>sh cmake-linux.sh -- --skip-license --prefix=<span style="color:#00688b">$MY_INSTALL_DIR</span>
+</span></span><span style="display:flex;"><span>rm cmake-linux.sh
+</span></span><span style="display:flex;"><span>cmake --version
+</span></span></code></pre></div><p>次にgRPCのインストールを行う。まずはパス通しから</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#658b00">export</span> <span style="color:#00688b">MY_INSTALL_DIR</span>=<span style="color:#00688b">$HOME</span>/.local
+</span></span><span style="display:flex;"><span>mkdir -p <span style="color:#00688b">$MY_INSTALL_DIR</span>
+</span></span><span style="display:flex;"><span><span style="color:#658b00">export</span> <span style="color:#00688b">PATH</span>=<span style="color:#cd5555">&#34;</span><span style="color:#00688b">$PATH</span><span style="color:#cd5555">:</span><span style="color:#00688b">$MY_INSTALL_DIR</span><span style="color:#cd5555">/bin&#34;</span>
+</span></span></code></pre></div><p>.~bashrcにも追記する</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#658b00">export</span> <span style="color:#00688b">PATH</span>=<span style="color:#00688b">$PATH</span>:<span style="color:#00688b">$HOME</span>/.local/bin
+</span></span></code></pre></div><p>そして関連ツールのインストール</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get install build-essential autoconf libtool pkg-config libssl-dev
+</span></span></code></pre></div><p>そしてgRPCをクローンしてきてひたすらmakeする.<br>
 ただし普通にビルドするとPCに負荷がかかり過ぎてフリーズすることがあった。そのため、cgroupで制約を課しながら、システムに余裕を持たせて実行すると良い。\</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt install cgroup-tools
-</code></pre></div><p>cgroup-toolsをインストールしたら、<code>/etc/cgconfig.conf</code>を作成して、以下のように入力する</p>
-<pre><code class="language-conf" data-lang="conf">group g1{
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install cgroup-tools
+</span></span></code></pre></div><p>cgroup-toolsをインストールしたら、<code>/etc/cgconfig.conf</code>を作成して、以下のように入力する</p>
+<pre tabindex="0"><code class="language-conf" data-lang="conf">group g1{
   memory{
     memory.limit_in_bytes=2G;
   }
 }
 </code></pre><p>最後に設定を反映させたターミナルを起動する</p>
-<pre><code>sudo cgconfigparser -l /etc/cgconfig.conf
+<pre tabindex="0"><code>sudo cgconfigparser -l /etc/cgconfig.conf
 sudo cgexec -g memory:g1 gnome-terminal
 su $一般ユーザー
 </code></pre><p>ターミナルが起動したら作業ディレクトリまで移動したのち、以下のコマンドを実行してビルドを行う</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#658b00">export</span> <span style="color:#00688b">MY_INSTALL_DIR</span>=<span style="color:#00688b">$HOME</span>/.local
-git clone --recurse-submodules -b v1.35.0 https://github.com/grpc/grpc
-<span style="color:#658b00">cd</span> grpc
-</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir -p cmake/build
-<span style="color:#658b00">pushd</span> cmake/build
-cmake -DgRPC_INSTALL=ON <span style="color:#cd5555">\
-</span><span style="color:#cd5555"></span>    -DgRPC_BUILD_TESTS=OFF <span style="color:#cd5555">\
-</span><span style="color:#cd5555"></span>    -DCMAKE_INSTALL_PREFIX=<span style="color:#00688b">$MY_INSTALL_DIR</span> <span style="color:#cd5555">\
-</span><span style="color:#cd5555"></span>    ../..
-make
-make install
-<span style="color:#658b00">popd</span>
-</code></pre></div><pre><code class="language-bash:asbeil-cpp" data-lang="bash:asbeil-cpp">mkdir -p third_party/abseil-cpp/cmake/build
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#658b00">export</span> <span style="color:#00688b">MY_INSTALL_DIR</span>=<span style="color:#00688b">$HOME</span>/.local
+</span></span><span style="display:flex;"><span>git clone --recurse-submodules -b v1.35.0 https://github.com/grpc/grpc
+</span></span><span style="display:flex;"><span><span style="color:#658b00">cd</span> grpc
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir -p cmake/build
+</span></span><span style="display:flex;"><span><span style="color:#658b00">pushd</span> cmake/build
+</span></span><span style="display:flex;"><span>cmake -DgRPC_INSTALL=ON <span style="color:#cd5555">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cd5555"></span>    -DgRPC_BUILD_TESTS=OFF <span style="color:#cd5555">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cd5555"></span>    -DCMAKE_INSTALL_PREFIX=<span style="color:#00688b">$MY_INSTALL_DIR</span> <span style="color:#cd5555">\
+</span></span></span><span style="display:flex;"><span><span style="color:#cd5555"></span>    ../..
+</span></span><span style="display:flex;"><span>make
+</span></span><span style="display:flex;"><span>make install
+</span></span><span style="display:flex;"><span><span style="color:#658b00">popd</span>
+</span></span></code></pre></div><pre tabindex="0"><code class="language-bash:asbeil-cpp" data-lang="bash:asbeil-cpp">mkdir -p third_party/abseil-cpp/cmake/build
 pushd third_party/abseil-cpp/cmake/build
 cmake -DCMAKE_INSTALL_PREFIX=$MY_INSTALL_DIR \
     -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE \
@@ -485,37 +485,37 @@ make
 make install
 popd
 </code></pre><p>最後になぜかパーミッションがおかしい.pcファイルたちを移動しつつ権限を変更する</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo cp ~/.local/lib/pkgconfig/*.pc /usr/local/lib/pkgconfig/
-sudo chmod <span style="color:#b452cd">664</span> /usr/local/lib/pkgconfig/*
-</code></pre></div><p>それとPKG＿CONFIG＿PATHを指定しておかないと.pcファイルを読んでくれないので、これも指定する</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#658b00">export</span> <span style="color:#00688b">PKG_CONFIG_PATH</span>=~/.local/lib/pkgconfig/
-</code></pre></div><p>いちおうbashrcにも書いておく。</p>
-<pre><code class="language-bash:bashrc" data-lang="bash:bashrc">PKG_CONFIG_PATH=~/.local/lib/pkgconfig/
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo cp ~/.local/lib/pkgconfig/*.pc /usr/local/lib/pkgconfig/
+</span></span><span style="display:flex;"><span>sudo chmod <span style="color:#b452cd">664</span> /usr/local/lib/pkgconfig/*
+</span></span></code></pre></div><p>それとPKG＿CONFIG＿PATHを指定しておかないと.pcファイルを読んでくれないので、これも指定する</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#658b00">export</span> <span style="color:#00688b">PKG_CONFIG_PATH</span>=~/.local/lib/pkgconfig/
+</span></span></code></pre></div><p>いちおうbashrcにも書いておく。</p>
+<pre tabindex="0"><code class="language-bash:bashrc" data-lang="bash:bashrc">PKG_CONFIG_PATH=~/.local/lib/pkgconfig/
 </code></pre><p>ここまでで、ようやくgrpcの作成環境が整えることができた。次はプログラミングである。ディレクトリ構成を以下のようにする</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">(root) /
-    proto /  （.protoファイルを置くためのディレクトリ）
-    server /   (C++で書かれたserverのソースを置くためのディレクトリ）
-    client /    (Pythonで書かれたclientのソースを置くディレクトリ）
-</code></pre></div><p>このprotoディレクトリ内にrandom_walker.protoを用意する</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto">syntax = <span style="color:#cd5555">&#34;proto3&#34;</span>;<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#8b008b;font-weight:bold">package</span> <span style="color:#008b45;text-decoration:underline">random_walker</span>;<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#8b008b;font-weight:bold">service</span> MyRandomWalker {<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span>  <span style="color:#8b008b;font-weight:bold">rpc</span> Update (NumSteps) <span style="color:#8b008b;font-weight:bold">returns</span> (Empty) {}<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span>  <span style="color:#8b008b;font-weight:bold">rpc</span> GetPosition (Empty) <span style="color:#8b008b;font-weight:bold">returns</span> (Position) {}<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span>}<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#8b008b;font-weight:bold">message</span> <span style="color:#008b45;font-weight:bold">Empty</span> {<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span>}<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#8b008b;font-weight:bold">message</span> <span style="color:#008b45;font-weight:bold">NumSteps</span> {<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span>  <span style="color:#00688b;font-weight:bold">int32</span> n = <span style="color:#b452cd">1</span>;<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span>}<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#8b008b;font-weight:bold">message</span> <span style="color:#008b45;font-weight:bold">Position</span> {<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span>  <span style="color:#00688b;font-weight:bold">int32</span> x = <span style="color:#b452cd">1</span>;<span style="color:#a61717;background-color:#e3d2d2">
-</span><span style="color:#a61717;background-color:#e3d2d2"></span>}<span style="color:#a61717;background-color:#e3d2d2">
-</span></code></pre></div><p>これを以下のコマンドでcppとhに変換する</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">protoc -I ../proto --cpp_out=. ../proto/random_walker.proto
-protoc -I ../proto --grpc_out=. --plugin=protoc-gen-grpc=<span style="color:#cd5555">`</span>which grpc_cpp_plugin<span style="color:#cd5555">`</span> ../proto/random_walker.proto
-</code></pre></div><p>これで生成されるproto/random_walker.grpc.pb.hを見ると、134-140行目に関数の定義がされている</p>
-<pre><code class="language-cpp:proto/random_walker.grpc.pb.hの134-140行目" data-lang="cpp:proto/random_walker.grpc.pb.hの134-140行目">class Service : public ::grpc::Service {
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>(root) /
+</span></span><span style="display:flex;"><span>    proto /  （.protoファイルを置くためのディレクトリ）
+</span></span><span style="display:flex;"><span>    server /   (C++で書かれたserverのソースを置くためのディレクトリ）
+</span></span><span style="display:flex;"><span>    client /    (Pythonで書かれたclientのソースを置くディレクトリ）
+</span></span></code></pre></div><p>このprotoディレクトリ内にrandom_walker.protoを用意する</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-proto" data-lang="proto"><span style="display:flex;"><span>syntax = <span style="color:#cd5555">&#34;proto3&#34;</span>;<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#8b008b;font-weight:bold">package</span> <span style="color:#008b45;text-decoration:underline">random_walker</span>;<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#8b008b;font-weight:bold">service</span> MyRandomWalker {<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span>  <span style="color:#8b008b;font-weight:bold">rpc</span> Update (NumSteps) <span style="color:#8b008b;font-weight:bold">returns</span> (Empty) {}<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span>  <span style="color:#8b008b;font-weight:bold">rpc</span> GetPosition (Empty) <span style="color:#8b008b;font-weight:bold">returns</span> (Position) {}<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span>}<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#8b008b;font-weight:bold">message</span> <span style="color:#008b45;font-weight:bold">Empty</span> {<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span>}<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#8b008b;font-weight:bold">message</span> <span style="color:#008b45;font-weight:bold">NumSteps</span> {<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span>  <span style="color:#00688b;font-weight:bold">int32</span> n = <span style="color:#b452cd">1</span>;<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span>}<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span><span style="color:#8b008b;font-weight:bold">message</span> <span style="color:#008b45;font-weight:bold">Position</span> {<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span>  <span style="color:#00688b;font-weight:bold">int32</span> x = <span style="color:#b452cd">1</span>;<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2"></span>}<span style="color:#a61717;background-color:#e3d2d2">
+</span></span></span></code></pre></div><p>これを以下のコマンドでcppとhに変換する</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>protoc -I ../proto --cpp_out=. ../proto/random_walker.proto
+</span></span><span style="display:flex;"><span>protoc -I ../proto --grpc_out=. --plugin=protoc-gen-grpc=<span style="color:#cd5555">`</span>which grpc_cpp_plugin<span style="color:#cd5555">`</span> ../proto/random_walker.proto
+</span></span></code></pre></div><p>これで生成されるproto/random_walker.grpc.pb.hを見ると、134-140行目に関数の定義がされている</p>
+<pre tabindex="0"><code class="language-cpp:proto/random_walker.grpc.pb.hの134-140行目" data-lang="cpp:proto/random_walker.grpc.pb.hの134-140行目">class Service : public ::grpc::Service {
   public:
     Service();
     virtual ~Service();

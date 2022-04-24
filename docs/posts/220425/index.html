@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+
+    
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400&display=swap' rel='stylesheet' type='text/css'>
+    
+
+    <title>
+      
+      
+         PipenvとHugoとDijkstra&#39;s algorithm 
+      
+    </title>
+    <link rel="canonical" href="https://RockinWool.github.io/RFV/posts/220425/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+    text-decoration-skip: ink;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:700px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  .left-justify {
+    float: left;
+  }
+
+  .right-justify {
+    float:right;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+
+  blockquote p {
+    display:inline-block;
+    font-style:italic;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    content:'\201C';
+    font-size:35px;
+    color:#403c3b;
+  }
+
+  blockquote:after {
+    content:'\201D';
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+  #sub-header, .date {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .posts_listing a,#nav a {
+    text-decoration: none;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 5px;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+  }
+
+  #nav ul li:before, .posts_listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 80px;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content .date {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts_listing {
+    margin:0 0 50px;
+  }
+
+  .posts_listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts_listing li a:hover,#nav a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts_listing li div {
+      font-size:12px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts_listing li div{
+      font-size:12px;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    *, #nav h1 a {
+      color: #FDFDFD;
+    }
+
+    body {
+      background: #121212;
+    }
+
+    pre, code {
+      background-color: #262626;
+    }
+
+    #sub-header, .date {
+      color: #BABABA;
+    }
+
+    hr {
+      background: #EBEBEB;
+    }
+  }
+</style>
+
+
+    </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="https://RockinWool.github.io/RFV/">Tar_nullaの部屋</a></h1>
+      <ul>
+        
+          <li><a href="https://github.com/davidhampgonsalves/hugo-black-and-light-theme">black-and-light-theme(Hugo)</a></li>
+        
+          <li><a href="https://github.com/RockinWool/talkings">GitHub</a></li>
+        
+          <li><a href="https://twitter.com/vaex116">Twitter</a></li>
+        
+      </ul>
+    </section>
+
+
+<section id=content>
+  <h1> PipenvとHugoとDijkstra&#39;s algorithm </h1>
+
+  
+    <div id=sub-header>
+      April 2022 · 6 minute read
+    </div>
+  
+
+  <div class="entry-content">
+    <p>お久しぶりです。RockinWoolです。<br>
+最近は自分たちの担当しているシステムの量産開発も始まり、先行開発チーム所属なのに引っ張り出されているのが非常に不満です。本当にそろそろ辞めて、研究に専念しないとなあ・・・。\</p>
+<p>さて、本日は先輩より出題されたDijkstra法の実装を行いたいと思います。<br>
+まずは本日の方針↓</p>
+<ol>
+<li>HugoのUbuntuへの導入</li>
+<li>Hugoの軽い復習</li>
+<li>PipenvのUbuntuへの導入</li>
+<li>Pipenvの軽い復習</li>
+<li>Pythonを使ってDijkstra法のプログラムを簡易実装</li>
+<li>C++でDijkstra法のコア部分の実装</li>
+</ol>
+<p>多いですね。（現在深夜1時ピッタリ）寝れるようにがんばります。</p>
+<h2 id="1-hugoのubuntuへの導入">1. HugoのUbuntuへの導入</h2>
+<p>Ubuntuには下記コマンドで入れられます。Windowsに入れたときは本当に苦労した記憶しか無かったのに。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>snap install hugo --channel=extended
+</span></span></code></pre></div><p>※ちなみに、久しぶりにUbuntuを起動したら、~/.profileの記述が変で起動しなかった。Ctrl+Alt+F3を押して端末に入って該当ファイルを修正したら起動した。</p>
+<h2 id="2-hugoの軽い復習">2. Hugoの軽い復習</h2>
+<p>Githubpages連携済みのHugo製ページのrepositoryがあれば、まずはそこから<code>git clone</code>します。<br>
+その後、テーマを有効にするために、<code>cd hogehoge</code>して<code>git submodule update --init --recursive</code>しました。<br>
+<a href="https://infraya.work/posts/hugo_mypage_git_clone_error/">参考ページ:Hugo ビルドエラー対応 found no layout file</a> <br>
+<br>
+ちなみに完全にHugoを忘れてしまっていたので、作業にかなり手間取りましたw<br>
+以下備忘録↓</p>
+<ul>
+<li>hugoコマンドでコンパイル</li>
+<li>hugo new posts/hogehoge.mdで記事作成</li>
+<li>hugo serverで作成内容の確認</li>
+</ul>
+<h2 id="3-pipenvのubuntuへの導入">3. PipenvのUbuntuへの導入</h2>
+<p>pipenvもHugo同様にワンライナーで導入できます。Linuxってやっぱすごいなー・</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install pipenv
+</span></span></code></pre></div><p><a href="https://qiita.com/y-tsutsu/items/54c10e0b2c6b565c887a">参考サイト:Pipenvを使ったPython開発まとめ</a> <br>
+なお、最初にpyenv(とついでにpyenv-virtualenv)を入れておきました。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install -y build-essential libffi-dev libssl-dev zlib1g-dev liblzma-dev libbz2-dev libreadline-dev libsqlite3-dev libopencv-dev tk-dev git
+</span></span><span style="display:flex;"><span><span style="color:#228b22"># pyenv本体のダウンロードとインストール</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+</span></span><span style="display:flex;"><span><span style="color:#228b22"># (Option)pyenvのバージョンをv2.0.3に変更</span>
+</span></span><span style="display:flex;"><span><span style="color:#658b00">cd</span> ~/.pyenv
+</span></span><span style="display:flex;"><span>git checkout v2.0.3
+</span></span><span style="display:flex;"><span><span style="color:#228b22"># .bashrcの更新</span>
+</span></span><span style="display:flex;"><span><span style="color:#658b00">echo</span> <span style="color:#cd5555">&#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39;</span> &gt;&gt; ~/.bashrc
+</span></span><span style="display:flex;"><span><span style="color:#658b00">echo</span> <span style="color:#cd5555">&#39;export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39;</span> &gt;&gt; ~/.bashrc
+</span></span><span style="display:flex;"><span><span style="color:#658b00">echo</span> <span style="color:#cd5555">&#39;eval &#34;$(pyenv init --path)&#34;&#39;</span> &gt;&gt; ~/.bashrc
+</span></span><span style="display:flex;"><span><span style="color:#658b00">source</span> ~/.bashrc
+</span></span><span style="display:flex;"><span><span style="color:#228b22"># virtualenvのダウンロードと設定</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/pyenv/pyenv-virtualenv.git <span style="color:#8b008b;font-weight:bold">$(</span>pyenv root<span style="color:#8b008b;font-weight:bold">)</span>/plugins/pyenv-virtualenv
+</span></span><span style="display:flex;"><span>pyenv virtualenv-init -
+</span></span></code></pre></div><h2 id="4-pipenvの軽い復習">4. Pipenvの軽い復習</h2>
+<p>まずはpyenvでpythonの環境を導入しておきます。<code>pyenv install --list</code>で最新かつ安定っぽいpython環境を探し、3.9.6が妥当そうだったので指定しました。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pyenv install 3.9.6
+</span></span></code></pre></div><p>※ここまででちょうど深夜1時30分になる。家の回線が死んでいるためか、ひどくPython3.9.6のインストールが遅い。この間にDijkstra法の復習を実施することにする。\</p>
+<p>次に、pyenvで導入したPython3.9.6をPipenvに反映させる。（この表現が正しいかは不明だが、感覚的にはこんな感じに見える）。<br>
+下記のコマンドを実施する。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pipenv --python 3.9.6
+</span></span></code></pre></div><p>これでpipenv仮想環境ができるので、あとは下記コマンドでパッケージを入れておけばOK!</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pipenv install numpy scipy networkx matplotlib pandas
+</span></span></code></pre></div><p><strong>ところが</strong>この時点でエラー発生！その内容がこちら。</p>
+<pre tabindex="0"><code class="language-error" data-lang="error">ModuleNotFoundError: No module named &#39;pip._vendor.six&#39;
+</code></pre><p>しらべてみると、このエラーはpyenvのPythonバージョンを<a href="https://takuya-1st.hatenablog.jp/entry/2022/02/13/131112">高く設定しすぎたために発生しているようですね</a>。<br>
+仕方が無いので、Python3.7.1までダウングレードすることにしました。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pipenv --rm
+</span></span><span style="display:flex;"><span>pyenv install 3.7.1
+</span></span><span style="display:flex;"><span>pipenv --python 3.7.1
+</span></span><span style="display:flex;"><span>pipenv install numpy scipy networkx matplotlib pandas
+</span></span></code></pre></div><p>しかし、これでも同じエラーが出てしまいました。ただ、結局<a href="https://tousu.in/qa/?qa=723718/">Pip本体の更新を行い</a>、そのあとに<code>pipenv --python</code>せずに<code>pipenv install numpy</code>することでうまくいくことがわかりました。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pipenv install numpy scipy networkx matplotlib pandas
+</span></span></code></pre></div><p><a href="https://qiita.com/RW_876/items/ce42026884f1383e21da">参考サイト:Pipenvコマンドメモ</a> <br>
+<a href="https://qiita.com/y-tsutsu/items/54c10e0b2c6b565c887a">参考サイト:Pipenvを使ったPython開発まとめ</a></p>
+<h2 id="pythonを使ってdijkstra法の実装を行う">Pythonを使ってDijkstra法の実装を行う</h2>
+<p>ここに来て、VSCodeのインテリセンスに不満を感じたので修正を加えます。<br>
+最初にインテリセンスが行末で発動すると、改行したいのにインテリセンスが優先されて不快なので修正しました。<br>
+<a href="https://qiita.com/kuma15/items/2e5bfe352cfad336b90a">参考サイト:地味に便利なVSCodeの改行を紹介。</a> <br>
+<br>
+次に、ローカルに入っているはずのnetworkxについて、インテリセンスが発動しなかったので、VSCodeの設定を修正しました。<br>
+<a href="https://buzz-server.com/tech/vscode-pylance/">参考サイト:VSCode + Dockerで開発しているとPylanceのインテリセンスが効かない</a> <br>
+やったことは<code>pip3 show networkx</code>でnetworkx等のパッケージが入っているライブラリのPATHを確認し、VSCode設定のPylance, Extra Pathsに追加するだけである。<br>
+<br>
+さて、ようやくガリガリ実装していくのだが、ここでも早速問題が発生！matplotlib.pyplotでshow()しようとしたら<code>main.py:28: UserWarning: Matplotlib is currently using agg, which is a non-GUI backend, so cannot show the figure.</code>と怒られてしまった！これは見たことがあるぞ！<br>
+<a href="https://makandat.wordpress.com/2020/06/25/ubuntu-20-04lts-%E3%81%A7-python3-tkinter-%E3%81%8C%E3%81%AA%E3%81%84%E3%81%A8%E3%81%84%E3%81%86%E3%82%A8%E3%83%A9%E3%83%BC/">参考サイト:Ubuntu 20.04LTS で Python3 Tkinter がないというエラー</a></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#228b22">#解決法</span>
+</span></span><span style="display:flex;"><span>sudo apt -y install python3-tk python-tk
+</span></span></code></pre></div><p><br>
+そして、Dijkstra法で導き出した最短経路に対し、色塗りを実施する方法については<a href="https://www.letsopt.com/entry/2020/09/06/095449">このサイト</a>が参考になった。edgeを追加する際に、重さや色を定義しておいて、あとからPathを追加する際に上書きすれば良いということに気づかせてもらった。
+<br>
+また、関数内にnx.Graph型のインテリセンスを効かせるために、引数に型ヒントをつけた。これは<a href="https://future-architect.github.io/articles/20201223/">このサイト</a>が参考になった。あとはいつもどおり<a href="https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.shortest_paths.weighted.dijkstra_predecessor_and_distance.html">networkxの公式ドキュメント</a>を読みながらゴリゴリ書いていって完成という感じ。ここまでで深夜3時20分。目標としていた3時00分をオーバーしてしまった。</p>
+<p>明日は6番のc++実装のところから再開したい。
+ここまで見てくださりありがとうございました。</p>
+<p>↓作成したPythonコード</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#228b22">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">networkx</span> <span style="color:#8b008b;font-weight:bold">as</span> <span style="color:#008b45;text-decoration:underline">nx</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">matplotlib.pyplot</span> <span style="color:#8b008b;font-weight:bold">as</span> <span style="color:#008b45;text-decoration:underline">plt</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">create_network</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#228b22"># 1-1. Define a network</span>
+</span></span><span style="display:flex;"><span>    G = nx.Graph()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#228b22"># 1-2. Add nodes.</span>
+</span></span><span style="display:flex;"><span>    Nodes = [<span style="color:#cd5555">&#34;A&#34;</span>,<span style="color:#cd5555">&#34;B&#34;</span>,<span style="color:#cd5555">&#34;C&#34;</span>,<span style="color:#cd5555">&#34;D&#34;</span>,<span style="color:#cd5555">&#34;E&#34;</span>,<span style="color:#cd5555">&#34;F&#34;</span>]
+</span></span><span style="display:flex;"><span>    G.add_nodes_from(Nodes)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#228b22"># 1-3. Add edges.</span>
+</span></span><span style="display:flex;"><span>    Edges = [(<span style="color:#cd5555">&#34;A&#34;</span>,<span style="color:#cd5555">&#34;B&#34;</span>,{<span style="color:#cd5555">&#34;color&#34;</span> : <span style="color:#cd5555">&#34;lightblue&#34;</span>, <span style="color:#cd5555">&#34;weight&#34;</span> : <span style="color:#b452cd">7</span>}), \
+</span></span><span style="display:flex;"><span>            (<span style="color:#cd5555">&#34;A&#34;</span>,<span style="color:#cd5555">&#34;C&#34;</span>,{<span style="color:#cd5555">&#34;color&#34;</span> : <span style="color:#cd5555">&#34;lightblue&#34;</span>, <span style="color:#cd5555">&#34;weight&#34;</span> : <span style="color:#b452cd">9</span>}), \
+</span></span><span style="display:flex;"><span>            (<span style="color:#cd5555">&#34;A&#34;</span>,<span style="color:#cd5555">&#34;F&#34;</span>,{<span style="color:#cd5555">&#34;color&#34;</span> : <span style="color:#cd5555">&#34;lightblue&#34;</span>, <span style="color:#cd5555">&#34;weight&#34;</span> : <span style="color:#b452cd">14</span>}), \
+</span></span><span style="display:flex;"><span>            (<span style="color:#cd5555">&#34;B&#34;</span>,<span style="color:#cd5555">&#34;C&#34;</span>,{<span style="color:#cd5555">&#34;color&#34;</span> : <span style="color:#cd5555">&#34;lightblue&#34;</span>, <span style="color:#cd5555">&#34;weight&#34;</span> : <span style="color:#b452cd">10</span>}), \
+</span></span><span style="display:flex;"><span>            (<span style="color:#cd5555">&#34;B&#34;</span>,<span style="color:#cd5555">&#34;D&#34;</span>,{<span style="color:#cd5555">&#34;color&#34;</span> : <span style="color:#cd5555">&#34;lightblue&#34;</span>, <span style="color:#cd5555">&#34;weight&#34;</span> : <span style="color:#b452cd">15</span>}), \
+</span></span><span style="display:flex;"><span>            (<span style="color:#cd5555">&#34;C&#34;</span>,<span style="color:#cd5555">&#34;D&#34;</span>,{<span style="color:#cd5555">&#34;color&#34;</span> : <span style="color:#cd5555">&#34;lightblue&#34;</span>, <span style="color:#cd5555">&#34;weight&#34;</span> : <span style="color:#b452cd">11</span>}), \
+</span></span><span style="display:flex;"><span>            (<span style="color:#cd5555">&#34;C&#34;</span>,<span style="color:#cd5555">&#34;F&#34;</span>,{<span style="color:#cd5555">&#34;color&#34;</span> : <span style="color:#cd5555">&#34;lightblue&#34;</span>, <span style="color:#cd5555">&#34;weight&#34;</span> : <span style="color:#b452cd">2</span>}), \
+</span></span><span style="display:flex;"><span>            (<span style="color:#cd5555">&#34;D&#34;</span>,<span style="color:#cd5555">&#34;E&#34;</span>,{<span style="color:#cd5555">&#34;color&#34;</span> : <span style="color:#cd5555">&#34;lightblue&#34;</span>, <span style="color:#cd5555">&#34;weight&#34;</span> : <span style="color:#b452cd">6</span>}), \
+</span></span><span style="display:flex;"><span>            (<span style="color:#cd5555">&#34;E&#34;</span>,<span style="color:#cd5555">&#34;F&#34;</span>,{<span style="color:#cd5555">&#34;color&#34;</span> : <span style="color:#cd5555">&#34;lightblue&#34;</span>, <span style="color:#cd5555">&#34;weight&#34;</span> : <span style="color:#b452cd">9</span>})]
+</span></span><span style="display:flex;"><span>    G.add_edges_from(Edges)
+</span></span><span style="display:flex;"><span>    <span style="color:#8b008b;font-weight:bold">return</span>(G)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">show_shortestpath</span>(G: nx.Graph,dijkstra_path):
+</span></span><span style="display:flex;"><span>    <span style="color:#228b22"># 4-1. Add shoetest path</span>
+</span></span><span style="display:flex;"><span>    nx.add_path(G,dijkstra_path,color=<span style="color:#cd5555">&#34;r&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#228b22"># 4-2. Set edgecolor</span>
+</span></span><span style="display:flex;"><span>    edge_color = [edge[<span style="color:#cd5555">&#34;color&#34;</span>] <span style="color:#8b008b;font-weight:bold">for</span> edge <span style="color:#8b008b">in</span> G.edges.values()]
+</span></span><span style="display:flex;"><span>    <span style="color:#228b22"># 4-3. Show Graph</span>
+</span></span><span style="display:flex;"><span>    fig = plt.figure()
+</span></span><span style="display:flex;"><span>    pos = nx.spring_layout(G)
+</span></span><span style="display:flex;"><span>    nx.draw_networkx(G, pos, edge_color=edge_color)
+</span></span><span style="display:flex;"><span>    plt.axis(<span style="color:#cd5555">&#34;off&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#228b22">#fig.savefig(&#34;Dijkstra.png&#34;)</span>
+</span></span><span style="display:flex;"><span>    plt.show()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">if</span> __name__==<span style="color:#cd5555">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#228b22">#1. create network</span>
+</span></span><span style="display:flex;"><span>    net = create_network()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#228b22">#2. serch shortest path</span>
+</span></span><span style="display:flex;"><span>    dijkstra_path = nx.dijkstra_path(net,<span style="color:#cd5555">&#34;A&#34;</span>,<span style="color:#cd5555">&#34;E&#34;</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#228b22">#3. display shortest path</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">print</span>(<span style="color:#cd5555">&#34;shortest path = </span><span style="color:#cd5555">{}</span><span style="color:#cd5555">&#34;</span>.format(dijkstra_path), \
+</span></span><span style="display:flex;"><span>        <span style="color:#cd5555">&#34;</span><span style="color:#cd5555">\n</span><span style="color:#cd5555">length = </span><span style="color:#cd5555">{}</span><span style="color:#cd5555">&#34;</span>.format(nx.dijkstra_path_length(net,<span style="color:#cd5555">&#34;A&#34;</span>,<span style="color:#cd5555">&#34;E&#34;</span>)))
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#228b22">#4. show network&amp;shortest path image</span>
+</span></span><span style="display:flex;"><span>    show_shortestpath(net,dijkstra_path)
+</span></span></code></pre></div>
+  </div>
+
+  <div id=links>
+    
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/211107/">&laquo; 2021/11/07 ゼロ作OSその１＆Atcoder2回目</a>
+    
+    
+  </div>
+</section>
+
+  
+</body>
+</html>
+
+
+

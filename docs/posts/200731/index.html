@@ -435,108 +435,108 @@
 <p>さて、本日は前回のLaTeXの続きからやっていこうと思います。今日は<a href="https://texwiki.texjp.org/?LaTeX%E5%85%A5%E9%96%80%2F%E7%B0%A1%E5%8D%98%E3%81%AA%E6%95%B0%E5%BC%8F%281%29">ここから</a>始めていこうと思います。\</p>
 <h2 id="1数式の挿入">1.数式の挿入</h2>
 <p>まずは参考サイトにある例をここにそのままコピペしました。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
-<span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
-
-日本で漱石が「吾輩は猫である」を発表したころ，
-ドイツではAlbert Einsteinが特殊相対論を発表した。
-
-この理論によれば，エネルギー<span style="color:#cd5555">$</span><span style="color:#658b00">E</span><span style="color:#cd5555">$</span>と質量<span style="color:#cd5555">$</span><span style="color:#658b00">m</span><span style="color:#cd5555">$</span>は
-<span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>equation<span style="color:#658b00">}</span>
-  E = mc<span style="color:#658b00">^{</span>2<span style="color:#658b00">}</span>
-<span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>equation<span style="color:#658b00">}</span>
-で関係づけられる。
-ここに<span style="color:#cd5555">$</span><span style="color:#658b00">c</span><span style="color:#cd5555">$</span>は光速で，
-<span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>equation<span style="color:#658b00">}</span>
-  c = 299<span style="color:#658b00">{</span>,<span style="color:#658b00">}</span>792<span style="color:#658b00">{</span>,<span style="color:#658b00">}</span>458 <span style="color:#8b008b;font-weight:bold">\,</span> <span style="color:#8b008b;font-weight:bold">\mathrm</span><span style="color:#658b00">{</span>m/s<span style="color:#658b00">}</span>
-<span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>equation<span style="color:#658b00">}</span>
-である。
-
-<span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
-</code></pre></div><p>これを<code>ptex2pdf -l hoge.tex</code>することによってPDF化すると、数式が挿入できていることがわかります。LaTeXでは数式用の文字を<code>$E$</code>のように表記したり、数式を</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>equation<span style="color:#658b00">}</span>
-    E = mc<span style="color:#658b00">^{</span>2<span style="color:#658b00">}</span>
-<span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>equation<span style="color:#658b00">}</span>
-</code></pre></div><p>のように記載するんですね。後、単位は<code>\, \mathrm{m/s}</code>で表現するみたいですね。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>日本で漱石が「吾輩は猫である」を発表したころ，
+</span></span><span style="display:flex;"><span>ドイツではAlbert Einsteinが特殊相対論を発表した。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>この理論によれば，エネルギー<span style="color:#cd5555">$</span><span style="color:#658b00">E</span><span style="color:#cd5555">$</span>と質量<span style="color:#cd5555">$</span><span style="color:#658b00">m</span><span style="color:#cd5555">$</span>は
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>equation<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>  E = mc<span style="color:#658b00">^{</span>2<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>equation<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>で関係づけられる。
+</span></span><span style="display:flex;"><span>ここに<span style="color:#cd5555">$</span><span style="color:#658b00">c</span><span style="color:#cd5555">$</span>は光速で，
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>equation<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>  c = 299<span style="color:#658b00">{</span>,<span style="color:#658b00">}</span>792<span style="color:#658b00">{</span>,<span style="color:#658b00">}</span>458 <span style="color:#8b008b;font-weight:bold">\,</span> <span style="color:#8b008b;font-weight:bold">\mathrm</span><span style="color:#658b00">{</span>m/s<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>equation<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>である。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
+</span></span></code></pre></div><p>これを<code>ptex2pdf -l hoge.tex</code>することによってPDF化すると、数式が挿入できていることがわかります。LaTeXでは数式用の文字を<code>$E$</code>のように表記したり、数式を</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>equation<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>    E = mc<span style="color:#658b00">^{</span>2<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>equation<span style="color:#658b00">}</span>
+</span></span></code></pre></div><p>のように記載するんですね。後、単位は<code>\, \mathrm{m/s}</code>で表現するみたいですね。</p>
 <h2 id="2-数式の代入2httpstexwikitexjporglatexe585a5e996802fe7b0a1e58d98e381aae695b0e5bc8f28229">2. <a href="https://texwiki.texjp.org/?LaTeX%E5%85%A5%E9%96%80%2F%E7%B0%A1%E5%8D%98%E3%81%AA%E6%95%B0%E5%BC%8F%282%29">数式の代入2</a></h2>
 <p>次の数式が簡単とか紹介されているんですけど・・。うーん・・天才ってやっぱり存在しますねえ。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
-<span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
-
-<span style="color:#cd5555">\[</span><span style="color:#658b00">
-</span><span style="color:#658b00">  </span><span style="color:#00688b">\frac</span><span style="color:#658b00">{</span><span style="color:#00688b">\pi</span><span style="color:#658b00">}{</span><span style="color:#b452cd">2</span><span style="color:#658b00">} </span>=<span style="color:#658b00">
-</span><span style="color:#658b00">  </span><span style="color:#00688b">\left</span>(<span style="color:#658b00"> </span><span style="color:#00688b">\int</span><span style="color:#658b00">_{</span><span style="color:#b452cd">0</span><span style="color:#658b00">}^{</span><span style="color:#00688b">\infty</span><span style="color:#658b00">} </span><span style="color:#00688b">\frac</span><span style="color:#658b00">{</span><span style="color:#00688b">\sin</span><span style="color:#658b00"> x}{</span><span style="color:#00688b">\sqrt</span><span style="color:#658b00">{x}} dx </span><span style="color:#00688b">\right</span>)<span style="color:#658b00">^</span><span style="color:#b452cd">2</span><span style="color:#658b00"> </span>=<span style="color:#658b00">
-</span><span style="color:#658b00">  </span><span style="color:#00688b">\sum</span><span style="color:#658b00">_{k</span>=<span style="color:#b452cd">0</span><span style="color:#658b00">}^{</span><span style="color:#00688b">\infty</span><span style="color:#658b00">} </span><span style="color:#00688b">\frac</span><span style="color:#658b00">{</span>(<span style="color:#b452cd">2</span><span style="color:#658b00">k</span>)!<span style="color:#658b00">}{</span><span style="color:#b452cd">2</span><span style="color:#658b00">^{</span><span style="color:#b452cd">2</span><span style="color:#658b00">k}</span>(<span style="color:#658b00">k</span>!)<span style="color:#658b00">^</span><span style="color:#b452cd">2</span><span style="color:#658b00">} </span><span style="color:#00688b">\frac</span><span style="color:#658b00">{</span><span style="color:#b452cd">1</span><span style="color:#658b00">}{</span><span style="color:#b452cd">2</span><span style="color:#658b00">k</span>+<span style="color:#b452cd">1</span><span style="color:#658b00">} </span>=<span style="color:#658b00">
-</span><span style="color:#658b00">  </span><span style="color:#00688b">\prod</span><span style="color:#658b00">_{k</span>=<span style="color:#b452cd">1</span><span style="color:#658b00">}^{</span><span style="color:#00688b">\infty</span><span style="color:#658b00">} </span><span style="color:#00688b">\frac</span><span style="color:#658b00">{</span><span style="color:#b452cd">4</span><span style="color:#658b00">k^</span><span style="color:#b452cd">2</span><span style="color:#658b00">}{</span><span style="color:#b452cd">4</span><span style="color:#658b00">k^</span><span style="color:#b452cd">2</span><span style="color:#658b00"> </span>-<span style="color:#658b00"> </span><span style="color:#b452cd">1</span><span style="color:#658b00">}
-</span><span style="color:#658b00"></span><span style="color:#cd5555">\]</span>
-
-<span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
-</code></pre></div><p>これをまた<code>ptex2pdf -l hogehoge.tex</code>するとなんとも珍妙な式が出てきます。個人的にはうおおおお・・・って感じです。\</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cd5555">\[</span><span style="color:#658b00">
+</span></span></span><span style="display:flex;"><span><span style="color:#658b00">  </span><span style="color:#00688b">\frac</span><span style="color:#658b00">{</span><span style="color:#00688b">\pi</span><span style="color:#658b00">}{</span><span style="color:#b452cd">2</span><span style="color:#658b00">} </span>=<span style="color:#658b00">
+</span></span></span><span style="display:flex;"><span><span style="color:#658b00">  </span><span style="color:#00688b">\left</span>(<span style="color:#658b00"> </span><span style="color:#00688b">\int</span><span style="color:#658b00">_{</span><span style="color:#b452cd">0</span><span style="color:#658b00">}^{</span><span style="color:#00688b">\infty</span><span style="color:#658b00">} </span><span style="color:#00688b">\frac</span><span style="color:#658b00">{</span><span style="color:#00688b">\sin</span><span style="color:#658b00"> x}{</span><span style="color:#00688b">\sqrt</span><span style="color:#658b00">{x}} dx </span><span style="color:#00688b">\right</span>)<span style="color:#658b00">^</span><span style="color:#b452cd">2</span><span style="color:#658b00"> </span>=<span style="color:#658b00">
+</span></span></span><span style="display:flex;"><span><span style="color:#658b00">  </span><span style="color:#00688b">\sum</span><span style="color:#658b00">_{k</span>=<span style="color:#b452cd">0</span><span style="color:#658b00">}^{</span><span style="color:#00688b">\infty</span><span style="color:#658b00">} </span><span style="color:#00688b">\frac</span><span style="color:#658b00">{</span>(<span style="color:#b452cd">2</span><span style="color:#658b00">k</span>)!<span style="color:#658b00">}{</span><span style="color:#b452cd">2</span><span style="color:#658b00">^{</span><span style="color:#b452cd">2</span><span style="color:#658b00">k}</span>(<span style="color:#658b00">k</span>!)<span style="color:#658b00">^</span><span style="color:#b452cd">2</span><span style="color:#658b00">} </span><span style="color:#00688b">\frac</span><span style="color:#658b00">{</span><span style="color:#b452cd">1</span><span style="color:#658b00">}{</span><span style="color:#b452cd">2</span><span style="color:#658b00">k</span>+<span style="color:#b452cd">1</span><span style="color:#658b00">} </span>=<span style="color:#658b00">
+</span></span></span><span style="display:flex;"><span><span style="color:#658b00">  </span><span style="color:#00688b">\prod</span><span style="color:#658b00">_{k</span>=<span style="color:#b452cd">1</span><span style="color:#658b00">}^{</span><span style="color:#00688b">\infty</span><span style="color:#658b00">} </span><span style="color:#00688b">\frac</span><span style="color:#658b00">{</span><span style="color:#b452cd">4</span><span style="color:#658b00">k^</span><span style="color:#b452cd">2</span><span style="color:#658b00">}{</span><span style="color:#b452cd">4</span><span style="color:#658b00">k^</span><span style="color:#b452cd">2</span><span style="color:#658b00"> </span>-<span style="color:#658b00"> </span><span style="color:#b452cd">1</span><span style="color:#658b00">}
+</span></span></span><span style="display:flex;"><span><span style="color:#658b00"></span><span style="color:#cd5555">\]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
+</span></span></code></pre></div><p>これをまた<code>ptex2pdf -l hogehoge.tex</code>するとなんとも珍妙な式が出てきます。個人的にはうおおおお・・・って感じです。\</p>
 <p>まず<code>\frac{分子}{分母}</code>で分数を表現します。<code>\pi</code>はπで<code>\left(hogehoge\right)</code>は中身に応じて大きさの変わるカッコ。積分記号は<code>\int_{下限}^{上限}</code>で表わせ、無限大は<code>\infty</code>らしいです。個人的には<code>\infty</code>が一番間違えそう。<br>
 他にも三角関数<code>\sin x,\cos,\tan</code>や対数<code>\log</code>、平方根の<code>\sqrt{x}</code>や<code>\sqrt{3}{x}</code>、総和相乗の<code>\sum,\prod</code>などがあります。<code>\sum_{下限}^{上限}</code>ともできるみたいです。そういえば話がそれますが、英語では総乗のことをプロダクトと言うんですよね。これをみて思い出しました。\</p>
 <h2 id="3-各種パッケージの利用httpstexwikitexjporglatexe585a5e996802fe59084e7a8aee38391e38383e382b1e383bce382b8e381aee588a9e794a8">3. <a href="https://texwiki.texjp.org/?LaTeX%E5%85%A5%E9%96%80%2F%E5%90%84%E7%A8%AE%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E5%88%A9%E7%94%A8">各種パッケージの利用</a></h2>
 <p>ここで、いままでで<code>amsmath</code>や<code>amssymb</code>という数学用パッケージを無意識に使用していたことが明かされました。Pythonなどとは違って宣言しなくても使用できるライブラリもあるということなのでしょうか？そして、明示的にパッケージを使用する例として、次の内容が解説されました。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
-<span style="color:#8b008b;font-weight:bold">\usepackage</span><span style="color:#658b00">{</span>multicol<span style="color:#658b00">}</span>
-<span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
-ここは一段組み。
-<span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>multicols<span style="color:#658b00">}{</span>3<span style="color:#658b00">}</span>
-ここは三段組み。
-でも三段組みにするためにはもっと長い例文が必要なので，意味も無いことをここにだらだら書き連ねています。
-このくらい書けば三段に分かれて組み上げられるでしょうか？
-<span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>multicols<span style="color:#658b00">}</span>
-<span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
-</code></pre></div><p>今までの経験より、２行目の<code>usepackage{multicol}</code>でマルチカラム・・すなわち複数の列からなる文章を作成できるようにしているのかなと推測できます。これは<code>\begin{multicols}{3}</code>から始まって<code>end{multicols}</code>で終了するように書かれています。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\usepackage</span><span style="color:#658b00">{</span>multicol<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>ここは一段組み。
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>multicols<span style="color:#658b00">}{</span>3<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>ここは三段組み。
+</span></span><span style="display:flex;"><span>でも三段組みにするためにはもっと長い例文が必要なので，意味も無いことをここにだらだら書き連ねています。
+</span></span><span style="display:flex;"><span>このくらい書けば三段に分かれて組み上げられるでしょうか？
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>multicols<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
+</span></span></code></pre></div><p>今までの経験より、２行目の<code>usepackage{multicol}</code>でマルチカラム・・すなわち複数の列からなる文章を作成できるようにしているのかなと推測できます。これは<code>\begin{multicols}{3}</code>から始まって<code>end{multicols}</code>で終了するように書かれています。</p>
 <h2 id="4-レポートを書いてみる">4. レポートを書いてみる</h2>
 <p>これが一番のLaTeXを使う目的ですよね。レポートの例として以下のソースが示されています。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
-<span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
-
-<span style="color:#8b008b;font-weight:bold">\title</span><span style="color:#658b00">{</span>情報科学レポート<span style="color:#658b00">}</span>
-<span style="color:#8b008b;font-weight:bold">\author</span><span style="color:#658b00">{</span>奥村晴彦<span style="color:#658b00">}</span>
-<span style="color:#8b008b;font-weight:bold">\maketitle</span>
-
-<span style="color:#8b008b;font-weight:bold">\section</span><span style="color:#658b00">{</span>はじめに<span style="color:#658b00">}</span>
-
-この文書は，ごく基本的なレポートや論文の例を示すものです。
-実際にこのソースを入力してタイプセット（コンパイル）し，
-タイトル，著者名，本文，見出し，箇条書きがどのように表示されるかを
-確認してみましょう。
-
-<span style="color:#8b008b;font-weight:bold">\section</span><span style="color:#658b00">{</span>見出し<span style="color:#658b00">}</span>
-
-この文書の先頭にはタイトル，著者名，日付が出力されています。
-特定の日付を指定することもできます。
-
-そして，セクションの見出しが出力されています。
-セクションの番号は自動的に付きます。
-
-<span style="color:#8b008b;font-weight:bold">\section</span><span style="color:#658b00">{</span>箇条書き<span style="color:#658b00">}</span>
-
-以下は箇条書きの例です。これは番号を振らない箇条書きです。
-
-<span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>itemize<span style="color:#658b00">}</span>
-  <span style="color:#8b008b;font-weight:bold">\item</span> ちゃお
-  <span style="color:#8b008b;font-weight:bold">\item</span> りぼん
-  <span style="color:#8b008b;font-weight:bold">\item</span> なかよし
-<span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>itemize<span style="color:#658b00">}</span>
-
-これは番号を振る箇条書きです。
-
-<span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>enumerate<span style="color:#658b00">}</span>
-  <span style="color:#8b008b;font-weight:bold">\item</span> 富士
-  <span style="color:#8b008b;font-weight:bold">\item</span> 鷹
-  <span style="color:#8b008b;font-weight:bold">\item</span> なすび
-<span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>enumerate<span style="color:#658b00">}</span>
-
-<span style="color:#8b008b;font-weight:bold">\section</span><span style="color:#658b00">{</span>おわりに<span style="color:#658b00">}</span>
-
-これは一段組の例ですが，二段組に変更することもできます。
-
-解説文を読んで，このソースをいろいろと変更してみましょう。
-
-<span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
-</code></pre></div><p>これだけでもメチャクチャかっこいいレポートが書けてしまいます。LaTeXすげえ！<br>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\documentclass</span><span style="color:#658b00">[dvipdfmx]</span><span style="color:#658b00">{</span>jsarticle<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\title</span><span style="color:#658b00">{</span>情報科学レポート<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\author</span><span style="color:#658b00">{</span>奥村晴彦<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\maketitle</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\section</span><span style="color:#658b00">{</span>はじめに<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>この文書は，ごく基本的なレポートや論文の例を示すものです。
+</span></span><span style="display:flex;"><span>実際にこのソースを入力してタイプセット（コンパイル）し，
+</span></span><span style="display:flex;"><span>タイトル，著者名，本文，見出し，箇条書きがどのように表示されるかを
+</span></span><span style="display:flex;"><span>確認してみましょう。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\section</span><span style="color:#658b00">{</span>見出し<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>この文書の先頭にはタイトル，著者名，日付が出力されています。
+</span></span><span style="display:flex;"><span>特定の日付を指定することもできます。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>そして，セクションの見出しが出力されています。
+</span></span><span style="display:flex;"><span>セクションの番号は自動的に付きます。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\section</span><span style="color:#658b00">{</span>箇条書き<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>以下は箇条書きの例です。これは番号を振らない箇条書きです。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>itemize<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8b008b;font-weight:bold">\item</span> ちゃお
+</span></span><span style="display:flex;"><span>  <span style="color:#8b008b;font-weight:bold">\item</span> りぼん
+</span></span><span style="display:flex;"><span>  <span style="color:#8b008b;font-weight:bold">\item</span> なかよし
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>itemize<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>これは番号を振る箇条書きです。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\begin</span><span style="color:#658b00">{</span>enumerate<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8b008b;font-weight:bold">\item</span> 富士
+</span></span><span style="display:flex;"><span>  <span style="color:#8b008b;font-weight:bold">\item</span> 鷹
+</span></span><span style="display:flex;"><span>  <span style="color:#8b008b;font-weight:bold">\item</span> なすび
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>enumerate<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\section</span><span style="color:#658b00">{</span>おわりに<span style="color:#658b00">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>これは一段組の例ですが，二段組に変更することもできます。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>解説文を読んで，このソースをいろいろと変更してみましょう。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">\end</span><span style="color:#658b00">{</span>document<span style="color:#658b00">}</span>
+</span></span></code></pre></div><p>これだけでもメチャクチャかっこいいレポートが書けてしまいます。LaTeXすげえ！<br>
 最初の<code>\documentclass[dvipdfmx]{jsarticle}</code>と<code>\begin{document}</code>。そして最後の<code>\end{document}</code>が共通して宣言する基本文法。そして、ドキュメントの開始宣言の後の<code>\title{hoge}</code>、<code>\author{fuga}</code>、<code>\maketitle</code>でタイトルを出力するそうです。リンク先にも書かれていますが、日付はデフォルトだと今日の日付が勝手に入ってしまうそうなので、明示的に指定する場合は<code>\date{hoge年fuga月n日}</code>とすれば良いそうです。<br>
 <br>
 章は<code>\section{hoge}</code>で宣言できるそうです。何も指定しなければ勝手に番号が振られる部分はmarkdownと同じですね。番号を振りたく無い場合は<code>\section*{hoge}</code>とすれば良いそうです。章内のサブセクションは<code>\subsection{fuga}</code>でやるみたいです。<br>

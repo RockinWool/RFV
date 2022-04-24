@@ -443,45 +443,45 @@
 <li>Docker run -itd {コンテナ名} {イメージ名} bash</li>
 </ol>
 <p>それではまず、作業環境を作ります\</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~$ mkdir 2020_March
-</code></pre></div><p><br>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>~$ mkdir 2020_March
+</span></span></code></pre></div><p><br>
 この中にpythonで作ったプログラムをぶち込みます\</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~$ ls ~/2020_March
-main.py
-</code></pre></div><p><br>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>~$ ls ~/2020_March
+</span></span><span style="display:flex;"><span>main.py
+</span></span></code></pre></div><p><br>
 次にdockerfileでanaconda環境を設定していきます<br>
 自分はgeditを愛用している(Vim＜nano＜gedit)のでgeditを使います。WindowsだったらVisual Studio Codeで書いちゃいます<br>
 (ここで自分が仕事のせいで完全にWindows派からLinux派に堕ちてしまっていることに気づく)</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~$ gedit Dockerfile
-</code></pre></div><p><br>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>~$ gedit Dockerfile
+</span></span></code></pre></div><p><br>
 Dockerfileの記述はQiitaの<a href="https://qiita.com/komiya_____/items/96c14485eb035701e218">この記事</a>を参考にして作りました（マークダウンで初のURLリンク)<br>
 っつーことでいざ実行！\</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">(base)~$ docker build -t <span style="color:#b452cd">20200320</span> .
-Command <span style="color:#cd5555">&#39;docker&#39;</span> not found, but can be installed with:
-sudo snap install docker     <span style="color:#228b22"># version 18.09.9, or</span>
-sudo apt  install docker.io
-See <span style="color:#cd5555">&#39;snap info docker&#39;</span> <span style="color:#8b008b;font-weight:bold">for</span> additional versions.
-</code></pre></div><p>正直ワロタｗこの環境にはDocker入れてませんでしたね・・・<br>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>(base)~$ docker build -t <span style="color:#b452cd">20200320</span> .
+</span></span><span style="display:flex;"><span>Command <span style="color:#cd5555">&#39;docker&#39;</span> not found, but can be installed with:
+</span></span><span style="display:flex;"><span>sudo snap install docker     <span style="color:#228b22"># version 18.09.9, or</span>
+</span></span><span style="display:flex;"><span>sudo apt  install docker.io
+</span></span><span style="display:flex;"><span>See <span style="color:#cd5555">&#39;snap info docker&#39;</span> <span style="color:#8b008b;font-weight:bold">for</span> additional versions.
+</span></span></code></pre></div><p>正直ワロタｗこの環境にはDocker入れてませんでしたね・・・<br>
 提示された解決策を実行して(apt-getではなくsnap使ったのですがログがほとんど残らないのに衝撃を受けつつ)\</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~$ sudo snap install docker
-docker 18.09.9 from Canonical✓ installed
-</code></pre></div><p>とりあえず、dockerが入ったのはわかったのでリベンジ<br>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>~$ sudo snap install docker
+</span></span><span style="display:flex;"><span>docker 18.09.9 from Canonical✓ installed
+</span></span></code></pre></div><p>とりあえず、dockerが入ったのはわかったのでリベンジ<br>
 \</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~$ docker build -t <span style="color:#b452cd">20200320</span> .
-ERRO[0000] failed to dial gRPC: cannot connect to the Docker daemon. Is <span style="color:#cd5555">&#39;docker daemon&#39;</span> running on this host?: dial unix /var/run/docker.sock: connect: permission denied 
-Got permission denied <span style="color:#8b008b;font-weight:bold">while</span> trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.39/build?buildargs=%7B%7D&amp;<span style="color:#00688b">cachefrom</span>=%5B%5D&amp;<span style="color:#00688b">cgroupparent</span>=&amp;<span style="color:#00688b">cpuperiod</span>=0&amp;<span style="color:#00688b">cpuquota</span>=0&amp;<span style="color:#00688b">cpusetcpus</span>=&amp;<span style="color:#00688b">cpusetmems</span>=&amp;<span style="color:#00688b">cpushares</span>=0&amp;<span style="color:#00688b">dockerfile</span>=Dockerfile&amp;<span style="color:#00688b">labels</span>=%7B%7D&amp;<span style="color:#00688b">memory</span>=0&amp;<span style="color:#00688b">memswap</span>=0&amp;<span style="color:#00688b">networkmode</span>=default&amp;<span style="color:#00688b">rm</span>=1&amp;<span style="color:#00688b">session</span>=py0c14unib9pi5f8397h7t1y0&amp;<span style="color:#00688b">shmsize</span>=0&amp;<span style="color:#00688b">t</span>=20200320&amp;<span style="color:#00688b">target</span>=&amp;<span style="color:#00688b">ulimits</span>=null&amp;<span style="color:#00688b">version</span>=1: dial unix /var/run/docker.sock: connect: permission denied
-</code></pre></div><p>へー。sudo入れないとこんなエラーが出るんですね！(無知)とりあえずsudoを入れてもう一回実行します。<br>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>~$ docker build -t <span style="color:#b452cd">20200320</span> .
+</span></span><span style="display:flex;"><span>ERRO[0000] failed to dial gRPC: cannot connect to the Docker daemon. Is <span style="color:#cd5555">&#39;docker daemon&#39;</span> running on this host?: dial unix /var/run/docker.sock: connect: permission denied 
+</span></span><span style="display:flex;"><span>Got permission denied <span style="color:#8b008b;font-weight:bold">while</span> trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.39/build?buildargs=%7B%7D&amp;<span style="color:#00688b">cachefrom</span>=%5B%5D&amp;<span style="color:#00688b">cgroupparent</span>=&amp;<span style="color:#00688b">cpuperiod</span>=0&amp;<span style="color:#00688b">cpuquota</span>=0&amp;<span style="color:#00688b">cpusetcpus</span>=&amp;<span style="color:#00688b">cpusetmems</span>=&amp;<span style="color:#00688b">cpushares</span>=0&amp;<span style="color:#00688b">dockerfile</span>=Dockerfile&amp;<span style="color:#00688b">labels</span>=%7B%7D&amp;<span style="color:#00688b">memory</span>=0&amp;<span style="color:#00688b">memswap</span>=0&amp;<span style="color:#00688b">networkmode</span>=default&amp;<span style="color:#00688b">rm</span>=1&amp;<span style="color:#00688b">session</span>=py0c14unib9pi5f8397h7t1y0&amp;<span style="color:#00688b">shmsize</span>=0&amp;<span style="color:#00688b">t</span>=20200320&amp;<span style="color:#00688b">target</span>=&amp;<span style="color:#00688b">ulimits</span>=null&amp;<span style="color:#00688b">version</span>=1: dial unix /var/run/docker.sock: connect: permission denied
+</span></span></code></pre></div><p>へー。sudo入れないとこんなエラーが出るんですね！(無知)とりあえずsudoを入れてもう一回実行します。<br>
 するとSuccessfully tagged 20200320:latestと表示されたので多分イメージは完成しましたね。<br>
 それではdocker run します\</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~$ sudo docker run -itd --name 2020_March <span style="color:#b452cd">20200320</span>
-~$ sudo docker <span style="color:#658b00">exec</span> -it 2020_March bash
-Error response from daemon: Container d9b54f6101d600690f06cd67f0d6b5f4a4294384e65476023f2e105b8817f212 is not running 
-</code></pre></div><p>えええ？runさせた直後なのに止まっているとはどういうことじゃ？<br>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>~$ sudo docker run -itd --name 2020_March <span style="color:#b452cd">20200320</span>
+</span></span><span style="display:flex;"><span>~$ sudo docker <span style="color:#658b00">exec</span> -it 2020_March bash
+</span></span><span style="display:flex;"><span>Error response from daemon: Container d9b54f6101d600690f06cd67f0d6b5f4a4294384e65476023f2e105b8817f212 is not running 
+</span></span></code></pre></div><p>えええ？runさせた直後なのに止まっているとはどういうことじゃ？<br>
 考えられるのはDockerfileの記述内容だけですねえ..と思っていたのだけど、１０分後にこれはRUNのさせ方の問題じゃな・・となって修正\</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~$ sudo docker run -it -p 8888:8888 --rm --name 2020_March --mount <span style="color:#00688b">type</span>=bind,src=<span style="color:#cd5555">`</span><span style="color:#658b00">pwd</span><span style="color:#cd5555">`</span>,dst=/program_A <span style="color:#b452cd">20200320</span>
-</code></pre></div><p>とりあえずサーバーが立ち上がったそうなのでもう一個ctrl+alt+tで端末を召喚して\</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~$ firefox localhost:8888
-</code></pre></div><p>とでもしてアクセスすると&hellip;.<br>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>~$ sudo docker run -it -p 8888:8888 --rm --name 2020_March --mount <span style="color:#00688b">type</span>=bind,src=<span style="color:#cd5555">`</span><span style="color:#658b00">pwd</span><span style="color:#cd5555">`</span>,dst=/program_A <span style="color:#b452cd">20200320</span>
+</span></span></code></pre></div><p>とりあえずサーバーが立ち上がったそうなのでもう一個ctrl+alt+tで端末を召喚して\</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>~$ firefox localhost:8888
+</span></span></code></pre></div><p>とでもしてアクセスすると&hellip;.<br>
 <img src="https://RockinWool.github.io/RFV/img/j1.png" alt="jupyter-lab-homepage">
 <img src="https://RockinWool.github.io/RFV/img/j2.png" alt="jupyter-lab-docalc">
 ・・・いやあ、科学の力ってすげーですわ・・・<br>

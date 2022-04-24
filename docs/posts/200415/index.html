@@ -442,41 +442,41 @@
 まず最初に、今回のやりたいことを公開するためのrepositoryを<a href="https://github.com/RockinWool/Docker_hugomaker">自分のGithub</a>に作成しました。ライセンスはよくわからないのでとりあえずGPLv2.0にしてあります。<br>
 こうして空のリポジトリを作成した後に、そのリポジトリをローカルにクローンしました。<br>
 \</p>
-<pre><code class="language-Bash:gitclone" data-lang="Bash:gitclone">git clone https://github.com/RockinWool/Docker_hugomaker
+<pre tabindex="0"><code class="language-Bash:gitclone" data-lang="Bash:gitclone">git clone https://github.com/RockinWool/Docker_hugomaker
 </code></pre><p>こんな感じのコマンドです。ここで、コマンド文をマークダウンで挿入する際にVSCodeに怒られてしまいました。どうやら前後に改行を入れないと怒ってくるそうです。<br>
 そして、昨日の投稿の裏でコッソリやっていたDockerfileを移動して起動・・のつもりが凄いゴミイメージとゴミコンテナがあったので掃除することに。<br>
 これで冒頭の全消しコマンドが発動することになったというわけです。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">sudo docker images -aq | sudo xargs docker rmi -f
-sudo docker rm <span style="color:#8b008b;font-weight:bold">$(</span>sudo docker ps -q -a<span style="color:#8b008b;font-weight:bold">)</span> -f
-</code></pre></div><p>とりあえずこれでイメージもコンテナも全部消去することができました。<br>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>sudo docker images -aq | sudo xargs docker rmi -f
+</span></span><span style="display:flex;"><span>sudo docker rm <span style="color:#8b008b;font-weight:bold">$(</span>sudo docker ps -q -a<span style="color:#8b008b;font-weight:bold">)</span> -f
+</span></span></code></pre></div><p>とりあえずこれでイメージもコンテナも全部消去することができました。<br>
 次にこのDockerfileを読み込んで起動して停止するのを自動化するプログラムも書いてみました。しかし、これが仇となりました。<br>
 とりあえず完成品は以下に記載しますが、いかんせんif文の書き方にいじめられすぎて時間がなくなってしまったのでTipsはまた次回書きます<br>
 ここまで読んでくださってありがとうございました！<br>
 <a href="https://qiita.com/shisama/items/48e2eaf1dc356568b0d7">参考URL</a></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash"><span style="color:#658b00">export</span> <span style="color:#00688b">PWD</span>=<span style="color:#8b008b;font-weight:bold">$(</span><span style="color:#658b00">pwd</span><span style="color:#8b008b;font-weight:bold">)</span>
-<span style="color:#658b00">export</span> <span style="color:#00688b">EXISTDOCKER</span>=<span style="color:#8b008b;font-weight:bold">$(</span>sudo docker ps -a -f <span style="color:#cd5555">&#34;name=HugoC&#34;</span> --format {{.Names}}<span style="color:#8b008b;font-weight:bold">)</span>
-<span style="color:#8b008b;font-weight:bold">for</span> X in <span style="color:#cd5555">&#34;RockinWool&#34;</span>
-<span style="color:#8b008b;font-weight:bold">do</span>
-    sudo docker build -t hugoc .
-    <span style="color:#8b008b;font-weight:bold">if</span> [ <span style="color:#cd5555">&#34;</span><span style="color:#00688b">$EXISTDOCKER</span><span style="color:#cd5555">&#34;</span> = HugoC ]; <span style="color:#8b008b;font-weight:bold">then</span>
-        <span style="color:#658b00">read</span> -p <span style="color:#cd5555">&#34; すでにコンテナは存在しますが作り直しますか? (y/N):&#34;</span> BUILD
-        <span style="color:#8b008b;font-weight:bold">case</span> <span style="color:#cd5555">&#34;</span><span style="color:#00688b">$BUILD</span><span style="color:#cd5555">&#34;</span> in 
-            [yY]*) sudo docker rm HugoC &amp;&amp; sudo docker run -itd --name HugoC -v <span style="color:#00688b">$PWD</span>/volume/:/volume hugoc &amp;&amp; sudo docker <span style="color:#658b00">exec</span> -it HugoC bash;;
-            *) <span style="color:#658b00">echo</span> <span style="color:#cd5555">&#34;skipped.&#34;</span> ;;
-        <span style="color:#8b008b;font-weight:bold">esac</span>
-    <span style="color:#8b008b;font-weight:bold">else</span>
-        sudo docker run -itd --name HugoC -v <span style="color:#00688b">$PWD</span>/volume/:/volume hugoc
-    <span style="color:#8b008b;font-weight:bold">fi</span>
-    sudo docker start HugoC
-    sudo docker <span style="color:#658b00">exec</span> -it HugoC bash
-    sudo docker stop HugoC
-    <span style="color:#658b00">read</span> -p <span style="color:#cd5555">&#34;</span><span style="color:#cd5555">${</span><span style="color:#00688b">X</span><span style="color:#cd5555">}</span><span style="color:#cd5555"> : コンテナを破棄しますか? (y/N):&#34;</span> VAR
-    <span style="color:#8b008b;font-weight:bold">case</span> <span style="color:#cd5555">&#34;</span><span style="color:#00688b">$VAR</span><span style="color:#cd5555">&#34;</span> in 
-        [yY]*) sudo docker rm HugoC ;;
-        *) <span style="color:#658b00">echo</span> <span style="color:#cd5555">&#34;skipped.&#34;</span> ; <span style="color:#8b008b;font-weight:bold">continue</span> ;;
-    <span style="color:#8b008b;font-weight:bold">esac</span>
-<span style="color:#8b008b;font-weight:bold">done</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span><span style="color:#658b00">export</span> <span style="color:#00688b">PWD</span>=<span style="color:#8b008b;font-weight:bold">$(</span><span style="color:#658b00">pwd</span><span style="color:#8b008b;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#658b00">export</span> <span style="color:#00688b">EXISTDOCKER</span>=<span style="color:#8b008b;font-weight:bold">$(</span>sudo docker ps -a -f <span style="color:#cd5555">&#34;name=HugoC&#34;</span> --format {{.Names}}<span style="color:#8b008b;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">for</span> X in <span style="color:#cd5555">&#34;RockinWool&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">do</span>
+</span></span><span style="display:flex;"><span>    sudo docker build -t hugoc .
+</span></span><span style="display:flex;"><span>    <span style="color:#8b008b;font-weight:bold">if</span> [ <span style="color:#cd5555">&#34;</span><span style="color:#00688b">$EXISTDOCKER</span><span style="color:#cd5555">&#34;</span> = HugoC ]; <span style="color:#8b008b;font-weight:bold">then</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#658b00">read</span> -p <span style="color:#cd5555">&#34; すでにコンテナは存在しますが作り直しますか? (y/N):&#34;</span> BUILD
+</span></span><span style="display:flex;"><span>        <span style="color:#8b008b;font-weight:bold">case</span> <span style="color:#cd5555">&#34;</span><span style="color:#00688b">$BUILD</span><span style="color:#cd5555">&#34;</span> in 
+</span></span><span style="display:flex;"><span>            [yY]*) sudo docker rm HugoC &amp;&amp; sudo docker run -itd --name HugoC -v <span style="color:#00688b">$PWD</span>/volume/:/volume hugoc &amp;&amp; sudo docker <span style="color:#658b00">exec</span> -it HugoC bash;;
+</span></span><span style="display:flex;"><span>            *) <span style="color:#658b00">echo</span> <span style="color:#cd5555">&#34;skipped.&#34;</span> ;;
+</span></span><span style="display:flex;"><span>        <span style="color:#8b008b;font-weight:bold">esac</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8b008b;font-weight:bold">else</span>
+</span></span><span style="display:flex;"><span>        sudo docker run -itd --name HugoC -v <span style="color:#00688b">$PWD</span>/volume/:/volume hugoc
+</span></span><span style="display:flex;"><span>    <span style="color:#8b008b;font-weight:bold">fi</span>
+</span></span><span style="display:flex;"><span>    sudo docker start HugoC
+</span></span><span style="display:flex;"><span>    sudo docker <span style="color:#658b00">exec</span> -it HugoC bash
+</span></span><span style="display:flex;"><span>    sudo docker stop HugoC
+</span></span><span style="display:flex;"><span>    <span style="color:#658b00">read</span> -p <span style="color:#cd5555">&#34;</span><span style="color:#cd5555">${</span><span style="color:#00688b">X</span><span style="color:#cd5555">}</span><span style="color:#cd5555"> : コンテナを破棄しますか? (y/N):&#34;</span> VAR
+</span></span><span style="display:flex;"><span>    <span style="color:#8b008b;font-weight:bold">case</span> <span style="color:#cd5555">&#34;</span><span style="color:#00688b">$VAR</span><span style="color:#cd5555">&#34;</span> in 
+</span></span><span style="display:flex;"><span>        [yY]*) sudo docker rm HugoC ;;
+</span></span><span style="display:flex;"><span>        *) <span style="color:#658b00">echo</span> <span style="color:#cd5555">&#34;skipped.&#34;</span> ; <span style="color:#8b008b;font-weight:bold">continue</span> ;;
+</span></span><span style="display:flex;"><span>    <span style="color:#8b008b;font-weight:bold">esac</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">done</span>
+</span></span></code></pre></div>
   </div>
 
   <div id=links>

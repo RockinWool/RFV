@@ -447,7 +447,7 @@
 <li>xhost_setup.sh</li>
 </ol>
 <p>Dockerfileはコンテナの設計図のようなものと認識しております。今回はGUIというよりかは単なる端末であるxtermを内部で起動できるように作りました↓</p>
-<pre><code>FROM ubuntu:18.04
+<pre tabindex="0"><code>FROM ubuntu:18.04
 RUN apt update &amp;&amp; apt install -y \ 
     xterm \ 
     &amp;&amp; rm -rf /var/lib/apt/lists/* 
@@ -455,18 +455,18 @@ RUN useradd -m -s /bin/bash RockinWool
 USER RockinWool
 </code></pre><p>USERを足しているのは、xhostかなんかがroot権限者だと怒ってきたからだったと思います。やっておいて損はないはずです。<br>
 docker-compose.ymlの方は2つ注目すべき部分があります。1つ目は環境変数$DISPLAYをホストと同じものに設定している部分。2つ目は/tmp/.X11-unixディレクトリを共有している部分です。この二つを設定するとホストの画面出力を共有できるようになります。（重要なのはその中のソケットファイルなんだけど、話が長くなるので割愛）</p>
-<pre><code>version: &quot;3&quot; 
+<pre tabindex="0"><code>version: &#34;3&#34; 
 services: 
   guitest: 
     build: . 
     environment: 
-      - &quot;DISPLAY=${DISPLAY}&quot; 
+      - &#34;DISPLAY=${DISPLAY}&#34; 
     volumes: 
       - /tmp/.X11-unix:/tmp/.X11-unix 
     command: xterm 
 </code></pre><p>最後になりましたがxhost_setup.shは単にdocker-composeを自動化するものに近いです。自分がdocker-composeになれていないというのが原因です。ちなみにdocker-composeで単一のコンテナを起動したのは今回が初めてだったりします。<br>
 それとこのスクリプトではついでのようにxhost+でホスト側の画面をコンテナと共有できるようにしていますが、セキュリティ的にはまずいそうなので、適当なときにxhost-するべきなのかもしれませんね。</p>
-<pre><code>docker-compose build
+<pre tabindex="0"><code>docker-compose build
 xhost +
 docker-compose run --rm guitest
 </code></pre><p>これらを用いて実際に起動するとこんな感じになります・・・というのは次回にします。ここまで見てくださってありがとうございました。</p>

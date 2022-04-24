@@ -440,10 +440,10 @@
 pandasを使用するとdive_search関数（<a href="https://qiita.com/bc_yuuuuuki/items/964efd17dae53d855c8b">この記事</a>の作者が名付けたものかな？）の再起処理の部分で引っかかってしまいうまく行かない。<br>
 そこで多少重くなるがpythonのcsvライブラリを使って処理中にcsvファイルに書き込んでもらう形に変更した。<br>
 具体的にメイン部分は次のようにまとめられる\</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#8b008b;font-weight:bold">with</span> <span style="color:#658b00">open</span>(<span style="color:#cd5555">&#39;data.csv&#39;</span>, <span style="color:#cd5555">&#39;w&#39;</span>) <span style="color:#8b008b;font-weight:bold">as</span> f:
-    writer = csv.writer(f)
-    dive_search(targets, <span style="color:#b452cd">0</span>,writer)
-</code></pre></div><p>もともとがかなり整ったプログラムなので実質的には前に二行足しただけである。<br>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">with</span> <span style="color:#658b00">open</span>(<span style="color:#cd5555">&#39;data.csv&#39;</span>, <span style="color:#cd5555">&#39;w&#39;</span>) <span style="color:#8b008b;font-weight:bold">as</span> f:
+</span></span><span style="display:flex;"><span>    writer = csv.writer(f)
+</span></span><span style="display:flex;"><span>    dive_search(targets, <span style="color:#b452cd">0</span>,writer)
+</span></span></code></pre></div><p>もともとがかなり整ったプログラムなので実質的には前に二行足しただけである。<br>
 こんな書き方は良くないとかあったらぜひ指導してください。<br>
 とりあえず解説すると、dive_serch関数は再起関数で引数に指定した人のフォロワーのリストと深さdを持っています。<br>
 最初の実行で起点となる友人のリストが用意されて、その処理の途中で友人のリストの上から順に再び友人のリストが用意されて・・・というものの繰り返しで深さ分のフォロワー情報を入手することができます。<br>
@@ -453,96 +453,95 @@ pandasを使用するとdive_search関数（<a href="https://qiita.com/bc_yuuuuu
 今日の記事で作成したプログラムは↓にあげておきます。コメントいただけると嬉しいです（ほとんど丸パクリだけど）<br>
 それではここまで読んでくださってありがとうございました。
 \</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">json</span>
-<span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#008b45;text-decoration:underline">requests_oauthlib</span> <span style="color:#8b008b;font-weight:bold">import</span> OAuth1Session
-<span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#008b45;text-decoration:underline">time</span> <span style="color:#8b008b;font-weight:bold">import</span> sleep
-<span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">datetime</span>
-<span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">Twitconf</span> <span style="color:#8b008b;font-weight:bold">as</span> <span style="color:#008b45;text-decoration:underline">tc</span>
-<span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">pandas</span> <span style="color:#8b008b;font-weight:bold">as</span> <span style="color:#008b45;text-decoration:underline">pd</span>
-<span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">csv</span>
-
-<span style="color:#228b22"># APIキー設定(別ファイルのconfig.pyで定義しています)</span>
-Keys = tc.twconf()
-<span style="color:#228b22"># 認証処理</span>
-twitter = OAuth1Session(Keys.APIK,Keys.APISK,Keys.ACT,Keys.ACTS)
-<span style="color:#228b22">#情報収集</span>
-get_friends_url = <span style="color:#cd5555">&#34;https://api.twitter.com/1.1/friends/list.json&#34;</span> <span style="color:#228b22"># フォローしているアカウントを取得</span>
-get_user_info_url = <span style="color:#cd5555">&#34;https://api.twitter.com/1.1/users/show.json&#34;</span> <span style="color:#228b22"># ユーザー情報を取得する</span>
-count = <span style="color:#b452cd">200</span>
-targets = [<span style="color:#cd5555">&#39;任意のフォロワーを入れてね&#39;</span>]
-registed_list = []
-depth = <span style="color:#b452cd">2</span><span style="color:#228b22"># 潜る深さ</span>
-max_friends_count = <span style="color:#b452cd">1000</span> <span style="color:#228b22"># フォローアカウントがめちゃくちゃ多い人が居るので一定数を超えてると除外する</span>
-
-<span style="color:#228b22"># フォローアカウントが一定数を超えていないか判定する</span>
-<span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">judge_friends_count</span>(screen_name):
-    params = {<span style="color:#cd5555">&#39;screen_name&#39;</span>: screen_name}
-    <span style="color:#8b008b;font-weight:bold">while</span> <span style="color:#8b008b;font-weight:bold">True</span>:
-        res = twitter.get(get_user_info_url, params=params)
-        result_json = json.loads(res.text)
-        <span style="color:#8b008b;font-weight:bold">if</span> res.status_code == <span style="color:#b452cd">200</span>:
-            <span style="color:#228b22"># フォローしている人数は「friends_count」、フォローされている人数は「followers_count」</span>
-            <span style="color:#8b008b;font-weight:bold">if</span> result_json[<span style="color:#cd5555">&#39;friends_count&#39;</span>] &gt; max_friends_count:
-                <span style="color:#8b008b;font-weight:bold">return</span> <span style="color:#8b008b;font-weight:bold">False</span>
-            <span style="color:#8b008b;font-weight:bold">else</span>:
-                <span style="color:#8b008b;font-weight:bold">return</span> <span style="color:#8b008b;font-weight:bold">True</span>
-        <span style="color:#8b008b;font-weight:bold">elif</span> res.status_code == <span style="color:#b452cd">429</span>:
-            <span style="color:#228b22"># 15分間で15回しかリクエストを送信出来ないので上限に達していたら待つ</span>
-            now = datetime.datetime.now()
-            <span style="color:#658b00">print</span>(now.strftime(<span style="color:#cd5555">&#34;%Y/%m/</span><span style="color:#cd5555">%d</span><span style="color:#cd5555"> %H:%M:%S&#34;</span>) + <span style="color:#cd5555">&#39; 接続上限のため待機&#39;</span>)
-            sleep(<span style="color:#b452cd">15</span> * <span style="color:#b452cd">65</span>) <span style="color:#228b22"># 15分待機</span>
-        <span style="color:#8b008b;font-weight:bold">else</span>:
-            <span style="color:#8b008b;font-weight:bold">return</span> <span style="color:#8b008b;font-weight:bold">False</span>
-
-<span style="color:#228b22"># 指定したscreen_nameのフォロワーを取得する</span>
-<span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">get_followers_info</span>(screen_name):
-    followers_info = []
-    params = {<span style="color:#cd5555">&#39;count&#39;</span>: count,<span style="color:#cd5555">&#39;screen_name&#39;</span>: screen_name}
-    <span style="color:#8b008b;font-weight:bold">while</span> <span style="color:#8b008b;font-weight:bold">True</span>:
-        res = twitter.get(get_friends_url, params=params)
-        result_json = json.loads(res.text)
-
-        <span style="color:#8b008b;font-weight:bold">if</span> res.status_code == <span style="color:#b452cd">200</span> <span style="color:#8b008b">and</span> <span style="color:#658b00">len</span>(result_json[<span style="color:#cd5555">&#39;users&#39;</span>]) != <span style="color:#b452cd">0</span>:
-                <span style="color:#8b008b;font-weight:bold">for</span> user <span style="color:#8b008b">in</span> result_json[<span style="color:#cd5555">&#39;users&#39;</span>]:
-                    <span style="color:#228b22"># APIから取得した情報のうち、必要な情報だけをdict形式で設定　（このPGでidは使ってない・・）</span>
-                    followers_info.append({<span style="color:#cd5555">&#39;screen_name&#39;</span>: user[<span style="color:#cd5555">&#39;screen_name&#39;</span>], <span style="color:#cd5555">&#39;id&#39;</span>: user[<span style="color:#cd5555">&#39;id&#39;</span>]})
-                <span style="color:#228b22"># パラメーターに次の取得位置を設定する</span>
-                params[<span style="color:#cd5555">&#39;cursor&#39;</span>] = result_json[<span style="color:#cd5555">&#39;next_cursor&#39;</span>]
-        <span style="color:#228b22"># APIの接続上限を超えた場合の処理           </span>
-        <span style="color:#8b008b;font-weight:bold">elif</span> res.status_code == <span style="color:#b452cd">429</span>:
-            now = datetime.datetime.now()
-            <span style="color:#658b00">print</span>(now.strftime(<span style="color:#cd5555">&#34;%Y/%m/</span><span style="color:#cd5555">%d</span><span style="color:#cd5555"> %H:%M:%S&#34;</span>) + <span style="color:#cd5555">&#39; 接続上限のため待機&#39;</span>)
-            sleep(<span style="color:#b452cd">15</span> * <span style="color:#b452cd">60</span>) <span style="color:#228b22"># 1分待機</span>
-        <span style="color:#8b008b;font-weight:bold">else</span>:
-            <span style="color:#8b008b;font-weight:bold">break</span>
-    <span style="color:#8b008b;font-weight:bold">return</span> followers_info
-
-<span style="color:#228b22"># dictのlistからscreen_nameのみのlistを取得する</span>
-<span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">followers_list</span>(followers_info):
-    followers_list = []
-    <span style="color:#8b008b;font-weight:bold">for</span> follower <span style="color:#8b008b">in</span> followers_info:
-        followers_list.append(follower[<span style="color:#cd5555">&#39;screen_name&#39;</span>])
-    <span style="color:#8b008b;font-weight:bold">return</span> followers_list
-
-<span style="color:#228b22"># 再帰処理</span>
-<span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">dive_search</span>(target_list, d,writer):
-    <span style="color:#8b008b;font-weight:bold">for</span> name <span style="color:#8b008b">in</span> target_list:
-        <span style="color:#8b008b;font-weight:bold">if</span> name <span style="color:#8b008b">in</span> registed_list <span style="color:#8b008b">or</span> <span style="color:#8b008b">not</span> judge_friends_count(name):
-            <span style="color:#8b008b;font-weight:bold">continue</span>
-        <span style="color:#658b00">print</span>(name)
-        writer.writerow([d,name])
-        followers_info = get_followers_info(name)
-        registed_list.append(name)
-        <span style="color:#8b008b;font-weight:bold">if</span> depth &gt; d:
-            dive_search(followers_list(followers_info), d + <span style="color:#b452cd">1</span>,writer)
-        <span style="color:#8b008b;font-weight:bold">else</span>:
-            <span style="color:#8b008b;font-weight:bold">return</span>
-
-<span style="color:#8b008b;font-weight:bold">with</span> <span style="color:#658b00">open</span>(<span style="color:#cd5555">&#39;data.csv&#39;</span>, <span style="color:#cd5555">&#39;w&#39;</span>) <span style="color:#8b008b;font-weight:bold">as</span> f:
-    writer = csv.writer(f)
-    dive_search(targets, <span style="color:#b452cd">0</span>,writer)
-
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">json</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#008b45;text-decoration:underline">requests_oauthlib</span> <span style="color:#8b008b;font-weight:bold">import</span> OAuth1Session
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">from</span> <span style="color:#008b45;text-decoration:underline">time</span> <span style="color:#8b008b;font-weight:bold">import</span> sleep
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">datetime</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">Twitconf</span> <span style="color:#8b008b;font-weight:bold">as</span> <span style="color:#008b45;text-decoration:underline">tc</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">pandas</span> <span style="color:#8b008b;font-weight:bold">as</span> <span style="color:#008b45;text-decoration:underline">pd</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">import</span> <span style="color:#008b45;text-decoration:underline">csv</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#228b22"># APIキー設定(別ファイルのconfig.pyで定義しています)</span>
+</span></span><span style="display:flex;"><span>Keys = tc.twconf()
+</span></span><span style="display:flex;"><span><span style="color:#228b22"># 認証処理</span>
+</span></span><span style="display:flex;"><span>twitter = OAuth1Session(Keys.APIK,Keys.APISK,Keys.ACT,Keys.ACTS)
+</span></span><span style="display:flex;"><span><span style="color:#228b22">#情報収集</span>
+</span></span><span style="display:flex;"><span>get_friends_url = <span style="color:#cd5555">&#34;https://api.twitter.com/1.1/friends/list.json&#34;</span> <span style="color:#228b22"># フォローしているアカウントを取得</span>
+</span></span><span style="display:flex;"><span>get_user_info_url = <span style="color:#cd5555">&#34;https://api.twitter.com/1.1/users/show.json&#34;</span> <span style="color:#228b22"># ユーザー情報を取得する</span>
+</span></span><span style="display:flex;"><span>count = <span style="color:#b452cd">200</span>
+</span></span><span style="display:flex;"><span>targets = [<span style="color:#cd5555">&#39;任意のフォロワーを入れてね&#39;</span>]
+</span></span><span style="display:flex;"><span>registed_list = []
+</span></span><span style="display:flex;"><span>depth = <span style="color:#b452cd">2</span><span style="color:#228b22"># 潜る深さ</span>
+</span></span><span style="display:flex;"><span>max_friends_count = <span style="color:#b452cd">1000</span> <span style="color:#228b22"># フォローアカウントがめちゃくちゃ多い人が居るので一定数を超えてると除外する</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#228b22"># フォローアカウントが一定数を超えていないか判定する</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">judge_friends_count</span>(screen_name):
+</span></span><span style="display:flex;"><span>    params = {<span style="color:#cd5555">&#39;screen_name&#39;</span>: screen_name}
+</span></span><span style="display:flex;"><span>    <span style="color:#8b008b;font-weight:bold">while</span> <span style="color:#8b008b;font-weight:bold">True</span>:
+</span></span><span style="display:flex;"><span>        res = twitter.get(get_user_info_url, params=params)
+</span></span><span style="display:flex;"><span>        result_json = json.loads(res.text)
+</span></span><span style="display:flex;"><span>        <span style="color:#8b008b;font-weight:bold">if</span> res.status_code == <span style="color:#b452cd">200</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#228b22"># フォローしている人数は「friends_count」、フォローされている人数は「followers_count」</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#8b008b;font-weight:bold">if</span> result_json[<span style="color:#cd5555">&#39;friends_count&#39;</span>] &gt; max_friends_count:
+</span></span><span style="display:flex;"><span>                <span style="color:#8b008b;font-weight:bold">return</span> <span style="color:#8b008b;font-weight:bold">False</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#8b008b;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#8b008b;font-weight:bold">return</span> <span style="color:#8b008b;font-weight:bold">True</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8b008b;font-weight:bold">elif</span> res.status_code == <span style="color:#b452cd">429</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#228b22"># 15分間で15回しかリクエストを送信出来ないので上限に達していたら待つ</span>
+</span></span><span style="display:flex;"><span>            now = datetime.datetime.now()
+</span></span><span style="display:flex;"><span>            <span style="color:#658b00">print</span>(now.strftime(<span style="color:#cd5555">&#34;%Y/%m/</span><span style="color:#cd5555">%d</span><span style="color:#cd5555"> %H:%M:%S&#34;</span>) + <span style="color:#cd5555">&#39; 接続上限のため待機&#39;</span>)
+</span></span><span style="display:flex;"><span>            sleep(<span style="color:#b452cd">15</span> * <span style="color:#b452cd">65</span>) <span style="color:#228b22"># 15分待機</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8b008b;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#8b008b;font-weight:bold">return</span> <span style="color:#8b008b;font-weight:bold">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#228b22"># 指定したscreen_nameのフォロワーを取得する</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">get_followers_info</span>(screen_name):
+</span></span><span style="display:flex;"><span>    followers_info = []
+</span></span><span style="display:flex;"><span>    params = {<span style="color:#cd5555">&#39;count&#39;</span>: count,<span style="color:#cd5555">&#39;screen_name&#39;</span>: screen_name}
+</span></span><span style="display:flex;"><span>    <span style="color:#8b008b;font-weight:bold">while</span> <span style="color:#8b008b;font-weight:bold">True</span>:
+</span></span><span style="display:flex;"><span>        res = twitter.get(get_friends_url, params=params)
+</span></span><span style="display:flex;"><span>        result_json = json.loads(res.text)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8b008b;font-weight:bold">if</span> res.status_code == <span style="color:#b452cd">200</span> <span style="color:#8b008b">and</span> <span style="color:#658b00">len</span>(result_json[<span style="color:#cd5555">&#39;users&#39;</span>]) != <span style="color:#b452cd">0</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#8b008b;font-weight:bold">for</span> user <span style="color:#8b008b">in</span> result_json[<span style="color:#cd5555">&#39;users&#39;</span>]:
+</span></span><span style="display:flex;"><span>                    <span style="color:#228b22"># APIから取得した情報のうち、必要な情報だけをdict形式で設定　（このPGでidは使ってない・・）</span>
+</span></span><span style="display:flex;"><span>                    followers_info.append({<span style="color:#cd5555">&#39;screen_name&#39;</span>: user[<span style="color:#cd5555">&#39;screen_name&#39;</span>], <span style="color:#cd5555">&#39;id&#39;</span>: user[<span style="color:#cd5555">&#39;id&#39;</span>]})
+</span></span><span style="display:flex;"><span>                <span style="color:#228b22"># パラメーターに次の取得位置を設定する</span>
+</span></span><span style="display:flex;"><span>                params[<span style="color:#cd5555">&#39;cursor&#39;</span>] = result_json[<span style="color:#cd5555">&#39;next_cursor&#39;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#228b22"># APIの接続上限を超えた場合の処理           </span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8b008b;font-weight:bold">elif</span> res.status_code == <span style="color:#b452cd">429</span>:
+</span></span><span style="display:flex;"><span>            now = datetime.datetime.now()
+</span></span><span style="display:flex;"><span>            <span style="color:#658b00">print</span>(now.strftime(<span style="color:#cd5555">&#34;%Y/%m/</span><span style="color:#cd5555">%d</span><span style="color:#cd5555"> %H:%M:%S&#34;</span>) + <span style="color:#cd5555">&#39; 接続上限のため待機&#39;</span>)
+</span></span><span style="display:flex;"><span>            sleep(<span style="color:#b452cd">15</span> * <span style="color:#b452cd">60</span>) <span style="color:#228b22"># 1分待機</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8b008b;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#8b008b;font-weight:bold">break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8b008b;font-weight:bold">return</span> followers_info
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#228b22"># dictのlistからscreen_nameのみのlistを取得する</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">followers_list</span>(followers_info):
+</span></span><span style="display:flex;"><span>    followers_list = []
+</span></span><span style="display:flex;"><span>    <span style="color:#8b008b;font-weight:bold">for</span> follower <span style="color:#8b008b">in</span> followers_info:
+</span></span><span style="display:flex;"><span>        followers_list.append(follower[<span style="color:#cd5555">&#39;screen_name&#39;</span>])
+</span></span><span style="display:flex;"><span>    <span style="color:#8b008b;font-weight:bold">return</span> followers_list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#228b22"># 再帰処理</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">def</span> <span style="color:#008b45">dive_search</span>(target_list, d,writer):
+</span></span><span style="display:flex;"><span>    <span style="color:#8b008b;font-weight:bold">for</span> name <span style="color:#8b008b">in</span> target_list:
+</span></span><span style="display:flex;"><span>        <span style="color:#8b008b;font-weight:bold">if</span> name <span style="color:#8b008b">in</span> registed_list <span style="color:#8b008b">or</span> <span style="color:#8b008b">not</span> judge_friends_count(name):
+</span></span><span style="display:flex;"><span>            <span style="color:#8b008b;font-weight:bold">continue</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#658b00">print</span>(name)
+</span></span><span style="display:flex;"><span>        writer.writerow([d,name])
+</span></span><span style="display:flex;"><span>        followers_info = get_followers_info(name)
+</span></span><span style="display:flex;"><span>        registed_list.append(name)
+</span></span><span style="display:flex;"><span>        <span style="color:#8b008b;font-weight:bold">if</span> depth &gt; d:
+</span></span><span style="display:flex;"><span>            dive_search(followers_list(followers_info), d + <span style="color:#b452cd">1</span>,writer)
+</span></span><span style="display:flex;"><span>        <span style="color:#8b008b;font-weight:bold">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#8b008b;font-weight:bold">return</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8b008b;font-weight:bold">with</span> <span style="color:#658b00">open</span>(<span style="color:#cd5555">&#39;data.csv&#39;</span>, <span style="color:#cd5555">&#39;w&#39;</span>) <span style="color:#8b008b;font-weight:bold">as</span> f:
+</span></span><span style="display:flex;"><span>    writer = csv.writer(f)
+</span></span><span style="display:flex;"><span>    dive_search(targets, <span style="color:#b452cd">0</span>,writer)
+</span></span></code></pre></div>
   </div>
 
   <div id=links>

@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Tar_nullaの部屋</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 07 Nov 2021 19:49:12 +0900</lastBuildDate><atom:link href="https://RockinWool.github.io/RFV/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Apr 2022 00:54:10 +0900</lastBuildDate><atom:link href="https://RockinWool.github.io/RFV/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PipenvとHugoとDijkstra&#39;s algorithm</title>
+      <link>https://RockinWool.github.io/RFV/posts/220425/</link>
+      <pubDate>Mon, 25 Apr 2022 00:54:10 +0900</pubDate>
+      
+      <guid>https://RockinWool.github.io/RFV/posts/220425/</guid>
+      <description>お久しぶりです。RockinWoolです。 最近は自分たちの担当しているシステムの量産開発も始まり、先行開発チーム所属なのに引っ張り出されてい</description>
+    </item>
+    
     <item>
       <title>2021/11/07 ゼロ作OSその１＆Atcoder2回目</title>
       <link>https://RockinWool.github.io/RFV/posts/211107/</link>

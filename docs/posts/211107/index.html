@@ -442,38 +442,38 @@
 </ul>
 <p>その後AWSにバイナリファイルチェック用環境を整えて行きました。
 なお、ubutu20.04のイメージを使用しています。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/uchan-nos/mikanos-build.git osbook
-</code></pre></div><h2 id="atcoder開始a問題httpsatcoderjpcontestsabc226tasksabc226_a">Atcoder開始<a href="https://atcoder.jp/contests/abc226/tasks/abc226_a">A問題</a></h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/uchan-nos/mikanos-build.git osbook
+</span></span></code></pre></div><h2 id="atcoder開始a問題httpsatcoderjpcontestsabc226tasksabc226_a">Atcoder開始<a href="https://atcoder.jp/contests/abc226/tasks/abc226_a">A問題</a></h2>
 <p>作業中にAtcoderが始まってしまったので、こちらも挑戦。
 ところが、この作業中にローカルのWindowsPCにg++等が存在しないことが判明！
 仕方がないので脳内コンパイラでA問題を解いてみました(AC)</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#1e889b">#include</span> <span style="color:#1e889b">&lt;iostream&gt;</span><span style="color:#1e889b">
-</span><span style="color:#1e889b"></span>
-<span style="color:#00688b;font-weight:bold">int</span> <span style="color:#008b45">main</span>(){
-    <span style="color:#00688b;font-weight:bold">double</span> X;
-
-    std::cin &gt;&gt; X;
-    X = <span style="color:#00688b;font-weight:bold">int</span>(X+<span style="color:#b452cd">0.5</span>);
-    std::cout &lt;&lt; X &lt;&lt;std::endl;
-}
-</code></pre></div><p>四捨五入の関数とか知らなかったので愚直に実装。intにキャストすると切り捨てられることを想定して前もって0.5足しておけば良いのでは？となりAC。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#1e889b">#include</span> <span style="color:#1e889b">&lt;iostream&gt;</span><span style="color:#1e889b">
+</span></span></span><span style="display:flex;"><span><span style="color:#1e889b"></span>
+</span></span><span style="display:flex;"><span><span style="color:#00688b;font-weight:bold">int</span> <span style="color:#008b45">main</span>(){
+</span></span><span style="display:flex;"><span>    <span style="color:#00688b;font-weight:bold">double</span> X;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    std::cin &gt;&gt; X;
+</span></span><span style="display:flex;"><span>    X = <span style="color:#00688b;font-weight:bold">int</span>(X+<span style="color:#b452cd">0.5</span>);
+</span></span><span style="display:flex;"><span>    std::cout &lt;&lt; X &lt;&lt;std::endl;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>四捨五入の関数とか知らなかったので愚直に実装。intにキャストすると切り捨てられることを想定して前もって0.5足しておけば良いのでは？となりAC。</p>
 <h2 id="atcoderb問題httpsatcoderjpcontestsabc226tasksabc226_b">Atcoder<a href="https://atcoder.jp/contests/abc226/tasks/abc226_b">B問題</a></h2>
 <p>B問題は手元にpythonの実行環境ならばあったのでpyuthonで実装。
 pythonならば同じ文字列でもset型でキャストしてしまえば統合されるので、簡単に実装できた。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#228b22">#!/usr/bin/env python3</span>
-<span style="color:#228b22"># 標準入力の方法については下記サイトを参考</span>
-<span style="color:#228b22"># https://qiita.com/zenrshon/items/c4f3849552348b3dbe67</span>
-
-<span style="color:#228b22"># 最初に数列の個数を取得</span>
-N = <span style="color:#658b00">int</span>(<span style="color:#658b00">input</span>())
-
-<span style="color:#228b22"># 数列を(文字列として)N個分だけ取得</span>
-base_array = [<span style="color:#658b00">input</span>().replace(<span style="color:#cd5555">&#34; &#34;</span>,<span style="color:#cd5555">&#34;-&#34;</span>) <span style="color:#8b008b;font-weight:bold">for</span> l <span style="color:#8b008b">in</span> <span style="color:#658b00">range</span>(N)]
-
-<span style="color:#228b22"># set型にキャストして数列内の数字の種類を返すようにする</span>
-base_array = <span style="color:#658b00">set</span>(base_array)
-<span style="color:#658b00">print</span>(<span style="color:#658b00">len</span>(base_array))
-</code></pre></div><p>ということで、今回はAtcoderのB問題まで溶けたところで終わりにします。
+<div class="highlight"><pre tabindex="0" style="background-color:#eed;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#228b22">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span><span style="color:#228b22"># 標準入力の方法については下記サイトを参考</span>
+</span></span><span style="display:flex;"><span><span style="color:#228b22"># https://qiita.com/zenrshon/items/c4f3849552348b3dbe67</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#228b22"># 最初に数列の個数を取得</span>
+</span></span><span style="display:flex;"><span>N = <span style="color:#658b00">int</span>(<span style="color:#658b00">input</span>())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#228b22"># 数列を(文字列として)N個分だけ取得</span>
+</span></span><span style="display:flex;"><span>base_array = [<span style="color:#658b00">input</span>().replace(<span style="color:#cd5555">&#34; &#34;</span>,<span style="color:#cd5555">&#34;-&#34;</span>) <span style="color:#8b008b;font-weight:bold">for</span> l <span style="color:#8b008b">in</span> <span style="color:#658b00">range</span>(N)]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#228b22"># set型にキャストして数列内の数字の種類を返すようにする</span>
+</span></span><span style="display:flex;"><span>base_array = <span style="color:#658b00">set</span>(base_array)
+</span></span><span style="display:flex;"><span><span style="color:#658b00">print</span>(<span style="color:#658b00">len</span>(base_array))
+</span></span></code></pre></div><p>ということで、今回はAtcoderのB問題まで溶けたところで終わりにします。
 なお、次回はAWSにchrome remote desktop入れてQemuを動作させるところまで頑張ろうと思います。
 ご閲覧ありがとうございます。</p>
 
@@ -483,6 +483,8 @@ base_array = <span style="color:#658b00">set</span>(base_array)
     
       <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/211106/">&laquo; 久しぶりにhugo環境を整えた話</a>
     
+    
+      <a class="basic-alignment left" href="https://RockinWool.github.io/RFV/posts/220425/">PipenvとHugoとDijkstra&#39;s algorithm &raquo;</a>
     
   </div>
 </section>
